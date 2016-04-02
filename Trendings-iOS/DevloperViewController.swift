@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import SafariServices
 import Kingfisher
 
 class DevloperViewController: UIViewController {
 
     let CELL = "devCell"
+    
+    var language = "all"
+    var currentIndex = 0
     
     var devItems = [Developers]()
     
@@ -19,17 +23,37 @@ class DevloperViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Developers"
         tableView.estimatedRowHeight = 93.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-        getDevelopers("swift", since: "daily")
+        getDevelopers(language, since: "daily")
     }
-
+    
     func getDevelopers(language: String, since: String) {
         TrendingAPI.getDevelopers(language, since: since) { items in
             self.devItems = items.items
             self.tableView.reloadData()
+        }
+    }
+
+    
+    @IBAction func segmentValueChanged(sender: UISegmentedControl) {
+        let index = sender.selectedSegmentIndex
+        if index == currentIndex {
+            return
+        }
+        currentIndex = index
+        switch index {
+        case 0:
+            getDevelopers(language, since: "daily")
+        case 1:
+            getDevelopers(language, since: "weekly")
+        case 2:
+            getDevelopers(language, since: "monthly")
+        default:
+            break
         }
     }
 }
@@ -53,6 +77,12 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
         cell.repoDesc.text = item.repoDesc
         cell.avatar.kf_setImageWithURL(NSURL(string: item.avatar)!)
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let item = self.devItems[indexPath.row]
+        let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(item.url)")!)
+        self.presentViewController(svc, animated: true, completion: nil)
     }
 
 }
