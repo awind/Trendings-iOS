@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import SafariServices
 
 class RepoViewController: UIViewController {
 
     let CELL = "repoCell"
+    
+    var language = "all"
+    var currentIndex = 0
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,20 +22,38 @@ class RepoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Repositiories"
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         tableView.delegate = self
-        getTrendings()
+        getTrendings(language, since: "daily")
     }
     
-    func getTrendings() {
-        TrendingAPI.getTrendings("all", since: "daily") { items in
+    func getTrendings(language: String, since: String) {
+        TrendingAPI.getTrendings(language, since: since) { items in
             self.repos = items.items
             self.tableView.reloadData()
         }
     }
 
+    @IBAction func segmentIndexChange(sender: UISegmentedControl) {
+        let index = sender.selectedSegmentIndex
+        if index == currentIndex  {
+            return
+        }
+        currentIndex = index
+        switch index {
+        case 0:
+            getTrendings(language, since: "daily")
+        case 1:
+            getTrendings(language, since: "weekly")
+        case 2:
+            getTrendings(language, since: "monthly")
+        default:
+            break
+        }
+    }
 
 }
 
@@ -56,6 +78,11 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let repo = repos[indexPath.row]
+        let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(repo.url)")!)
+        self.presentViewController(svc, animated: true, completion: nil)
+    }
     
 }
 

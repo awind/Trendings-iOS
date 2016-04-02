@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RepoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var star: UILabel!
-    @IBOutlet weak var avatar: UIView!
+//    @IBOutlet weak var avatarContainer: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,5 +26,11 @@ class RepoTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+//    
+//    func addContributor(contributor: Contributor) {
+//        let avatar = UIImageView(frame: CGRectMake(0, 0, avatarContainer.frame.height, avatarContainer.frame.height))
+//        avatar.kf_setImageWithURL(NSURL(string: contributor.avatar)!)
+//        avatarContainer.addSubview(avatar)
+//    }
 
 }
