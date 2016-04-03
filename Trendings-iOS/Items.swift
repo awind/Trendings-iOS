@@ -17,8 +17,8 @@ struct Contributor {
 extension Contributor: Decodable {
     static func decode(j: JSON) -> Decoded<Contributor> {
         return curry(Contributor.init)
-            <^> j <| "username"
-            <*> j <| "avatar"
+            <^> j <| "avatar"
+            <*> j <| "username"
     }
 }
 

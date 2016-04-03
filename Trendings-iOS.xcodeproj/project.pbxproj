@@ -40,6 +40,7 @@
 		A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 		A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevTableViewCell.swift; sourceTree = "<group>"; };
 		A541DFC41CAFCB0A00549D35 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Trending-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,14 +97,15 @@
 				A52310781CA7DC740042EC5E /* Networking */,
 				A52310611CA791DD0042EC5E /* AppDelegate.swift */,
 				A52310631CA791DD0042EC5E /* RepoViewController.swift */,
+				A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */,
 				A52310651CA791DD0042EC5E /* Main.storyboard */,
 				A52310681CA791DD0042EC5E /* Assets.xcassets */,
 				A523106A1CA791DD0042EC5E /* LaunchScreen.storyboard */,
 				A523106D1CA791DD0042EC5E /* Info.plist */,
 				A52310751CA7B7350042EC5E /* Items.swift */,
-				A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */,
 				A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */,
 				A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */,
+				A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */,
 			);
 			path = "Trendings-iOS";
 			sourceTree = "<group>";
