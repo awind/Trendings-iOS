@@ -4,6 +4,7 @@ PODS:
   - Curry (2.0.0)
   - Kingfisher (2.2.0)
   - MBProgressHUD (0.9.2)
+  - MJRefresh (3.1.0)
   - Moya (6.4.0):
     - Moya/Core (= 6.4.0)
   - Moya/Core (6.4.0):
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - Curry
   - Kingfisher (~> 2.2)
   - MBProgressHUD (~> 0.9.2)
+  - MJRefresh
   - Moya
   - Moya/RxSwift
   - SDWebImage (~> 3.7)
@@ -34,6 +36,7 @@ SPEC CHECKSUMS:
   Curry: 5c5c5887d80fa22ca2133c7ea4d48c4d02283c0a
   Kingfisher: 350869ed88d6451803b390475d977abdd9f0a357
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   Moya: 4d526954c8afd79820991393d40d7d8af756ceee
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
   RxSwift: 829b2843e9eddc77a02cb3f5117f0d55f8f646f1

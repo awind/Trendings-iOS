@@ -9,12 +9,14 @@
 import UIKit
 import SafariServices
 import Kingfisher
+import MJRefresh
 
 class DevloperViewController: UIViewController {
 
     let CELL = "devCell"
     
     var language = "all"
+    let sinceArray = ["daily", "weekly", "monthly"]
     var currentIndex = 0
     
     var devItems = [Developers]()
@@ -23,11 +25,22 @@ class DevloperViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Developers"
+        
+        
+        let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullDownRefresh))
+        header.setTitle("Pull down to refresg", forState: .Idle)
+        header.setTitle("Release_to_refresh", forState: .Pulling)
+        header.setTitle("Loading", forState: .Refreshing)
+        header.lastUpdatedTimeLabel?.hidden = true
+        
+        self.tableView.mj_header = header
+
         tableView.estimatedRowHeight = 93.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
+        
+        self.tableView.mj_header.beginRefreshing()
         getDevelopers(language, since: "daily")
     }
     
@@ -35,7 +48,13 @@ class DevloperViewController: UIViewController {
         TrendingAPI.getDevelopers(language, since: since) { items in
             self.devItems = items.items
             self.tableView.reloadData()
+            self.tableView.mj_header.endRefreshing()
         }
+    }
+    
+    func pullDownRefresh() {
+        self.tableView.mj_header.beginRefreshing()
+        getDevelopers(language, since: sinceArray[currentIndex])
     }
 
     
@@ -47,11 +66,11 @@ class DevloperViewController: UIViewController {
         currentIndex = index
         switch index {
         case 0:
-            getDevelopers(language, since: "daily")
+            getDevelopers(language, since: sinceArray[0])
         case 1:
-            getDevelopers(language, since: "weekly")
+            getDevelopers(language, since: sinceArray[1])
         case 2:
-            getDevelopers(language, since: "monthly")
+            getDevelopers(language, since: sinceArray[2])
         default:
             break
         }

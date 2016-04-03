@@ -14,7 +14,8 @@ class RepoTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var star: UILabel!
-//    @IBOutlet weak var avatarContainer: UIView!
+    @IBOutlet weak var lang: UIImageView!
+    @IBOutlet weak var avaterContainer: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,11 +27,20 @@ class RepoTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-//    
-//    func addContributor(contributor: Contributor) {
-//        let avatar = UIImageView(frame: CGRectMake(0, 0, avatarContainer.frame.height, avatarContainer.frame.height))
-//        avatar.kf_setImageWithURL(NSURL(string: contributor.avatar)!)
-//        avatarContainer.addSubview(avatar)
-//    }
+    
+    func addContributor(contributors: [Contributor]) {
+        for view in avaterContainer.subviews {
+            view.removeFromSuperview()
+        }
+        var count = 0
+        for item in contributors {
+            let positionX = count * 24 + 4
+            let imageView = UIImageView(frame: CGRectMake(CGFloat(positionX), 0, 24, 24))
+            imageView.kf_setImageWithURL(NSURL(string: item.avatar)!)
+            avaterContainer.addSubview(imageView)
+            count += 1
+        }
+
+    }
 
 }
