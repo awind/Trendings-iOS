@@ -64,16 +64,7 @@ class DevloperViewController: UIViewController {
             return
         }
         currentIndex = index
-        switch index {
-        case 0:
-            getDevelopers(language, since: sinceArray[0])
-        case 1:
-            getDevelopers(language, since: sinceArray[1])
-        case 2:
-            getDevelopers(language, since: sinceArray[2])
-        default:
-            break
-        }
+        pullDownRefresh()
     }
 }
 
@@ -90,7 +81,11 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
         let item = devItems[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(CELL, forIndexPath: indexPath) as! DevTableViewCell
         
-        cell.name.text = item.loginName
+        let attributeString = NSMutableAttributedString(string: "\(item.loginName)")
+        let attrs = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: UIColor.blackColor()]
+        attributeString.appendAttributedString(NSAttributedString(string: item.fullName, attributes: attrs))
+        cell.name.attributedText = attributeString
+        
         cell.rank.text = "\(item.rank)"
         cell.repoName.text = item.repoName
         cell.repoDesc.text = item.repoDesc

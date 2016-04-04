@@ -60,16 +60,7 @@ class RepoViewController: UIViewController {
             return
         }
         currentIndex = index
-        switch index {
-        case 0:
-            getTrendings(language, since: sinceArray[0])
-        case 1:
-            getTrendings(language, since: sinceArray[1])
-        case 2:
-            getTrendings(language, since: sinceArray[2])
-        default:
-            break
-        }
+        pullDownRefresh()
     }
 
 }
@@ -89,7 +80,11 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(CELL, forIndexPath: indexPath) as! RepoTableViewCell
         
-        cell.title.text = "\(repo.owner)\(repo.name)"
+        let attributeString = NSMutableAttributedString(string: "\(repo.owner)/")
+        let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
+        attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
+        cell.title.attributedText = attributeString
+        
         cell.desc.text = "\(repo.description)"
         cell.star.text = "\(repo.star)"
         cell.lang.kf_setImageWithURL(NSURL(string: "http://7xs2pw.com1.z0.glb.clouddn.com/\(repo.language.lowercaseString).png")!)
