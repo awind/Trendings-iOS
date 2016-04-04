@@ -24,7 +24,7 @@ public enum TrendingAPI {
 
 
 extension TrendingAPI: TargetType {
-    public var baseURL: NSURL { return NSURL(string : "http://162.243.45.82")! }
+    public var baseURL: NSURL { return NSURL(string : "http://xxxxx")! }
     public var path: String {
         switch self {
         case .Trending(_, _):
