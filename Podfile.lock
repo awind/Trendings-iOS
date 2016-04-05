@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (3.3.0)
   - Argo (2.3.0)
+  - BTNavigationDropdownMenu (0.2.1)
   - Curry (2.0.0)
   - Kingfisher (2.2.0)
   - MBProgressHUD (0.9.2)
@@ -15,24 +16,22 @@ PODS:
     - RxSwift (~> 2.0)
   - Result (2.0.0)
   - RxSwift (2.3.1)
-  - SDWebImage (3.7.5):
-    - SDWebImage/Core (= 3.7.5)
-  - SDWebImage/Core (3.7.5)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - Argo
+  - BTNavigationDropdownMenu
   - Curry
   - Kingfisher (~> 2.2)
   - MBProgressHUD (~> 0.9.2)
   - MJRefresh
   - Moya
   - Moya/RxSwift
-  - SDWebImage (~> 3.7)
 
 SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
   Argo: 3dbecf4204b1a3cdd1df88ebd5e23d01b652d34b
+  BTNavigationDropdownMenu: 9cf4060162c96510ee27c388412e28678320cdc0
   Curry: 5c5c5887d80fa22ca2133c7ea4d48c4d02283c0a
   Kingfisher: 350869ed88d6451803b390475d977abdd9f0a357
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -40,6 +39,5 @@ SPEC CHECKSUMS:
   Moya: 4d526954c8afd79820991393d40d7d8af756ceee
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
   RxSwift: 829b2843e9eddc77a02cb3f5117f0d55f8f646f1
-  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 
 COCOAPODS: 0.39.0

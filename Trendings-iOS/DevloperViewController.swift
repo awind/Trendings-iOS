@@ -10,12 +10,15 @@ import UIKit
 import SafariServices
 import Kingfisher
 import MJRefresh
+import BTNavigationDropdownMenu
 
 class DevloperViewController: UIViewController {
 
-    let CELL = "devCell"
+    let DEVELOPER_CELL = "devCell"
+    let SEGMENTED_CELL = "segmented"
     
     var language = "all"
+    let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "Ruby", "Php", "Shell", "Go", "C", "Cpp"]
     let sinceArray = ["daily", "weekly", "monthly"]
     var currentIndex = 0
     
@@ -26,7 +29,33 @@ class DevloperViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
+        initMenuView()
+        initTableView()
+        
+        self.tableView.mj_header.beginRefreshing()
+        getDevelopers(language, since: "daily")
+    }
+    
+    func initMenuView() {
+        
+        let parentVC = self.parentViewController as! UINavigationController
+        let menuView = BTNavigationDropdownMenu(navigationController: parentVC, title: "Developers \(self.language)", items: supportLanguages)
+        menuView.cellSeparatorColor = UIColor.init(red: 136, green: 136, blue: 136, alpha: 1)
+        menuView.arrowImage = UIImage(named: "ic_arrow_down.png")
+        menuView.checkMarkImage = UIImage(named: "ic_check.png")
+        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
+            self.language = self.supportLanguages[indexPath].lowercaseString
+            self.pullDownRefresh()
+        }
+        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
+        menuView.cellTextLabelColor = UIColor.darkGrayColor()
+        menuView.cellTextLabelFont = UIFont(name: "Avenir-Heavy", size: 17)
+        self.navigationItem.titleView = menuView
+    }
+    
+    func initTableView() {
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullDownRefresh))
         header.setTitle("Pull down to refresg", forState: .Idle)
         header.setTitle("Release_to_refresh", forState: .Pulling)
@@ -34,14 +63,12 @@ class DevloperViewController: UIViewController {
         header.lastUpdatedTimeLabel?.hidden = true
         
         self.tableView.mj_header = header
-
+        
         tableView.estimatedRowHeight = 93.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-        
-        self.tableView.mj_header.beginRefreshing()
-        getDevelopers(language, since: "daily")
+
     }
     
     func getDevelopers(language: String, since: String) {
@@ -49,6 +76,7 @@ class DevloperViewController: UIViewController {
             self.devItems = items.items
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }
     
@@ -58,7 +86,7 @@ class DevloperViewController: UIViewController {
     }
 
     
-    @IBAction func segmentValueChanged(sender: UISegmentedControl) {
+    func segmentValueChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
         if index == currentIndex {
             return
@@ -78,23 +106,38 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let item = devItems[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier(CELL, forIndexPath: indexPath) as! DevTableViewCell
         
-        let attributeString = NSMutableAttributedString(string: "\(item.loginName)")
-        let attrs = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: UIColor.blackColor()]
-        attributeString.appendAttributedString(NSAttributedString(string: item.fullName, attributes: attrs))
-        cell.name.attributedText = attributeString
+        var identifier = DEVELOPER_CELL
+        if indexPath.row == 0 {
+            identifier = SEGMENTED_CELL
+        }
         
-        cell.rank.text = "\(item.rank)"
-        cell.repoName.text = item.repoName
-        cell.repoDesc.text = item.repoDesc
-        cell.avatar.kf_setImageWithURL(NSURL(string: item.avatar)!)
+        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+        
+        if let devCell = cell as? DevTableViewCell {
+            let item = devItems[indexPath.row - 1]
+            let attributeString = NSMutableAttributedString(string: "\(item.loginName)")
+            let attrs = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: UIColor.blackColor()]
+            attributeString.appendAttributedString(NSAttributedString(string: item.fullName, attributes: attrs))
+            devCell.name.attributedText = attributeString
+            
+            devCell.rank.text = "\(item.rank)"
+            devCell.repoName.text = item.repoName
+            devCell.repoDesc.text = item.repoDesc
+            devCell.avatar.kf_setImageWithURL(NSURL(string: item.avatar)!)
+        }
+        
+        if let segmentedCell = cell as? SegmentedTableViewCell {
+            segmentedCell.segmentedControl.addTarget(self, action: #selector(segmentValueChanged), forControlEvents: .ValueChanged)
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let item = self.devItems[indexPath.row]
+        guard indexPath.row > 0 else {
+            return
+        }
+        let item = self.devItems[indexPath.row - 1]
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(item.url)")!)
         self.presentViewController(svc, animated: true, completion: nil)
     }

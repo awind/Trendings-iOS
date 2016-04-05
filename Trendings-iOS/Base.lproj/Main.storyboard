@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Devloper View Controller-->
+        <!--Developers-->
         <scene sceneID="0Md-n4-gnD">
             <objects>
                 <viewController id="LXt-2c-xts" customClass="DevloperViewController" customModule="Trendings_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -23,10 +23,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="devCell" rowHeight="93" id="nWH-yH-htV" customClass="DevTableViewCell" customModule="Trendings_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="122" width="600" height="93"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="nWH-yH-htV" id="yT6-D2-tZI">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="93"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ft6-BA-Hms" userLabel="rank">
@@ -42,8 +42,8 @@
                                                         <constraint firstAttribute="height" constant="56" id="BWk-am-B3e"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lee-Dx-yo8" userLabel="loginName">
-                                                    <rect key="frame" x="86" y="16" width="236" height="26"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lee-Dx-yo8" userLabel="loginName">
+                                                    <rect key="frame" x="86" y="16" width="39.5" height="26"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.25098039215686274" green="0.47058823529411764" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -101,6 +101,31 @@
                                             <outlet property="repoName" destination="WDr-3H-R6f" id="A8r-8E-Rlk"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="segmented" rowHeight="48" id="nDa-Bc-jS6" customClass="SegmentedTableViewCell" customModule="Trendings_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="185" width="600" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nDa-Bc-jS6" id="ZGG-4M-kRQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="47.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="53j-3P-2As">
+                                                    <rect key="frame" x="216.5" y="10" width="167" height="29"/>
+                                                    <segments>
+                                                        <segment title="Daily"/>
+                                                        <segment title="Weekly"/>
+                                                        <segment title="Monthly"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="53j-3P-2As" firstAttribute="centerX" secondItem="ZGG-4M-kRQ" secondAttribute="centerX" id="8ey-tQ-2ay"/>
+                                                <constraint firstItem="53j-3P-2As" firstAttribute="centerY" secondItem="ZGG-4M-kRQ" secondAttribute="centerY" id="vCN-9Q-MDE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="segmentedControl" destination="53j-3P-2As" id="MUz-BC-1z8"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -112,21 +137,7 @@
                             <constraint firstItem="EZX-XI-m0T" firstAttribute="width" secondItem="5d8-Ec-9NF" secondAttribute="width" id="sS2-7V-q35"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" prompt="Developers" id="juf-18-atY">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="bordered" selectedSegmentIndex="0" id="68R-FH-BGG">
-                            <rect key="frame" x="180" y="37" width="240" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Daily"/>
-                                <segment title="Weekly"/>
-                                <segment title="Monthly"/>
-                            </segments>
-                            <connections>
-                                <action selector="segmentValueChanged:" destination="LXt-2c-xts" eventType="valueChanged" id="NEX-7H-OON"/>
-                            </connections>
-                        </segmentedControl>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Developers" id="juf-18-atY"/>
                     <connections>
                         <outlet property="tableView" destination="EZX-XI-m0T" id="8Ku-u7-cBF"/>
                     </connections>
@@ -135,7 +146,26 @@
             </objects>
             <point key="canvasLocation" x="1623" y="1081"/>
         </scene>
-        <!--Repo View Controller-->
+        <!--Settings-->
+        <scene sceneID="5cU-vi-m7q">
+            <objects>
+                <viewController title="Settings" id="oMs-37-sRF" customClass="SettingsViewController" customModule="Trendings_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZBh-QA-CjA"/>
+                        <viewControllerLayoutGuide type="bottom" id="8kW-et-74D"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vFI-Ml-Pgy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VAq-pu-7HO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="66P-7c-MmU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1565" y="1991"/>
+        </scene>
+        <!--Repositiores-->
         <scene sceneID="gHp-ch-PHT">
             <objects>
                 <viewController id="eFL-Pj-Xqj" customClass="RepoViewController" customModule="Trendings_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -152,13 +182,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="repoCell" id="bQh-Fj-dcC" customClass="RepoTableViewCell" customModule="Trendings_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="122" width="600" height="138"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="138"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bQh-Fj-dcC" id="hQG-Dj-Cdm">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="138"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="137.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBZ-4J-Ta3" userLabel="owner">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBZ-4J-Ta3" userLabel="owner">
                                                     <rect key="frame" x="24" y="16" width="552" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.25098039215686274" green="0.47058823529411764" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
@@ -227,6 +257,31 @@
                                             <outlet property="title" destination="FBZ-4J-Ta3" id="aPt-Ii-bRD"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="segmented" rowHeight="48" id="YPm-yM-tSu" customClass="SegmentedTableViewCell" customModule="Trendings_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="230" width="600" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YPm-yM-tSu" id="h3u-7C-leD">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="47.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iQJ-qM-2wN">
+                                                    <rect key="frame" x="205" y="10" width="191" height="29"/>
+                                                    <segments>
+                                                        <segment title="Daily"/>
+                                                        <segment title="Weekly"/>
+                                                        <segment title="Monthly"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iQJ-qM-2wN" firstAttribute="centerY" secondItem="h3u-7C-leD" secondAttribute="centerY" id="9c3-4A-LRc"/>
+                                                <constraint firstItem="iQJ-qM-2wN" firstAttribute="centerX" secondItem="h3u-7C-leD" secondAttribute="centerX" id="dua-UD-m30"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="segmentedControl" destination="iQJ-qM-2wN" id="J3k-GL-bp7"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="eFL-Pj-Xqj" id="LZu-Z8-6ba"/>
@@ -242,21 +297,7 @@
                             <constraint firstItem="MsP-7k-jz5" firstAttribute="centerY" secondItem="yyf-j8-5r9" secondAttribute="centerY" id="hWm-B0-XaA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" prompt="Repositiories" id="eKa-g5-FPm">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="EfY-vu-dGB">
-                            <rect key="frame" x="180" y="37" width="240" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Daily"/>
-                                <segment title="Weekly"/>
-                                <segment title="Monthly"/>
-                            </segments>
-                            <connections>
-                                <action selector="segmentIndexChange:" destination="eFL-Pj-Xqj" eventType="valueChanged" id="Btf-r9-VJo"/>
-                            </connections>
-                        </segmentedControl>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Repositiores" id="eKa-g5-FPm"/>
                     <connections>
                         <outlet property="tableView" destination="MsP-7k-jz5" id="iZC-ej-XrJ"/>
                     </connections>
@@ -277,11 +318,29 @@
                     <connections>
                         <segue destination="IPC-ut-QEm" kind="relationship" relationship="viewControllers" id="leB-vW-HPm"/>
                         <segue destination="7je-fB-j0d" kind="relationship" relationship="viewControllers" id="lS9-kE-CQ0"/>
+                        <segue destination="ctw-Uu-acr" kind="relationship" relationship="viewControllers" id="kCa-vQ-fW1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fc9-Yz-Wky" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-12" y="751"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="GeV-WJ-w1t">
+            <objects>
+                <navigationController id="ctw-Uu-acr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="ic_settings" id="PuE-za-mSn"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SVX-3j-wLW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="oMs-37-sRF" kind="relationship" relationship="rootViewController" id="5FK-Up-0OI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eRw-qB-ivJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="675" y="1991"/>
         </scene>
         <!--Repositiories-->
         <scene sceneID="PUc-he-LYr">
@@ -329,5 +388,6 @@
     <resources>
         <image name="ic_developer" width="8" height="16"/>
         <image name="ic_repo" width="12" height="16"/>
+        <image name="ic_settings" width="15" height="12"/>
     </resources>
 </document>
