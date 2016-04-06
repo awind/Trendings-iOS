@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Armchair
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,6 +42,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
 
+let Pages = "1071979318"
+
+extension AppDelegate {
+    
+    override class func initialize() {
+        AppDelegate.setupArmchair()
+    }
+    
+    class func setupArmchair() {
+        
+        Armchair.appID(Pages)
+        Armchair.opensInStoreKit(false)
+        Armchair.significantEventsUntilPrompt(30)
+    }
+
+}

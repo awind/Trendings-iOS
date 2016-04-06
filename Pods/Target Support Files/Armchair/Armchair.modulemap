@@ -1,0 +1,6 @@
+framework module Armchair {
+  umbrella header "Armchair-umbrella.h"
+
+  export *
+  module * { export * }
+}

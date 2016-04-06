@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (3.3.0)
   - Argo (2.3.0)
+  - Armchair (0.1.1)
   - BTNavigationDropdownMenu (0.2.1)
   - Curry (2.0.0)
   - Kingfisher (2.2.0)
@@ -20,6 +21,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - Argo
+  - Armchair (~> 0.1.1)
   - BTNavigationDropdownMenu
   - Curry
   - Kingfisher (~> 2.2)
@@ -31,6 +33,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
   Argo: 3dbecf4204b1a3cdd1df88ebd5e23d01b652d34b
+  Armchair: 276f0dadba704b562870613301bdf7b595a29315
   BTNavigationDropdownMenu: 9cf4060162c96510ee27c388412e28678320cdc0
   Curry: 5c5c5887d80fa22ca2133c7ea4d48c4d02283c0a
   Kingfisher: 350869ed88d6451803b390475d977abdd9f0a357

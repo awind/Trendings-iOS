@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SafariServices
+import Armchair
 
 class SettingsViewController: UIViewController {
 
@@ -19,4 +21,23 @@ class SettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    @IBAction func shareClicked(sender: UIButton) {
+        let urlToShare = ""
+        let array = ["This app is awesome! Click to \(urlToShare) download!"]
+        let activityVC = UIActivityViewController(activityItems: array, applicationActivities: nil)
+        self.presentViewController(activityVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func aboutClicked(sender: UIButton) {
+        let svc = SFSafariViewController(URL: NSURL(string: "https://github.com/awind")!)
+        self.presentViewController(svc, animated: true, completion: nil)
+    }
+    
+    @IBAction func reviewClick(sender: UIButton) {
+        Armchair.rateApp()
+    }
+    
+    
+    
+    
 }
