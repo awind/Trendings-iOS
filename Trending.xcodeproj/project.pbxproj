@@ -30,7 +30,7 @@
 		97657CCC73F0F9BA8C67DCBB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50C7AB21CB27A1900DC1EAD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevloperViewController.swift; sourceTree = "<group>"; };
-		A523105E1CA791DD0042EC5E /* Trendings-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trendings-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A523105E1CA791DD0042EC5E /* Trending.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trending.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52310611CA791DD0042EC5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A52310631CA791DD0042EC5E /* RepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewController.swift; sourceTree = "<group>"; };
 		A52310661CA791DD0042EC5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		A523105F1CA791DD0042EC5E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A523105E1CA791DD0042EC5E /* Trendings-iOS.app */,
+				A523105E1CA791DD0042EC5E /* Trending.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,9 +152,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A523105D1CA791DD0042EC5E /* Trendings-iOS */ = {
+		A523105D1CA791DD0042EC5E /* Trending */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A52310701CA791DD0042EC5E /* Build configuration list for PBXNativeTarget "Trendings-iOS" */;
+			buildConfigurationList = A52310701CA791DD0042EC5E /* Build configuration list for PBXNativeTarget "Trending" */;
 			buildPhases = (
 				05CA8B67A8CAB0D648A40320 /* Check Pods Manifest.lock */,
 				A523105A1CA791DD0042EC5E /* Sources */,
@@ -167,9 +167,9 @@
 			);
 			dependencies = (
 			);
-			name = "Trendings-iOS";
+			name = Trending;
 			productName = "Trendings-iOS";
-			productReference = A523105E1CA791DD0042EC5E /* Trendings-iOS.app */;
+			productReference = A523105E1CA791DD0042EC5E /* Trending.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -184,10 +184,11 @@
 				TargetAttributes = {
 					A523105D1CA791DD0042EC5E = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 4AU8A4C436;
 					};
 				};
 			};
-			buildConfigurationList = A52310591CA791DD0042EC5E /* Build configuration list for PBXProject "Trendings-iOS" */;
+			buildConfigurationList = A52310591CA791DD0042EC5E /* Build configuration list for PBXProject "Trending" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -200,7 +201,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A523105D1CA791DD0042EC5E /* Trendings-iOS */,
+				A523105D1CA791DD0042EC5E /* Trending */,
 			);
 		};
 /* End PBXProject section */
@@ -396,10 +397,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "awind.me.Trendings-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = awind.me.Trendings;
+				PRODUCT_NAME = Trending;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -409,17 +412,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "awind.me.Trendings-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = awind.me.Trendings;
+				PRODUCT_NAME = Trending;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A52310591CA791DD0042EC5E /* Build configuration list for PBXProject "Trendings-iOS" */ = {
+		A52310591CA791DD0042EC5E /* Build configuration list for PBXProject "Trending" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A523106E1CA791DD0042EC5E /* Debug */,
@@ -428,7 +433,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A52310701CA791DD0042EC5E /* Build configuration list for PBXNativeTarget "Trendings-iOS" */ = {
+		A52310701CA791DD0042EC5E /* Build configuration list for PBXNativeTarget "Trending" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A52310711CA791DD0042EC5E /* Debug */,
