@@ -22,6 +22,7 @@
 		A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */; };
 		A541DFC31CAFBDAC00549D35 /* DevTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */; };
 		A541DFC51CAFCB0A00549D35 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A541DFC41CAFCB0A00549D35 /* .gitignore */; };
+		A54BFD941CB4D3EE006C3343 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BFD931CB4D3EE006C3343 /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevTableViewCell.swift; sourceTree = "<group>"; };
 		A541DFC41CAFCB0A00549D35 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Trending-Bridging-Header.h"; sourceTree = "<group>"; };
+		A54BFD931CB4D3EE006C3343 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				A523106A1CA791DD0042EC5E /* LaunchScreen.storyboard */,
 				A523106D1CA791DD0042EC5E /* Info.plist */,
 				A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */,
+				A54BFD931CB4D3EE006C3343 /* String.swift */,
 			);
 			path = "Trendings-iOS";
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				A523105C1CA791DD0042EC5E /* Resources */,
 				7AB1C906B118DB0D52F0E55D /* Embed Pods Frameworks */,
 				6FA91CD631820F82503BCEDF /* Copy Pods Resources */,
+				A54BFD911CB4C503006C3343 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -266,6 +270,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A54BFD911CB4C503006C3343 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" a8dbb91c6c25377d1cb8886e9939d5d015d59c3a 931e64bc48f235a7f2cd082a501245d812acc1a7fb9f2edd348a7d03d8bd4c18";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -274,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A53D83171CB36D21006F78E5 /* SegmentedTableViewCell.swift in Sources */,
+				A54BFD941CB4D3EE006C3343 /* String.swift in Sources */,
 				A52310641CA791DD0042EC5E /* RepoViewController.swift in Sources */,
 				A523107A1CA7DCB30042EC5E /* TrendingAPI.swift in Sources */,
 				A523107C1CA7DCCD0042EC5E /* Observable+Networking.swift in Sources */,

@@ -11,6 +11,7 @@ import SafariServices
 import Kingfisher
 import MJRefresh
 import BTNavigationDropdownMenu
+import Crashlytics
 
 class DevloperViewController: UIViewController {
 
@@ -41,7 +42,7 @@ class DevloperViewController: UIViewController {
     func initMenuView() {
         
         let parentVC = self.parentViewController as! UINavigationController
-        let menuView = BTNavigationDropdownMenu(navigationController: parentVC, title: "Developers \(self.language)", items: supportLanguages)
+        let menuView = BTNavigationDropdownMenu(navigationController: parentVC, title: "\(self.language)", items: supportLanguages)
         menuView.cellSeparatorColor = UIColor.init(red: 136, green: 136, blue: 136, alpha: 1)
         menuView.arrowImage = UIImage(named: "ic_arrow_down.png")
         menuView.checkMarkImage = UIImage(named: "ic_check.png")
@@ -72,7 +73,7 @@ class DevloperViewController: UIViewController {
     }
     
     func getDevelopers(language: String, since: String) {
-        TrendingAPI.getDevelopers(language, since: since) { items in
+        TrendingAPI.getDevelopers(language.lowercaseString, since: since.lowercaseString) { items in
             self.devItems = items.items
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
@@ -140,6 +141,8 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
         let item = self.devItems[indexPath.row - 1]
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(item.url)")!)
         self.presentViewController(svc, animated: true, completion: nil)
+        
+        Answers.logContentViewWithName("ViewContent", contentType: "Developers", contentId: item.url, customAttributes: nil)
     }
 
 }

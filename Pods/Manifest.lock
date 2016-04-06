@@ -3,7 +3,10 @@ PODS:
   - Argo (2.3.0)
   - Armchair (0.1.1)
   - BTNavigationDropdownMenu (0.2.1)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
   - Curry (2.0.0)
+  - Fabric (1.6.7)
   - Kingfisher (2.2.0)
   - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.0)
@@ -23,7 +26,9 @@ DEPENDENCIES:
   - Argo
   - Armchair (~> 0.1.1)
   - BTNavigationDropdownMenu
+  - Crashlytics
   - Curry
+  - Fabric
   - Kingfisher (~> 2.2)
   - MBProgressHUD (~> 0.9.2)
   - MJRefresh
@@ -35,7 +40,9 @@ SPEC CHECKSUMS:
   Argo: 3dbecf4204b1a3cdd1df88ebd5e23d01b652d34b
   Armchair: 276f0dadba704b562870613301bdf7b595a29315
   BTNavigationDropdownMenu: 9cf4060162c96510ee27c388412e28678320cdc0
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Curry: 5c5c5887d80fa22ca2133c7ea4d48c4d02283c0a
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Kingfisher: 350869ed88d6451803b390475d977abdd9f0a357
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4

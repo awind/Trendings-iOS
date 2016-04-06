@@ -10,13 +10,14 @@ import UIKit
 import SafariServices
 import MJRefresh
 import BTNavigationDropdownMenu
+import Crashlytics
 
 class RepoViewController: UIViewController {
 
     let REPO_CELL = "repoCell"
     let SEGMENTED_CELL = "segmented"
     
-    var language = "all"
+    var language = "All"
     let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "Ruby", "Php", "Shell", "Go", "C", "Cpp"]
     let sinceArray = ["daily", "weekly", "monthly"]
     var currentIndex = 0
@@ -48,7 +49,7 @@ class RepoViewController: UIViewController {
     
     func initMenuView() {
         let parentVC = self.parentViewController as! UINavigationController
-        let menuView = BTNavigationDropdownMenu(navigationController: parentVC, title: "Repositiories", items: supportLanguages)
+        let menuView = BTNavigationDropdownMenu(navigationController: parentVC, title: self.language, items: supportLanguages)
         menuView.cellSeparatorColor = UIColor.init(red: 136, green: 136, blue: 136, alpha: 1)
         menuView.arrowImage = UIImage(named: "ic_arrow_down.png")
         menuView.checkMarkImage = UIImage(named: "ic_check.png")
@@ -65,7 +66,7 @@ class RepoViewController: UIViewController {
     }
     
     func getTrendings(language: String, since: String) {
-        TrendingAPI.getTrendings(language, since: since) { items in
+        TrendingAPI.getTrendings(language.lowercaseString, since: since.lowercaseString) { items in
             self.repos = items.items
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
@@ -118,8 +119,14 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
             
             repoCell.desc.text = "\(repo.description)"
             repoCell.star.text = "\(repo.star)"
-            repoCell.lang.kf_setImageWithURL(NSURL(string: "http://7xs2pw.com1.z0.glb.clouddn.com/\(repo.language.lowercaseString).png")!)
             repoCell.addContributor(repo.contributors)
+            if !repo.language.isEmpty {
+                let language = repo.language.replace(" ", replacement: "-").lowercaseString
+                repoCell.lang.kf_setImageWithURL(NSURL(string: "http://7xs2pw.com1.z0.glb.clouddn.com/\(language).png")!, placeholderImage: UIImage(named: "ic_all.png"))
+            }
+            if self.language != "All" {
+                repoCell.lang.hidden = true
+            }
         }
     
         if let segmentedCell = cell as? SegmentedTableViewCell {
@@ -136,6 +143,9 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
         let repo = repos[indexPath.row - 1]
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(repo.url)")!)
         self.presentViewController(svc, animated: true, completion: nil)
+        
+        Answers.logContentViewWithName("ViewContent", contentType: "Repo", contentId: repo.url, customAttributes: nil)
+
     }
     
 }
