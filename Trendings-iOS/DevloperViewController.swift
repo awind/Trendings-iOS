@@ -18,7 +18,7 @@ class DevloperViewController: UIViewController {
     let DEVELOPER_CELL = "devCell"
     let SEGMENTED_CELL = "segmented"
     
-    var language = "all"
+    var language = "All"
     let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "Ruby", "Php", "Shell", "Go", "C", "Cpp"]
     let sinceArray = ["daily", "weekly", "monthly"]
     var currentIndex = 0

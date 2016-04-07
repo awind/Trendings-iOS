@@ -10,8 +10,9 @@ import UIKit
 import SafariServices
 import Armchair
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UITableViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
@@ -20,24 +21,38 @@ class SettingsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let section = indexPath.section
+        
+        switch section {
+        case 0:
+            shareClicked()
+        case 1:
+            reviewClick()
+        case 2:
+            aboutClicked()
+        default:
+            break
+        }
+    }
+    
 
-    @IBAction func shareClicked(sender: UIButton) {
+
+    
+    func shareClicked() {
         let urlToShare = ""
         let array = ["This app is awesome! Click to \(urlToShare) download!"]
         let activityVC = UIActivityViewController(activityItems: array, applicationActivities: nil)
         self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
-    @IBAction func aboutClicked(sender: UIButton) {
+   func aboutClicked() {
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com/awind")!)
         self.presentViewController(svc, animated: true, completion: nil)
     }
     
-    @IBAction func reviewClick(sender: UIButton) {
+    func reviewClick() {
         Armchair.rateApp()
     }
-    
-    
-    
-    
 }

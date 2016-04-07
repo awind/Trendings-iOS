@@ -128,6 +128,7 @@
 		A52310601CA791DD0042EC5E /* Trendings-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A5F911A51CB6335600B286D3 /* Util */,
 				A50C7AB01CB2786800DC1EAD /* View */,
 				A50C7AAF1CB2785600DC1EAD /* ViewControllers */,
 				A52310781CA7DC740042EC5E /* Networking */,
@@ -136,8 +137,6 @@
 				A52310681CA791DD0042EC5E /* Assets.xcassets */,
 				A523106A1CA791DD0042EC5E /* LaunchScreen.storyboard */,
 				A523106D1CA791DD0042EC5E /* Info.plist */,
-				A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */,
-				A54BFD931CB4D3EE006C3343 /* String.swift */,
 			);
 			path = "Trendings-iOS";
 			sourceTree = "<group>";
@@ -150,6 +149,15 @@
 				A523107B1CA7DCCD0042EC5E /* Observable+Networking.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		A5F911A51CB6335600B286D3 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */,
+				A54BFD931CB4D3EE006C3343 /* String.swift */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
