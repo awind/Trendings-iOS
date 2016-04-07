@@ -101,7 +101,7 @@
                                             <outlet property="repoName" destination="WDr-3H-R6f" id="A8r-8E-Rlk"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="segmented" rowHeight="48" id="nDa-Bc-jS6" customClass="SegmentedTableViewCell" customModule="Trending" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="segmented" rowHeight="48" id="nDa-Bc-jS6" customClass="SegmentedTableViewCell" customModule="Trending" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="185" width="600" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nDa-Bc-jS6" id="ZGG-4M-kRQ">
