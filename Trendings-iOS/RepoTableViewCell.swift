@@ -32,13 +32,13 @@ class RepoTableViewCell: UITableViewCell {
         for view in avaterContainer.subviews {
             view.removeFromSuperview()
         }
-        var count = 0
+        
+        var curFrame = CGRectMake(0, 0, 24, 24)
         for item in contributors {
-            let positionX = count * 24 + 4
-            let imageView = UIImageView(frame: CGRectMake(CGFloat(positionX), 0, 24, 24))
+            let imageView = UIImageView(frame: curFrame)
             imageView.kf_setImageWithURL(NSURL(string: item.avatar)!)
             avaterContainer.addSubview(imageView)
-            count += 1
+            curFrame.origin.x += 26;
         }
 
     }

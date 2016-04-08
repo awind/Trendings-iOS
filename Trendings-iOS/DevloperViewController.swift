@@ -48,7 +48,7 @@ class DevloperViewController: UIViewController {
         menuView.checkMarkImage = UIImage(named: "ic_check.png")
         menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
             self.language = self.supportLanguages[indexPath].lowercaseString
-            self.pullDownRefresh()
+            self.tableView.mj_header.beginRefreshing()
         }
         menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
         menuView.cellTextLabelColor = UIColor.darkGrayColor()
@@ -82,7 +82,6 @@ class DevloperViewController: UIViewController {
     }
     
     func pullDownRefresh() {
-        self.tableView.mj_header.beginRefreshing()
         getDevelopers(language, since: sinceArray[currentIndex])
     }
 
@@ -93,7 +92,8 @@ class DevloperViewController: UIViewController {
             return
         }
         currentIndex = index
-        pullDownRefresh()
+        self.tableView.mj_header.endRefreshing()
+        self.tableView.mj_header.beginRefreshing()
     }
 }
 
@@ -123,8 +123,7 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
             devCell.name.attributedText = attributeString
             
             devCell.rank.text = "\(item.rank)"
-            devCell.repoName.text = item.repoName
-            devCell.repoDesc.text = item.repoDesc
+            devCell.repoName.text = "\(item.repoName)  \(item.repoDesc)"
             devCell.avatar.kf_setImageWithURL(NSURL(string: item.avatar)!)
         }
         

@@ -196,7 +196,7 @@
 				TargetAttributes = {
 					A523105D1CA791DD0042EC5E = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4AU8A4C436;
+						DevelopmentTeam = 434358A4DE;
 					};
 				};
 			};
@@ -426,7 +426,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = awind.me.Trendings;
+				PRODUCT_BUNDLE_IDENTIFIER = me.awind.Trendings;
 				PRODUCT_NAME = Trending;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -441,7 +441,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = awind.me.Trendings;
+				PRODUCT_BUNDLE_IDENTIFIER = me.awind.Trendings;
 				PRODUCT_NAME = Trending;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

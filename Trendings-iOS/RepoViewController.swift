@@ -55,8 +55,7 @@ class RepoViewController: UIViewController {
         menuView.checkMarkImage = UIImage(named: "ic_check.png")
         menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
             self.language = self.supportLanguages[indexPath].lowercaseString
-            self.title = "Repositiories"
-            self.pullDownRefresh()
+            self.tableView.mj_header.beginRefreshing()
         }
         menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
         menuView.cellTextLabelColor = UIColor.darkGrayColor()
@@ -75,7 +74,6 @@ class RepoViewController: UIViewController {
     }
     
     func pullDownRefresh() {
-        self.tableView.mj_header.beginRefreshing()
         getTrendings(language, since: sinceArray[currentIndex])
     }
 
@@ -85,7 +83,8 @@ class RepoViewController: UIViewController {
             return
         }
         currentIndex = index
-        pullDownRefresh()
+        self.tableView.mj_header.endRefreshing()
+        self.tableView.mj_header.beginRefreshing()
     }
 
 }
@@ -124,8 +123,10 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
                 let language = repo.language.replace(" ", replacement: "-").lowercaseString
                 repoCell.lang.kf_setImageWithURL(NSURL(string: "http://7xs2pw.com1.z0.glb.clouddn.com/\(language).png")!, placeholderImage: UIImage(named: "ic_all.png"))
             }
-            if self.language != "All" {
+            if self.language.lowercaseString != "all" {
                 repoCell.lang.hidden = true
+            } else {
+                repoCell.lang.hidden = false
             }
         }
     

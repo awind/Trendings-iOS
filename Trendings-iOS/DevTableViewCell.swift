@@ -15,8 +15,6 @@ class DevTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var repoName: UILabel!
     
-    @IBOutlet weak var repoDesc: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
