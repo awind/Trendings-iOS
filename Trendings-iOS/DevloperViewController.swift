@@ -10,51 +10,35 @@ import UIKit
 import SafariServices
 import Kingfisher
 import MJRefresh
-import BTNavigationDropdownMenu
+import Alamofire
 import Crashlytics
+import ActionSheetPicker_3_0
 
 class DevloperViewController: UIViewController {
-
+    
     let DEVELOPER_CELL = "devCell"
     let SEGMENTED_CELL = "segmented"
     
     var language = "All"
-    let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "Ruby", "Php", "Shell", "Go", "C", "Cpp"]
-    let sinceArray = ["daily", "weekly", "monthly"]
+    var languageIndex = 0
     var currentIndex = 0
     
     var devItems = [Developers]()
     
     @IBOutlet weak var tableView: UITableView!
+    let button =  UIButton(type: .Custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         
-        initMenuView()
         initTableView()
         
         self.tableView.mj_header.beginRefreshing()
-        getDevelopers(language, since: "daily")
     }
     
-    func initMenuView() {
-        
-        let parentVC = self.parentViewController as! UINavigationController
-        let menuView = BTNavigationDropdownMenu(navigationController: parentVC, title: "\(self.language)", items: supportLanguages)
-        menuView.cellSeparatorColor = UIColor.init(red: 136, green: 136, blue: 136, alpha: 1)
-        menuView.arrowImage = UIImage(named: "ic_arrow_down.png")
-        menuView.checkMarkImage = UIImage(named: "ic_check.png")
-        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
-            self.language = self.supportLanguages[indexPath].lowercaseString
-            self.tableView.mj_header.beginRefreshing()
-        }
-        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
-        menuView.cellTextLabelColor = UIColor.darkGrayColor()
-        menuView.cellTextLabelFont = UIFont(name: "Avenir-Heavy", size: 17)
-        self.navigationItem.titleView = menuView
-    }
     
     func initTableView() {
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullDownRefresh))
@@ -69,7 +53,7 @@ class DevloperViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-
+        
     }
     
     func getDevelopers(language: String, since: String) {
@@ -81,10 +65,22 @@ class DevloperViewController: UIViewController {
         }
     }
     
-    func pullDownRefresh() {
-        getDevelopers(language, since: sinceArray[currentIndex])
+    func pickerViewClicked(sender: UIButton) {
+        ActionSheetStringPicker.showPickerWithTitle("Language", rows: supportLanguages, initialSelection: self.languageIndex, doneBlock: {  picker, value, index in
+            if (supportLanguages[value] == self.language) {
+                return
+            }
+            self.language = supportLanguages[value]
+            self.languageIndex = value
+            self.title = self.language
+            self.button.setTitle("\(self.language)", forState: UIControlState.Normal)
+            self.tableView.mj_header.beginRefreshing()
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
-
+    
+    func pullDownRefresh() {
+        getDevelopers(language.lowercaseString, since: sinceArray[currentIndex])
+    }
     
     func segmentValueChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
@@ -99,7 +95,7 @@ class DevloperViewController: UIViewController {
 
 extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.devItems.count
+        return self.devItems.count + 1
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -143,5 +139,5 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
         
         Answers.logContentViewWithName("ViewContent", contentType: "Developers", contentId: item.url, customAttributes: nil)
     }
-
+    
 }

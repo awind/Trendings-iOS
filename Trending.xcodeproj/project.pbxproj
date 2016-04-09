@@ -16,13 +16,14 @@
 		A52310691CA791DD0042EC5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A52310681CA791DD0042EC5E /* Assets.xcassets */; };
 		A523106C1CA791DD0042EC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A523106A1CA791DD0042EC5E /* LaunchScreen.storyboard */; };
 		A52310761CA7B7350042EC5E /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52310751CA7B7350042EC5E /* Items.swift */; };
-		A523107A1CA7DCB30042EC5E /* TrendingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52310791CA7DCB30042EC5E /* TrendingAPI.swift */; };
-		A523107C1CA7DCCD0042EC5E /* Observable+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A523107B1CA7DCCD0042EC5E /* Observable+Networking.swift */; };
 		A53D83171CB36D21006F78E5 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53D83161CB36D21006F78E5 /* SegmentedTableViewCell.swift */; };
 		A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */; };
 		A541DFC31CAFBDAC00549D35 /* DevTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */; };
 		A541DFC51CAFCB0A00549D35 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A541DFC41CAFCB0A00549D35 /* .gitignore */; };
 		A54BFD941CB4D3EE006C3343 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BFD931CB4D3EE006C3343 /* String.swift */; };
+		A55C41A81CB7D880004454C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C41A71CB7D880004454C4 /* Constants.swift */; };
+		A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F961CB8FD5A00F166E5 /* Observable+Networking.swift */; };
+		A57D4F991CB8FD5A00F166E5 /* TrendingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,14 +40,15 @@
 		A523106B1CA791DD0042EC5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A523106D1CA791DD0042EC5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A52310751CA7B7350042EC5E /* Items.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Items.swift; path = ../Items.swift; sourceTree = "<group>"; };
-		A52310791CA7DCB30042EC5E /* TrendingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingAPI.swift; sourceTree = "<group>"; };
-		A523107B1CA7DCCD0042EC5E /* Observable+Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Networking.swift"; sourceTree = "<group>"; };
 		A53D83161CB36D21006F78E5 /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
 		A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 		A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevTableViewCell.swift; sourceTree = "<group>"; };
 		A541DFC41CAFCB0A00549D35 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Trending-Bridging-Header.h"; sourceTree = "<group>"; };
 		A54BFD931CB4D3EE006C3343 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		A55C41A71CB7D880004454C4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A57D4F961CB8FD5A00F166E5 /* Observable+Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Networking.swift"; sourceTree = "<group>"; };
+		A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,9 +146,9 @@
 		A52310781CA7DC740042EC5E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A57D4F961CB8FD5A00F166E5 /* Observable+Networking.swift */,
+				A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */,
 				A50C7AB11CB2788300DC1EAD /* Model */,
-				A52310791CA7DCB30042EC5E /* TrendingAPI.swift */,
-				A523107B1CA7DCCD0042EC5E /* Observable+Networking.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -156,6 +158,7 @@
 			children = (
 				A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */,
 				A54BFD931CB4D3EE006C3343 /* String.swift */,
+				A55C41A71CB7D880004454C4 /* Constants.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -196,7 +199,7 @@
 				TargetAttributes = {
 					A523105D1CA791DD0042EC5E = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 434358A4DE;
+						DevelopmentTeam = 4AU8A4C436;
 					};
 				};
 			};
@@ -298,17 +301,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57D4F991CB8FD5A00F166E5 /* TrendingAPI.swift in Sources */,
 				A53D83171CB36D21006F78E5 /* SegmentedTableViewCell.swift in Sources */,
 				A54BFD941CB4D3EE006C3343 /* String.swift in Sources */,
+				A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */,
 				A52310641CA791DD0042EC5E /* RepoViewController.swift in Sources */,
-				A523107A1CA7DCB30042EC5E /* TrendingAPI.swift in Sources */,
-				A523107C1CA7DCCD0042EC5E /* Observable+Networking.swift in Sources */,
 				A541DFC31CAFBDAC00549D35 /* DevTableViewCell.swift in Sources */,
 				A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */,
 				A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */,
 				A52310621CA791DD0042EC5E /* AppDelegate.swift in Sources */,
 				A52310761CA7B7350042EC5E /* Items.swift in Sources */,
 				A50C7AB31CB27A1900DC1EAD /* SettingsViewController.swift in Sources */,
+				A55C41A81CB7D880004454C4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,11 +427,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fei Song (434358A4DE)";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.awind.Trendings;
 				PRODUCT_NAME = Trending;
+				PROVISIONING_PROFILE = "24d0c3a4-fdb0-4a5a-9a0a-c1fd4e3f1ded";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -438,11 +444,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fei Song (434358A4DE)";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.awind.Trendings;
 				PRODUCT_NAME = Trending;
+				PROVISIONING_PROFILE = "24d0c3a4-fdb0-4a5a-9a0a-c1fd4e3f1ded";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

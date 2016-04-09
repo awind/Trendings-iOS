@@ -20,7 +20,7 @@ enum ORMError : ErrorType {
 
 extension Observable {
     private func resultFromJSON<T: Decodable>(object:[String: AnyObject], classType: T.Type) -> T? {
-        let decoded = classType.decode(JSON.parse(object))
+        let decoded = classType.decode(JSON.init(object))
         switch decoded {
         case .Success(let result):
             return result as? T

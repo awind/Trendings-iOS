@@ -239,7 +239,7 @@
                                             <outlet property="title" destination="FBZ-4J-Ta3" id="aPt-Ii-bRD"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="segmented" rowHeight="48" id="YPm-yM-tSu" customClass="SegmentedTableViewCell" customModule="Trending" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="segmented" rowHeight="48" id="YPm-yM-tSu" customClass="SegmentedTableViewCell" customModule="Trending" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="230" width="600" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YPm-yM-tSu" id="h3u-7C-leD">

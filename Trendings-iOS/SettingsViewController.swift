@@ -37,9 +37,6 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-
-
-    
     func shareClicked() {
         let urlToShare = ""
         let array = ["This app is awesome! Click to \(urlToShare) download!"]

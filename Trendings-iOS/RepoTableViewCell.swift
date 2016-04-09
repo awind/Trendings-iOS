@@ -31,13 +31,16 @@ class RepoTableViewCell: UITableViewCell {
     func addContributor(contributors: [Contributor]) {
         for view in avaterContainer.subviews {
             view.removeFromSuperview()
+            
         }
-        
+
         var curFrame = CGRectMake(0, 0, 24, 24)
         for item in contributors {
             let imageView = UIImageView(frame: curFrame)
+            imageView.contentMode = .ScaleAspectFit
             imageView.kf_setImageWithURL(NSURL(string: item.avatar)!)
             avaterContainer.addSubview(imageView)
+            imageView.clipsToBounds = false
             curFrame.origin.x += 26;
         }
 

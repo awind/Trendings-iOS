@@ -1,14 +1,13 @@
 PODS:
-  - Alamofire (3.3.0)
-  - Argo (2.3.0)
+  - ActionSheetPicker-3.0 (2.0.5)
+  - Alamofire (3.3.1)
+  - Argo (3.0.1)
   - Armchair (0.1.1)
-  - BTNavigationDropdownMenu (0.2.1)
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
-  - Curry (2.0.0)
+  - Curry (2.2.0)
   - Fabric (1.6.7)
-  - Kingfisher (2.2.0)
-  - MBProgressHUD (0.9.2)
+  - Kingfisher (2.2.2)
   - MJRefresh (3.1.0)
   - Moya (6.4.0):
     - Moya/Core (= 6.4.0)
@@ -22,29 +21,27 @@ PODS:
   - RxSwift (2.3.1)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.0.5)
   - Alamofire (~> 3.0)
   - Argo
   - Armchair (~> 0.1.1)
-  - BTNavigationDropdownMenu
   - Crashlytics
   - Curry
   - Fabric
   - Kingfisher (~> 2.2)
-  - MBProgressHUD (~> 0.9.2)
   - MJRefresh
   - Moya
   - Moya/RxSwift
 
 SPEC CHECKSUMS:
-  Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
-  Argo: 3dbecf4204b1a3cdd1df88ebd5e23d01b652d34b
+  ActionSheetPicker-3.0: 8312778b6815578e6a86d630fbcf31dc94c534e7
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Argo: 22c5d62b7967020a641468c91dc9488bea9523b8
   Armchair: 276f0dadba704b562870613301bdf7b595a29315
-  BTNavigationDropdownMenu: 9cf4060162c96510ee27c388412e28678320cdc0
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
-  Curry: 5c5c5887d80fa22ca2133c7ea4d48c4d02283c0a
+  Curry: c22d80fff7f5a4b1bbd531455c3e2dbb099658a3
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  Kingfisher: 350869ed88d6451803b390475d977abdd9f0a357
-  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  Kingfisher: 7e8de5b0cf7b5dc8ec559d193029a0859df93ef1
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   Moya: 4d526954c8afd79820991393d40d7d8af756ceee
   Result: 9e75e1111c774c6ac594e14907b15057053a7959

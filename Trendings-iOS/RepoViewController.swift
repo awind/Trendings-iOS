@@ -7,76 +7,81 @@
 //
 
 import UIKit
+import Alamofire
 import SafariServices
 import MJRefresh
-import BTNavigationDropdownMenu
+import ActionSheetPicker_3_0
+
 import Crashlytics
 
 class RepoViewController: UIViewController {
-
+    
     let REPO_CELL = "repoCell"
     let SEGMENTED_CELL = "segmented"
     
     var language = "All"
-    let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "Ruby", "Php", "Shell", "Go", "C", "Cpp"]
-    let sinceArray = ["daily", "weekly", "monthly"]
+    var languageIndex = 0
     var currentIndex = 0
     
     @IBOutlet weak var tableView: UITableView!
+    let button =  UIButton(type: .Custom)
     
     var repos = [Repo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = self.language
+        
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-        initMenuView()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
 
+        initTableView()
+        self.tableView.mj_header.beginRefreshing()
+    }
+    
+    func initTableView() {
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullDownRefresh))
         header.setTitle("Pull down to refresg", forState: .Idle)
         header.setTitle("Release_to_refresh", forState: .Pulling)
         header.setTitle("Loading", forState: .Refreshing)
         header.lastUpdatedTimeLabel?.hidden = true
         self.tableView.mj_header = header
-        
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         tableView.delegate = self
-        self.tableView.mj_header.beginRefreshing()
-        getTrendings(language, since: "daily")
     }
     
-    func initMenuView() {
-        let parentVC = self.parentViewController as! UINavigationController
-        let menuView = BTNavigationDropdownMenu(navigationController: parentVC, title: self.language, items: supportLanguages)
-        menuView.cellSeparatorColor = UIColor.init(red: 136, green: 136, blue: 136, alpha: 1)
-        menuView.arrowImage = UIImage(named: "ic_arrow_down.png")
-        menuView.checkMarkImage = UIImage(named: "ic_check.png")
-        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
-            self.language = self.supportLanguages[indexPath].lowercaseString
+    func pickerViewClicked(sender: UIButton) {
+        ActionSheetStringPicker.showPickerWithTitle("Language", rows: supportLanguages, initialSelection: self.languageIndex, doneBlock: {  picker, value, index in
+            if (supportLanguages[value] == self.language) {
+                return
+            }
+            self.language = supportLanguages[value]
+            self.languageIndex = value
+            self.title = self.language
+            self.button.setTitle("\(self.language)", forState: UIControlState.Normal)
             self.tableView.mj_header.beginRefreshing()
-        }
-        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
-        menuView.cellTextLabelColor = UIColor.darkGrayColor()
-        menuView.cellTextLabelFont = UIFont(name: "Avenir-Heavy", size: 17)
-        menuView.animationDuration = 0.3
-        self.navigationItem.titleView = menuView
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
     
     func getTrendings(language: String, since: String) {
         TrendingAPI.getTrendings(language.lowercaseString, since: since.lowercaseString) { items in
             self.repos = items.items
+
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: .Top, animated: true)
         }
+        
     }
     
     func pullDownRefresh() {
-        getTrendings(language, since: sinceArray[currentIndex])
+        getTrendings(language.lowercaseString, since: sinceArray[currentIndex])
     }
-
+    
     func segmentValueChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
         if index == currentIndex  {
@@ -86,7 +91,7 @@ class RepoViewController: UIViewController {
         self.tableView.mj_header.endRefreshing()
         self.tableView.mj_header.beginRefreshing()
     }
-
+    
 }
 
 extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
@@ -97,7 +102,7 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return repos.count
+        return repos.count + 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -129,7 +134,7 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
                 repoCell.lang.hidden = false
             }
         }
-    
+        
         if let segmentedCell = cell as? SegmentedTableViewCell {
             segmentedCell.segmentedControl.addTarget(self, action: #selector(segmentValueChanged), forControlEvents: .ValueChanged)
         }
@@ -146,7 +151,7 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
         self.presentViewController(svc, animated: true, completion: nil)
         
         Answers.logContentViewWithName("ViewContent", contentType: "Repo", contentId: repo.url, customAttributes: nil)
-
+        
     }
     
 }

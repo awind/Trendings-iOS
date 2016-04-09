@@ -10,7 +10,7 @@ import UIKit
 import Armchair
 import Fabric
 import Crashlytics
-
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let cache = KingfisherManager.sharedManager.cache
+        
+        // Set max disk cache to 50 mb. Default is no limit.
+        cache.maxDiskCacheSize = 30 * 1024 * 1024
+        
+        let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
+        NSURLCache.setSharedURLCache(URLCache)
+        
         Fabric.sharedSDK().debug = true
         Fabric.with([Crashlytics.self])
         return true

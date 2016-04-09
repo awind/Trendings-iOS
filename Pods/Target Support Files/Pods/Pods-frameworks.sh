@@ -84,26 +84,24 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/ActionSheetPicker_3_0.framework"
   install_framework "Pods/Alamofire.framework"
   install_framework "Pods/Argo.framework"
   install_framework "Pods/Armchair.framework"
-  install_framework "Pods/BTNavigationDropdownMenu.framework"
   install_framework "Pods/Curry.framework"
   install_framework "Pods/Kingfisher.framework"
-  install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/MJRefresh.framework"
   install_framework "Pods/Moya.framework"
   install_framework "Pods/Result.framework"
   install_framework "Pods/RxSwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/ActionSheetPicker_3_0.framework"
   install_framework "Pods/Alamofire.framework"
   install_framework "Pods/Argo.framework"
   install_framework "Pods/Armchair.framework"
-  install_framework "Pods/BTNavigationDropdownMenu.framework"
   install_framework "Pods/Curry.framework"
   install_framework "Pods/Kingfisher.framework"
-  install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/MJRefresh.framework"
   install_framework "Pods/Moya.framework"
   install_framework "Pods/Result.framework"
