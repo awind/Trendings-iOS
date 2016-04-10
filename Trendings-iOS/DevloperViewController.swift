@@ -26,10 +26,16 @@ class DevloperViewController: UIViewController {
     var devItems = [Developers]()
     
     @IBOutlet weak var tableView: UITableView!
-    let button =  UIButton(type: .Custom)
+    let titleLabel = UILabel(frame: CGRectMake(0, 0, screenWidth - 120, 44))
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleLabel.backgroundColor = UIColor.clearColor()
+        titleLabel.numberOfLines = 1
+        titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.text = self.language
+        self.navigationItem.titleView = titleLabel
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
@@ -72,14 +78,13 @@ class DevloperViewController: UIViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
-            self.title = self.language
-            self.button.setTitle("\(self.language)", forState: UIControlState.Normal)
+            self.titleLabel.text = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
     
     func pullDownRefresh() {
-        getDevelopers(language.lowercaseString, since: sinceArray[currentIndex])
+        getDevelopers(language.lowercaseString, since: devSince[currentIndex])
     }
     
     func segmentValueChanged(sender: UISegmentedControl) {

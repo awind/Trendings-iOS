@@ -24,14 +24,19 @@ class RepoViewController: UIViewController {
     var currentIndex = 0
     
     @IBOutlet weak var tableView: UITableView!
-    let button =  UIButton(type: .Custom)
+    let titleLabel = UILabel(frame: CGRectMake(0, 0, screenWidth - 120, 44))
     
     var repos = [Repo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = self.language
+        titleLabel.backgroundColor = UIColor.clearColor()
+        titleLabel.numberOfLines = 1
+        titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.text = self.language
+        self.navigationItem.titleView = titleLabel
+        
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
@@ -61,8 +66,7 @@ class RepoViewController: UIViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
-            self.title = self.language
-            self.button.setTitle("\(self.language)", forState: UIControlState.Normal)
+            self.titleLabel.text = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
@@ -70,7 +74,6 @@ class RepoViewController: UIViewController {
     func getTrendings(language: String, since: String) {
         TrendingAPI.getTrendings(language.lowercaseString, since: since.lowercaseString) { items in
             self.repos = items.items
-
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: .Top, animated: true)
@@ -79,7 +82,7 @@ class RepoViewController: UIViewController {
     }
     
     func pullDownRefresh() {
-        getTrendings(language.lowercaseString, since: sinceArray[currentIndex])
+        getTrendings(language.lowercaseString, since: repoSince[currentIndex])
     }
     
     func segmentValueChanged(sender: UISegmentedControl) {

@@ -14,6 +14,7 @@ let screenHeight = screenSize.height
 
 
 let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "Ruby", "Php", "Shell", "Go", "C", "Cpp"]
-let sinceArray = ["daily", "weekly", "monthly"]
+let repoSince = ["daily", "weekly", "monthly"]
+let devSince = ["daily", "weekly"]
 
 let BASE_URL = "http://162.243.45.82/v2"
