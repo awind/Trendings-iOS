@@ -17,25 +17,24 @@ import Crashlytics
 class RepoViewController: UIViewController {
     
     let REPO_CELL = "repoCell"
-    let SEGMENTED_CELL = "segmented"
     
     var language = "All"
     var languageIndex = 0
     var currentIndex = 0
     
     @IBOutlet weak var tableView: UITableView!
-    let titleLabel = UILabel(frame: CGRectMake(0, 0, screenWidth - 120, 44))
+//    let titleLabel = UILabel(frame: CGRectMake(0, 0, screenWidth - 120, 44))
     
     var repos = [Repo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.backgroundColor = UIColor.clearColor()
-        titleLabel.numberOfLines = 1
-        titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.text = self.language
-        self.navigationItem.titleView = titleLabel
+//        titleLabel.backgroundColor = UIColor.clearColor()
+//        titleLabel.numberOfLines = 1
+//        titleLabel.textAlignment = NSTextAlignment.Center
+//        titleLabel.text = self.language
+//        self.navigationItem.titleView = titleLabel
         
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
@@ -66,7 +65,7 @@ class RepoViewController: UIViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
-            self.titleLabel.text = self.language
+            self.navigationItem.prompt = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
@@ -76,7 +75,6 @@ class RepoViewController: UIViewController {
             self.repos = items.items
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
-            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: .Top, animated: true)
         }
         
     }
@@ -85,7 +83,7 @@ class RepoViewController: UIViewController {
         getTrendings(language.lowercaseString, since: repoSince[currentIndex])
     }
     
-    func segmentValueChanged(sender: UISegmentedControl) {
+    @IBAction func segmentValueChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
         if index == currentIndex  {
             return
@@ -105,51 +103,39 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return repos.count + 1
+        return repos.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let repoCell = tableView.dequeueReusableCellWithIdentifier(REPO_CELL, forIndexPath: indexPath) as! RepoTableViewCell
         
-        var identifier = REPO_CELL
-        if indexPath.row == 0 {
-            identifier = SEGMENTED_CELL
+        let repo = repos[indexPath.row]
+        let attributeString = NSMutableAttributedString(string: "\(repo.owner)/")
+        let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
+        attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
+        repoCell.title.attributedText = attributeString
+        
+        repoCell.desc.text = "\(repo.description)"
+        repoCell.star.text = "\(repo.star)"
+        repoCell.addContributor(repo.contributors)
+        if !repo.language.isEmpty {
+            let language = repo.language.replace(" ", replacement: "-").lowercaseString
+            repoCell.lang.kf_setImageWithURL(NSURL(string: "http://7xs2pw.com1.z0.glb.clouddn.com/\(language).png")!, placeholderImage: UIImage(named: "ic_all.png"))
+        }
+        if self.language.lowercaseString != "all" {
+            repoCell.lang.hidden = true
+        } else {
+            repoCell.lang.hidden = false
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
-        
-        if let repoCell = cell as? RepoTableViewCell  {
-            let repo = repos[indexPath.row - 1]
-            let attributeString = NSMutableAttributedString(string: "\(repo.owner)/")
-            let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
-            attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
-            repoCell.title.attributedText = attributeString
-            
-            repoCell.desc.text = "\(repo.description)"
-            repoCell.star.text = "\(repo.star)"
-            repoCell.addContributor(repo.contributors)
-            if !repo.language.isEmpty {
-                let language = repo.language.replace(" ", replacement: "-").lowercaseString
-                repoCell.lang.kf_setImageWithURL(NSURL(string: "http://7xs2pw.com1.z0.glb.clouddn.com/\(language).png")!, placeholderImage: UIImage(named: "ic_all.png"))
-            }
-            if self.language.lowercaseString != "all" {
-                repoCell.lang.hidden = true
-            } else {
-                repoCell.lang.hidden = false
-            }
-        }
-        
-        if let segmentedCell = cell as? SegmentedTableViewCell {
-            segmentedCell.segmentedControl.addTarget(self, action: #selector(segmentValueChanged), forControlEvents: .ValueChanged)
-        }
-        
-        return cell
+        return repoCell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         guard indexPath.row > 0 else {
             return
         }
-        let repo = repos[indexPath.row - 1]
+        let repo = repos[indexPath.row]
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(repo.url)")!)
         self.presentViewController(svc, animated: true, completion: nil)
         

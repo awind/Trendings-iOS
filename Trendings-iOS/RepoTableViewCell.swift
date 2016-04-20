@@ -31,7 +31,6 @@ class RepoTableViewCell: UITableViewCell {
     func addContributor(contributors: [Contributor]) {
         for view in avaterContainer.subviews {
             view.removeFromSuperview()
-            
         }
 
         var curFrame = CGRectMake(0, 0, 24, 24)
