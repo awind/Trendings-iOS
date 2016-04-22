@@ -17,30 +17,25 @@ import Crashlytics
 class RepoViewController: UIViewController {
     
     let REPO_CELL = "repoCell"
+//    let SEARCH_REPO_CELL = "searchRepoCell"
     
     var language = "All"
     var languageIndex = 0
     var currentIndex = 0
     
     @IBOutlet weak var tableView: UITableView!
-//    let titleLabel = UILabel(frame: CGRectMake(0, 0, screenWidth - 120, 44))
+    var searchBar: UISearchBar!
     
     var repos = [Repo]()
+    var githubRepos = [Repositiory]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        titleLabel.backgroundColor = UIColor.clearColor()
-//        titleLabel.numberOfLines = 1
-//        titleLabel.textAlignment = NSTextAlignment.Center
-//        titleLabel.text = self.language
-//        self.navigationItem.titleView = titleLabel
-        
-        
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
-
+        
         initTableView()
         self.tableView.mj_header.beginRefreshing()
     }
@@ -56,6 +51,11 @@ class RepoViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         tableView.delegate = self
+        
+        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width, 44))
+        searchBar.placeholder = "Search Repositiories"
+        self.tableView.tableHeaderView = searchBar
+        searchBar.delegate = self
     }
     
     func pickerViewClicked(sender: UIButton) {
@@ -75,8 +75,8 @@ class RepoViewController: UIViewController {
             self.repos = items.items
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
-        
     }
     
     func pullDownRefresh() {
@@ -95,6 +95,8 @@ class RepoViewController: UIViewController {
     
 }
 
+// MARK: UITableViewDelegate
+
 extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -102,7 +104,9 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+//        if self.searchController.active {
+//            return githubRepos.count
+//        }
         return repos.count
     }
     
@@ -128,6 +132,24 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
             repoCell.lang.hidden = false
         }
         
+//        if let githubCell = cell as? SearchRepoTableViewCell {
+//            let repo = githubRepos[indexPath.row]
+//            let attributeString = NSMutableAttributedString(string: "\(repo.owner.login)/")
+//            let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
+//            attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
+//            githubCell.repoName.attributedText = attributeString
+//            
+//            githubCell.desc.text = "\(repo.description)"
+//            if repo.language != nil {
+//                githubCell.lang.text = "\(repo.language!)"
+//            } else {
+//                githubCell.lang.text = "Unknown"
+//            }
+//            githubCell.stars.text = "\(repo.stars)"
+//            githubCell.avatar.kf_setImageWithURL(NSURL(string: "\(repo.owner.avatarUrl)")!, placeholderImage: UIImage(named: "ic_all.png"))
+//            
+//        }
+        
         return repoCell
     }
     
@@ -142,6 +164,19 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
         Answers.logContentViewWithName("ViewContent", contentType: "Repo", contentId: repo.url, customAttributes: nil)
         
     }
+
+}
+
+// MARK: UISearchControllerDelegate
+
+extension RepoViewController: UISearchBarDelegate {
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        
+        let vc = SearchViewController()
+        let navVC = UINavigationController(rootViewController: vc)
+        self.presentViewController(navVC, animated: true, completion: nil)
+    }
 }
 

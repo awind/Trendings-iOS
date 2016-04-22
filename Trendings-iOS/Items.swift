@@ -9,6 +9,8 @@
 import Argo
 import Curry
 
+//MARK: Trending API Model
+
 struct Contributor {
     let avatar: String
     let username: String
@@ -103,4 +105,69 @@ extension DevItems: Decodable {
     }
 }
 
+
+// MARK: GitHub API Model
+
+struct Owner {
+    let id: Int
+    let login: String
+    let avatarUrl: String
+    let url: String
+    let type: String
+}
+
+extension Owner: Decodable {
+    static func decode(json: JSON) -> Decoded<Owner> {
+        return curry(Owner.init)
+            <^> json <| "id"
+            <*> json <| "login"
+            <*> json <| "avatar_url"
+            <*> json <| "html_url"
+            <*> json <| "type"
+    }
+}
+
+struct Repositiory {
+    let id: Int
+    let name: String
+    let fullname: String
+    let owner: Owner
+    let url: String
+    let description: String
+    let forks: Int
+    let stars: Int
+    let issues: Int
+    let language: String?
+}
+
+extension Repositiory: Decodable {
+    static func decode(json: JSON) -> Decoded<Repositiory> {
+        return curry(Repositiory.init)
+            <^> json <| "id"
+            <*> json <| "name"
+            <*> json <| "full_name"
+            <*> json <| "owner"
+            <*> json <| "html_url"
+            <*> json <| "description"
+            <*> json <| "forks_count"
+            <*> json <| "stargazers_count"
+            <*> json <| "open_issues_count"
+            <*> json <|? "language"
+    }
+}
+
+struct GithubRepos {
+    let count: Int
+    let incomplete: Bool
+    let items: [Repositiory]
+}
+
+extension GithubRepos: Decodable {
+    static func decode(json: JSON) -> Decoded<GithubRepos> {
+        return curry(GithubRepos.init)
+            <^> json <| "total_count"
+            <*> json <| "incomplete_results"
+            <*> json <|| "items"
+    }
+}
 

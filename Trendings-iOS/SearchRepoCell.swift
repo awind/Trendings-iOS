@@ -1,16 +1,20 @@
 //
-//  SegmentedTableViewCell.swift
-//  Trendings-iOS
+//  SearchRepoCell.swift
+//  Trending
 //
-//  Created by SongFei on 16/4/5.
+//  Created by SongFei on 16/4/22.
 //  Copyright © 2016年 SongFei. All rights reserved.
 //
 
 import UIKit
 
-class SegmentedTableViewCell: UITableViewCell {
+class SearchRepoCell: UITableViewCell {
 
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var repoName: UILabel!
+    @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var lang: UILabel!
+    @IBOutlet weak var stars: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,5 +26,5 @@ class SegmentedTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

@@ -25,17 +25,11 @@ class DevloperViewController: UIViewController {
     var devItems = [Developers]()
     
     @IBOutlet weak var tableView: UITableView!
-//    let titleLabel = UILabel(frame: CGRectMake(0, 0, screenWidth - 120, 44))
+    var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        titleLabel.backgroundColor = UIColor.clearColor()
-//        titleLabel.numberOfLines = 1
-//        titleLabel.textAlignment = NSTextAlignment.Center
-//        titleLabel.text = self.language
-//        self.navigationItem.titleView = titleLabel
-//        
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         
@@ -59,6 +53,11 @@ class DevloperViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        searchController = UISearchController(searchResultsController: nil)
+        self.searchController.searchBar.placeholder = "Search Repositiories"
+        self.searchController.dimsBackgroundDuringPresentation = true
+        self.searchController.searchResultsUpdater = self
+        self.tableView.tableHeaderView = self.searchController.searchBar
     }
     
     func getDevelopers(language: String, since: String) {
@@ -66,6 +65,7 @@ class DevloperViewController: UIViewController {
             self.devItems = items.items
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }
     
@@ -132,4 +132,12 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
         Answers.logContentViewWithName("ViewContent", contentType: "Developers", contentId: item.url, customAttributes: nil)
     }
     
+}
+
+// MARK: UISearchControllerDelegate
+
+extension DevloperViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        print(searchController.searchBar.text)
+    }
 }

@@ -16,7 +16,9 @@
 		A52310691CA791DD0042EC5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A52310681CA791DD0042EC5E /* Assets.xcassets */; };
 		A523106C1CA791DD0042EC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A523106A1CA791DD0042EC5E /* LaunchScreen.storyboard */; };
 		A52310761CA7B7350042EC5E /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52310751CA7B7350042EC5E /* Items.swift */; };
-		A53D83171CB36D21006F78E5 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53D83161CB36D21006F78E5 /* SegmentedTableViewCell.swift */; };
+		A52E60CE1CCA67AD00B0A0AD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E60CD1CCA67AD00B0A0AD /* SearchViewController.swift */; };
+		A52E60D71CCA77DF00B0A0AD /* SearchRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E60D51CCA77DF00B0A0AD /* SearchRepoCell.swift */; };
+		A52E60D81CCA77DF00B0A0AD /* SearchRepoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A52E60D61CCA77DF00B0A0AD /* SearchRepoCell.xib */; };
 		A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */; };
 		A541DFC31CAFBDAC00549D35 /* DevTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */; };
 		A541DFC51CAFCB0A00549D35 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A541DFC41CAFCB0A00549D35 /* .gitignore */; };
@@ -40,7 +42,9 @@
 		A523106B1CA791DD0042EC5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A523106D1CA791DD0042EC5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A52310751CA7B7350042EC5E /* Items.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Items.swift; path = ../Items.swift; sourceTree = "<group>"; };
-		A53D83161CB36D21006F78E5 /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
+		A52E60CD1CCA67AD00B0A0AD /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		A52E60D51CCA77DF00B0A0AD /* SearchRepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRepoCell.swift; sourceTree = "<group>"; };
+		A52E60D61CCA77DF00B0A0AD /* SearchRepoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchRepoCell.xib; sourceTree = "<group>"; };
 		A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 		A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevTableViewCell.swift; sourceTree = "<group>"; };
 		A541DFC41CAFCB0A00549D35 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 				A52310631CA791DD0042EC5E /* RepoViewController.swift */,
 				A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */,
 				A50C7AB21CB27A1900DC1EAD /* SettingsViewController.swift */,
+				A52E60CD1CCA67AD00B0A0AD /* SearchViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -95,7 +100,8 @@
 			children = (
 				A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */,
 				A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */,
-				A53D83161CB36D21006F78E5 /* SegmentedTableViewCell.swift */,
+				A52E60D51CCA77DF00B0A0AD /* SearchRepoCell.swift */,
+				A52E60D61CCA77DF00B0A0AD /* SearchRepoCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -226,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52E60D81CCA77DF00B0A0AD /* SearchRepoCell.xib in Resources */,
 				A541DFC51CAFCB0A00549D35 /* .gitignore in Resources */,
 				A523106C1CA791DD0042EC5E /* LaunchScreen.storyboard in Resources */,
 				A52310691CA791DD0042EC5E /* Assets.xcassets in Resources */,
@@ -302,14 +309,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A57D4F991CB8FD5A00F166E5 /* TrendingAPI.swift in Sources */,
-				A53D83171CB36D21006F78E5 /* SegmentedTableViewCell.swift in Sources */,
 				A54BFD941CB4D3EE006C3343 /* String.swift in Sources */,
 				A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */,
 				A52310641CA791DD0042EC5E /* RepoViewController.swift in Sources */,
 				A541DFC31CAFBDAC00549D35 /* DevTableViewCell.swift in Sources */,
+				A52E60D71CCA77DF00B0A0AD /* SearchRepoCell.swift in Sources */,
 				A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */,
 				A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */,
 				A52310621CA791DD0042EC5E /* AppDelegate.swift in Sources */,
+				A52E60CE1CCA67AD00B0A0AD /* SearchViewController.swift in Sources */,
 				A52310761CA7B7350042EC5E /* Items.swift in Sources */,
 				A50C7AB31CB27A1900DC1EAD /* SettingsViewController.swift in Sources */,
 				A55C41A81CB7D880004454C4 /* Constants.swift in Sources */,
@@ -427,8 +435,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Fei Song (2EU476U2HQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Fei Song (2EU476U2HQ)";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -445,7 +453,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Fei Song (2EU476U2HQ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
