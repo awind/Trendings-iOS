@@ -22,6 +22,7 @@ class RepoViewController: UIViewController {
     var currentIndex = 0
     
     @IBOutlet weak var tableView: UITableView!
+    var langTitle: UILabel!
     var searchBar: UISearchBar!
     
     var repos = [Repo]()
@@ -64,7 +65,6 @@ class RepoViewController: UIViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
-            self.navigationItem.prompt = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }

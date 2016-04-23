@@ -31,12 +31,15 @@ class SearchViewController: UITableViewController {
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        
         let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(fetchData))
         tableView.mj_footer = footer
 
         searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width-20, self.view.frame.height))
-        searchBar.placeholder = "Search"
+        if isSearchRepo {
+            searchBar.placeholder = "Search Repositiories"
+        } else {
+            searchBar.placeholder = "Search Users"
+        }
         let leftNavBarButton = UIBarButtonItem(customView: searchBar)
         searchBar.delegate = self
         searchBar.showsCancelButton = true

@@ -76,7 +76,6 @@ class DevloperViewController: UIViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
-            self.navigationItem.prompt = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
