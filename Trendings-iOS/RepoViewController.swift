@@ -41,8 +41,8 @@ class RepoViewController: UIViewController {
     
     func initTableView() {
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullDownRefresh))
-        header.setTitle("Pull down to refresg", forState: .Idle)
-        header.setTitle("Release_to_refresh", forState: .Pulling)
+        header.setTitle("Pull down to refresh", forState: .Idle)
+        header.setTitle("Release to refresh", forState: .Pulling)
         header.setTitle("Loading", forState: .Refreshing)
         header.lastUpdatedTimeLabel?.hidden = true
         self.tableView.mj_header = header

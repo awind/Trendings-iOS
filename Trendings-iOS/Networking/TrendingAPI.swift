@@ -150,7 +150,7 @@ extension GitHubAPI: TargetType {
 }
 
 extension GitHubAPI {
-    static func searchRepos(keyword: String, page: String, completion: GithubRepos -> Void) {
+    static func searchRepos(keyword: String, page: String, completion: GithubRepos -> Void, fail: ErrorType -> Void) {
         githubProvider.request(.SearchRepos(keyword, page))
             .mapSuccessfulHTTPToObject(GithubRepos)
             .observeOn(MainScheduler.instance)
@@ -158,13 +158,13 @@ extension GitHubAPI {
                 onNext: { items in
                     completion(items)
                 }, onError: { error in
-                    print(error)
+                    fail(error)
                 }
             )
             .addDisposableTo(disposeBag)
     }
     
-    static func searchUsers(keyword: String, page: String, completion: GithubUsers -> Void) {
+    static func searchUsers(keyword: String, page: String, completion: GithubUsers -> Void, fail: ErrorType -> Void) {
         githubProvider.request(.SearchUsers(keyword, page))
             .mapSuccessfulHTTPToObject(GithubUsers)
             .observeOn(MainScheduler.instance)
@@ -172,7 +172,7 @@ extension GitHubAPI {
                 onNext: { items in
                     completion(items)
                 }, onError: { error in
-                    print(error)
+                    fail(error)
                 }
             )
             .addDisposableTo(disposeBag)

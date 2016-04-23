@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import MJRefresh
+import MBProgressHUD
 
 class SearchViewController: UITableViewController {
     
@@ -32,6 +33,9 @@ class SearchViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(fetchData))
+        footer.setTitle("Pull to refresh", forState: .Idle)
+        footer.setTitle("Release to refresh", forState: .Pulling)
+        footer.setTitle("Loading", forState: .Refreshing)
         tableView.mj_footer = footer
 
         searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width-20, self.view.frame.height))
@@ -91,6 +95,11 @@ extension SearchViewController {
 
     
     func fetchData() {
+        if self.keyword.isEmpty {
+            tableView.mj_footer.endRefreshing()
+            return
+        }
+        
         if currentPage * 10 > totalCount {
             tableView.mj_footer.endRefreshingWithNoMoreData()
             return
@@ -105,7 +114,11 @@ extension SearchViewController {
     }
     
     func searchRepos() {
-        GitHubAPI.searchRepos(self.keyword, page: "\(currentPage)") { items in
+        let hud = MBProgressHUD.showHUDAddedTo(self.navigationController?.view, animated: true)
+        hud.mode = .Indeterminate
+        hud.labelText = "Loading"
+        hud.removeFromSuperViewOnHide = true
+        GitHubAPI.searchRepos(self.keyword, page: "\(currentPage)", completion: { items in
             self.tableView.mj_footer.endRefreshing()
             if self.currentPage == 1 {
                 self.repos.removeAll()
@@ -116,11 +129,20 @@ extension SearchViewController {
             self.currentPage += 1
             self.totalCount = items.count
             self.tableView.reloadData()
-        }
+            hud.hide(true)
+            }, fail:  { error in
+                self.tableView.mj_footer.endRefreshing()
+                hud.labelText = "Loading Error"
+                hud.hide(true, afterDelay: 1)
+        })
     }
     
     func searchUsers() {
-        GitHubAPI.searchUsers(self.keyword, page: "\(currentPage)") { items in
+        let hud = MBProgressHUD.showHUDAddedTo(self.navigationController?.view, animated: true)
+        hud.mode = .Indeterminate
+        hud.labelText = "Loading"
+        hud.removeFromSuperViewOnHide = true
+        GitHubAPI.searchUsers(self.keyword, page: "\(currentPage)", completion: { items in
             self.tableView.mj_footer.endRefreshing()
             if self.currentPage == 1 {
                 self.users.removeAll()
@@ -131,8 +153,13 @@ extension SearchViewController {
             self.currentPage += 1
             self.totalCount = items.count
             self.tableView.reloadData()
-        }
-
+            hud.hide(true)
+            }, fail: { error in
+                self.tableView.mj_footer.endRefreshing()
+                hud.labelText = "Loading Error"
+                hud.hide(true, afterDelay: 1)
+                
+        })
     }
 }
 
@@ -151,8 +178,9 @@ extension SearchViewController: UISearchBarDelegate {
         guard let key = searchBar.text else {
             return
         }
+        
         searchBar.endEditing(true)
-        currentPage = 0
+        currentPage = 1
         keyword = key
         fetchData()
     }

@@ -10,5 +10,6 @@
 #define Trending_Bridging_Header_h
 
 #import <MJRefresh/MJRefresh.h>
+#import <MBProgressHUD/MBProgressHUD.H>
 
 #endif /* Trending_Bridging_Header_h */
