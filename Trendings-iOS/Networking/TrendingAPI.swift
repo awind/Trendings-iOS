@@ -113,6 +113,7 @@ public func url(route: TargetType) -> String {
 
 public enum GitHubAPI {
     case SearchRepos(String, String)
+    case SearchUsers(String, String)
 }
 
 extension GitHubAPI: TargetType {
@@ -121,6 +122,8 @@ extension GitHubAPI: TargetType {
         switch self {
         case .SearchRepos(_):
             return "/repositories"
+        case .SearchUsers(_):
+            return "/users"
         }
     }
     
@@ -131,6 +134,8 @@ extension GitHubAPI: TargetType {
     public var parameters: [String: AnyObject]? {
         switch self {
         case .SearchRepos(let keyword, let page):
+            return ["q": keyword, "page": page]
+        case .SearchUsers(let keyword, let page):
             return ["q": keyword, "page": page]
         }
     }
@@ -146,7 +151,6 @@ extension GitHubAPI: TargetType {
 
 extension GitHubAPI {
     static func searchRepos(keyword: String, page: String, completion: GithubRepos -> Void) {
-        //disposeBag = DisposeBag()
         githubProvider.request(.SearchRepos(keyword, page))
             .mapSuccessfulHTTPToObject(GithubRepos)
             .observeOn(MainScheduler.instance)
@@ -159,6 +163,21 @@ extension GitHubAPI {
             )
             .addDisposableTo(disposeBag)
     }
+    
+    static func searchUsers(keyword: String, page: String, completion: GithubUsers -> Void) {
+        githubProvider.request(.SearchUsers(keyword, page))
+            .mapSuccessfulHTTPToObject(GithubUsers)
+            .observeOn(MainScheduler.instance)
+            .subscribe(
+                onNext: { items in
+                    completion(items)
+                }, onError: { error in
+                    print(error)
+                }
+            )
+            .addDisposableTo(disposeBag)
+    }
+
     
 }
 

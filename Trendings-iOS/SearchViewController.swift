@@ -7,22 +7,27 @@
 //
 
 import UIKit
+import SafariServices
 import MJRefresh
 
 class SearchViewController: UITableViewController {
     
     let REPO_CELL = "searchRepoCell"
+    let USER_CELL = "searchUserCell"
     
     var searchBar: UISearchBar!
     
     var repos = [Repositiory]()
+    var users = [User]()
     var currentPage = 1
     var totalCount = 10
     var keyword: String = ""
+    var isSearchRepo = true
     
     override func viewDidLoad() {
         
         tableView.registerNib(UINib(nibName: "SearchRepoCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
+         tableView.registerNib(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: USER_CELL)
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -47,40 +52,56 @@ extension SearchViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repos.count
+        if isSearchRepo {
+            return repos.count
+        } else {
+            return users.count
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let repo = repos[indexPath.row]
-        let repoCell = tableView.dequeueReusableCellWithIdentifier(REPO_CELL, forIndexPath: indexPath) as! SearchRepoCell
-        
-        let attributeString = NSMutableAttributedString(string: "\(repo.owner.login)/")
-        let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
-        attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
-        repoCell.repoName.attributedText = attributeString
-        
-        if let desc = repo.description {
-            repoCell.desc.text = "\(desc)"
+        if isSearchRepo {
+            let repo = repos[indexPath.row]
+            let repoCell = tableView.dequeueReusableCellWithIdentifier(REPO_CELL, forIndexPath: indexPath) as! SearchRepoCell
+            repoCell.bindItem(repo)
+            return repoCell
+        } else {
+            let user = users[indexPath.row]
+            let userCell = tableView.dequeueReusableCellWithIdentifier(USER_CELL, forIndexPath: indexPath) as! SearchUserCell
+            userCell.bindItem(user)
+            return userCell
         }
-        
-        if let language = repo.language {
-            repoCell.lang.text = "\(language)"
-        }
-        
-        
-        repoCell.stars.text = "\(repo.stars)"
-        repoCell.avatar.kf_setImageWithURL(NSURL(string: "\(repo.owner.avatarUrl)")!, placeholderImage: UIImage(named: "ic_all.png"))
-        
-        return repoCell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var svc: SFSafariViewController
+        if isSearchRepo {
+            let repo = repos[indexPath.row]
+            svc = SFSafariViewController(URL: NSURL(string: repo.url)!)
+        } else {
+            let user = users[indexPath.row]
+            svc = SFSafariViewController(URL: NSURL(string: user.url)!)
+        }
+        self.presentViewController(svc, animated: true, completion: nil)
+    }
+
+    
     func fetchData() {
-        print("current page: \(currentPage), total: \(totalCount)" )
         if currentPage * 10 > totalCount {
             tableView.mj_footer.endRefreshingWithNoMoreData()
             return
         }
+        
+        if isSearchRepo {
+            searchRepos()
+        } else {
+            searchUsers()
+        }
+        
+    }
+    
+    func searchRepos() {
         GitHubAPI.searchRepos(self.keyword, page: "\(currentPage)") { items in
             self.tableView.mj_footer.endRefreshing()
             if self.currentPage == 1 {
@@ -94,8 +115,23 @@ extension SearchViewController {
             self.tableView.reloadData()
         }
     }
-}
+    
+    func searchUsers() {
+        GitHubAPI.searchUsers(self.keyword, page: "\(currentPage)") { items in
+            self.tableView.mj_footer.endRefreshing()
+            if self.currentPage == 1 {
+                self.users.removeAll()
+                self.users = items.items
+            } else {
+                self.users += items.items
+            }
+            self.currentPage += 1
+            self.totalCount = items.count
+            self.tableView.reloadData()
+        }
 
+    }
+}
 
 
 extension SearchViewController: UISearchBarDelegate {

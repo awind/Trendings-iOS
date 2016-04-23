@@ -44,5 +44,20 @@ class RepoTableViewCell: UITableViewCell {
         }
 
     }
+    
+    func bindItem(repo: Repo) {
+        let attributeString = NSMutableAttributedString(string: "\(repo.owner)/")
+        let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
+        attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
+        title.attributedText = attributeString
+        
+        desc.text = "\(repo.description)"
+        star.text = "\(repo.star)"
+        addContributor(repo.contributors)
+        if !repo.language.isEmpty {
+            let language = repo.language.replace(" ", replacement: "-").lowercaseString
+            lang.kf_setImageWithURL(NSURL(string: "http://7xs2pw.com1.z0.glb.clouddn.com/\(language).png")!, placeholderImage: UIImage(named: "ic_all.png"))
+        }
+    }
 
 }

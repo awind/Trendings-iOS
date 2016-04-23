@@ -25,5 +25,18 @@ class DevTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func bindItem(item: Developer) {
+        avatar.layer.cornerRadius = 5
+        avatar.layer.masksToBounds = true
+        let attributeString = NSMutableAttributedString(string: "\(item.loginName)")
+        let attrs = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: UIColor.blackColor()]
+        attributeString.appendAttributedString(NSAttributedString(string: item.fullName, attributes: attrs))
+        name.attributedText = attributeString
+        
+        rank.text = "\(item.rank)"
+        repoName.text = "\(item.repoName)  \(item.repoDesc)"
+        avatar.kf_setImageWithURL(NSURL(string: item.avatar)!)
+    }
 
 }

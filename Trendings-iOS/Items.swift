@@ -65,7 +65,7 @@ extension RepoItems: Decodable {
 }
 
 
-struct Developers {
+struct Developer {
     let avatar: String
     let fullName: String
     let loginName: String
@@ -76,9 +76,9 @@ struct Developers {
     let url: String
 }
 
-extension Developers: Decodable {
-    static func decode(j: JSON) -> Decoded<Developers> {
-        return curry(Developers.init)
+extension Developer: Decodable {
+    static func decode(j: JSON) -> Decoded<Developer> {
+        return curry(Developer.init)
             <^> j <| "avatar"
             <*> j <| "full_name"
             <*> j <| "login_name"
@@ -92,7 +92,7 @@ extension Developers: Decodable {
 
 struct DevItems {
     let count: Int
-    let items: [Developers]
+    let items: [Developer]
     let status: String
 }
 
@@ -165,6 +165,38 @@ struct GithubRepos {
 extension GithubRepos: Decodable {
     static func decode(json: JSON) -> Decoded<GithubRepos> {
         return curry(GithubRepos.init)
+            <^> json <| "total_count"
+            <*> json <| "incomplete_results"
+            <*> json <|| "items"
+    }
+}
+
+struct User {
+    let id: Int
+    let login: String
+    let avatar: String
+    let url: String
+}
+
+extension User: Decodable {
+    static func decode(json: JSON) -> Decoded<User> {
+        return curry(User.init)
+            <^> json <| "id"
+            <*> json <| "login"
+            <*> json <| "avatar_url"
+            <*> json <| "html_url"
+    }
+}
+
+struct GithubUsers {
+    let count: Int
+    let incomplete: Bool
+    let items: [User]
+}
+
+extension GithubUsers: Decodable {
+    static func decode(json: JSON) -> Decoded<GithubUsers> {
+        return curry(GithubUsers.init)
             <^> json <| "total_count"
             <*> json <| "incomplete_results"
             <*> json <|| "items"

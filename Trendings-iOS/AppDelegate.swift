@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
         NSURLCache.setSharedURLCache(URLCache)
         
-        Fabric.sharedSDK().debug = true
         Fabric.with([Crashlytics.self])
         return true
     }

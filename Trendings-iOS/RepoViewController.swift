@@ -51,6 +51,7 @@ class RepoViewController: UIViewController {
         tableView.delegate = self
         
         searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width, 44))
+        searchBar.tintColor = UIColor(red: 220/255.0, green: 199/255.0, blue: 204/255.0, alpha: 1.0)
         searchBar.placeholder = "Search Repositiories"
         self.tableView.tableHeaderView = searchBar
         searchBar.delegate = self
@@ -107,39 +108,15 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let repoCell = tableView.dequeueReusableCellWithIdentifier(REPO_CELL, forIndexPath: indexPath) as! RepoTableViewCell
-        
         let repo = repos[indexPath.row]
-        let attributeString = NSMutableAttributedString(string: "\(repo.owner)/")
-        let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
-        attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
-        repoCell.title.attributedText = attributeString
-        
-        repoCell.desc.text = "\(repo.description)"
-        repoCell.star.text = "\(repo.star)"
-        repoCell.addContributor(repo.contributors)
-        if !repo.language.isEmpty {
-            let language = repo.language.replace(" ", replacement: "-").lowercaseString
-            repoCell.lang.kf_setImageWithURL(NSURL(string: "http://7xs2pw.com1.z0.glb.clouddn.com/\(language).png")!, placeholderImage: UIImage(named: "ic_all.png"))
-        }
-        if self.language.lowercaseString != "all" {
-            repoCell.lang.hidden = true
-        } else {
-            repoCell.lang.hidden = false
-        }
-        
+        repoCell.bindItem(repo)
         return repoCell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard indexPath.row > 0 else {
-            return
-        }
         let repo = repos[indexPath.row]
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(repo.url)")!)
         self.presentViewController(svc, animated: true, completion: nil)
-        
-        Answers.logContentViewWithName("ViewContent", contentType: "Repo", contentId: repo.url, customAttributes: nil)
-        
     }
 
 }
@@ -150,6 +127,7 @@ extension RepoViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         let vc = SearchViewController()
+        vc.isSearchRepo = true
         let navVC = UINavigationController(rootViewController: vc)
         self.presentViewController(navVC, animated: true, completion: nil)
         return false

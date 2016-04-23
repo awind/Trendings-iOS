@@ -22,10 +22,10 @@ class DevloperViewController: UIViewController {
     var languageIndex = 0
     var currentIndex = 0
     
-    var devItems = [Developers]()
+    var devItems = [Developer]()
     
     @IBOutlet weak var tableView: UITableView!
-    var searchController: UISearchController!
+    var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +53,11 @@ class DevloperViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        searchController = UISearchController(searchResultsController: nil)
-        self.searchController.searchBar.placeholder = "Search Repositiories"
-        self.searchController.dimsBackgroundDuringPresentation = true
-        self.searchController.searchResultsUpdater = self
-        self.tableView.tableHeaderView = self.searchController.searchBar
+        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width, 44))
+        searchBar.tintColor = UIColor(red: 220/255.0, green: 199/255.0, blue: 204/255.0, alpha: 1.0)
+        searchBar.placeholder = "Search Users"
+        self.tableView.tableHeaderView = searchBar
+        searchBar.delegate = self
     }
     
     func getDevelopers(language: String, since: String) {
@@ -109,14 +109,7 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
         let devCell = tableView.dequeueReusableCellWithIdentifier(DEVELOPER_CELL, forIndexPath: indexPath) as! DevTableViewCell
         
         let item = devItems[indexPath.row]
-        let attributeString = NSMutableAttributedString(string: "\(item.loginName)")
-        let attrs = [NSFontAttributeName: UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: UIColor.blackColor()]
-        attributeString.appendAttributedString(NSAttributedString(string: item.fullName, attributes: attrs))
-        devCell.name.attributedText = attributeString
-        
-        devCell.rank.text = "\(item.rank)"
-        devCell.repoName.text = "\(item.repoName)  \(item.repoDesc)"
-        devCell.avatar.kf_setImageWithURL(NSURL(string: item.avatar)!)
+        devCell.bindItem(item)
         
         return devCell
     }
@@ -136,8 +129,13 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: UISearchControllerDelegate
 
-extension DevloperViewController: UISearchResultsUpdating {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        print(searchController.searchBar.text)
+extension DevloperViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        let vc = SearchViewController()
+        vc.isSearchRepo = false
+        let navVC = UINavigationController(rootViewController: vc)
+        self.presentViewController(navVC, animated: true, completion: nil)
+        return false
     }
 }

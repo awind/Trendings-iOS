@@ -27,4 +27,25 @@ class SearchRepoCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func bindItem(repo: Repositiory) {
+        avatar.layer.cornerRadius = 5
+        avatar.layer.masksToBounds = true
+        
+        let attributeString = NSMutableAttributedString(string: "\(repo.owner.login)/")
+        let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
+        attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
+        repoName.attributedText = attributeString
+        
+        if let description = repo.description {
+            desc.text = "\(description)"
+        }
+        
+        if let language = repo.language {
+            lang.text = "\(language)"
+        }
+        
+        stars.text = "\(repo.stars)"
+        avatar.kf_setImageWithURL(NSURL(string: "\(repo.owner.avatarUrl)")!, placeholderImage: UIImage(named: "ic_all.png"))
+    }
+    
 }
