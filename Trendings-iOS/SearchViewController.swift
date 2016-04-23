@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class SearchViewController: UITableViewController {
     
@@ -15,12 +16,19 @@ class SearchViewController: UITableViewController {
     var searchBar: UISearchBar!
     
     var repos = [Repositiory]()
+    var currentPage = 1
+    var totalCount = 10
+    var keyword: String = ""
     
     override func viewDidLoad() {
         
         tableView.registerNib(UINib(nibName: "SearchRepoCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        
+        let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(fetchData))
+        tableView.mj_footer = footer
 
         searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width-20, self.view.frame.height))
         searchBar.placeholder = "Search"
@@ -28,6 +36,7 @@ class SearchViewController: UITableViewController {
         searchBar.delegate = self
         searchBar.showsCancelButton = true
         self.navigationItem.leftBarButtonItem = leftNavBarButton
+        searchBar.becomeFirstResponder()
     }
 
 }
@@ -51,16 +60,39 @@ extension SearchViewController {
         attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
         repoCell.repoName.attributedText = attributeString
         
-        repoCell.desc.text = "\(repo.description)"
-        if repo.language != nil {
-            repoCell.lang.text = "\(repo.language!)"
-        } else {
-            repoCell.lang.text = "Unknown"
+        if let desc = repo.description {
+            repoCell.desc.text = "\(desc)"
         }
+        
+        if let language = repo.language {
+            repoCell.lang.text = "\(language)"
+        }
+        
+        
         repoCell.stars.text = "\(repo.stars)"
         repoCell.avatar.kf_setImageWithURL(NSURL(string: "\(repo.owner.avatarUrl)")!, placeholderImage: UIImage(named: "ic_all.png"))
         
         return repoCell
+    }
+    
+    func fetchData() {
+        print("current page: \(currentPage), total: \(totalCount)" )
+        if currentPage * 10 > totalCount {
+            tableView.mj_footer.endRefreshingWithNoMoreData()
+            return
+        }
+        GitHubAPI.searchRepos(self.keyword, page: "\(currentPage)") { items in
+            self.tableView.mj_footer.endRefreshing()
+            if self.currentPage == 1 {
+                self.repos.removeAll()
+                self.repos = items.items
+            } else {
+                self.repos += items.items
+            }
+            self.currentPage += 1
+            self.totalCount = items.count
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -81,10 +113,9 @@ extension SearchViewController: UISearchBarDelegate {
             return
         }
         searchBar.endEditing(true)
-        GitHubAPI.searchRepos(key) { items in
-            self.repos = items.items
-            self.tableView.reloadData()
-        }
+        currentPage = 0
+        keyword = key
+        fetchData()
     }
 
 }

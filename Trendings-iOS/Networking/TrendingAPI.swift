@@ -112,7 +112,7 @@ public func url(route: TargetType) -> String {
 //MARK: GitHub API
 
 public enum GitHubAPI {
-    case SearchRepos(String)
+    case SearchRepos(String, String)
 }
 
 extension GitHubAPI: TargetType {
@@ -130,8 +130,8 @@ extension GitHubAPI: TargetType {
     
     public var parameters: [String: AnyObject]? {
         switch self {
-        case .SearchRepos(let keyword):
-            return ["q": keyword]
+        case .SearchRepos(let keyword, let page):
+            return ["q": keyword, "page": page]
         }
     }
     
@@ -145,9 +145,9 @@ extension GitHubAPI: TargetType {
 }
 
 extension GitHubAPI {
-    static func searchRepos(keyword: String, completion: GithubRepos -> Void) {
+    static func searchRepos(keyword: String, page: String, completion: GithubRepos -> Void) {
         //disposeBag = DisposeBag()
-        githubProvider.request(.SearchRepos(keyword))
+        githubProvider.request(.SearchRepos(keyword, page))
             .mapSuccessfulHTTPToObject(GithubRepos)
             .observeOn(MainScheduler.instance)
             .subscribe(

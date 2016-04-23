@@ -133,7 +133,7 @@ struct Repositiory {
     let fullname: String
     let owner: Owner
     let url: String
-    let description: String
+    let description: String?
     let forks: Int
     let stars: Int
     let issues: Int
@@ -148,7 +148,7 @@ extension Repositiory: Decodable {
             <*> json <| "full_name"
             <*> json <| "owner"
             <*> json <| "html_url"
-            <*> json <| "description"
+            <*> json <|? "description"
             <*> json <| "forks_count"
             <*> json <| "stargazers_count"
             <*> json <| "open_issues_count"

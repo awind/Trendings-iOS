@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import SafariServices
 import MJRefresh
 import ActionSheetPicker_3_0
@@ -17,7 +16,6 @@ import Crashlytics
 class RepoViewController: UIViewController {
     
     let REPO_CELL = "repoCell"
-//    let SEARCH_REPO_CELL = "searchRepoCell"
     
     var language = "All"
     var languageIndex = 0
@@ -104,9 +102,6 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if self.searchController.active {
-//            return githubRepos.count
-//        }
         return repos.count
     }
     
@@ -132,24 +127,6 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
             repoCell.lang.hidden = false
         }
         
-//        if let githubCell = cell as? SearchRepoTableViewCell {
-//            let repo = githubRepos[indexPath.row]
-//            let attributeString = NSMutableAttributedString(string: "\(repo.owner.login)/")
-//            let attrs = [NSFontAttributeName: UIFont.boldSystemFontOfSize(16)]
-//            attributeString.appendAttributedString(NSAttributedString(string: repo.name, attributes: attrs))
-//            githubCell.repoName.attributedText = attributeString
-//            
-//            githubCell.desc.text = "\(repo.description)"
-//            if repo.language != nil {
-//                githubCell.lang.text = "\(repo.language!)"
-//            } else {
-//                githubCell.lang.text = "Unknown"
-//            }
-//            githubCell.stars.text = "\(repo.stars)"
-//            githubCell.avatar.kf_setImageWithURL(NSURL(string: "\(repo.owner.avatarUrl)")!, placeholderImage: UIImage(named: "ic_all.png"))
-//            
-//        }
-        
         return repoCell
     }
     
@@ -171,12 +148,11 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension RepoViewController: UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-        
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         let vc = SearchViewController()
         let navVC = UINavigationController(rootViewController: vc)
         self.presentViewController(navVC, animated: true, completion: nil)
+        return false
     }
 }
 
