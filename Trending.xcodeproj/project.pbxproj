@@ -26,6 +26,7 @@
 		A55C41A81CB7D880004454C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C41A71CB7D880004454C4 /* Constants.swift */; };
 		A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F961CB8FD5A00F166E5 /* Observable+Networking.swift */; };
 		A57D4F991CB8FD5A00F166E5 /* TrendingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */; };
+		A5D5B64B1CD3660A00603BCB /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5B64A1CD3660A00603BCB /* TopViewController.swift */; };
 		A5FE6D1A1CCB148100163B66 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE6D181CCB148100163B66 /* SearchUserCell.swift */; };
 		A5FE6D1B1CCB148100163B66 /* SearchUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5FE6D191CCB148100163B66 /* SearchUserCell.xib */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		A55C41A71CB7D880004454C4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A57D4F961CB8FD5A00F166E5 /* Observable+Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Networking.swift"; sourceTree = "<group>"; };
 		A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingAPI.swift; sourceTree = "<group>"; };
+		A5D5B64A1CD3660A00603BCB /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		A5FE6D181CCB148100163B66 /* SearchUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		A5FE6D191CCB148100163B66 /* SearchUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchUserCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 				A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */,
 				A50C7AB21CB27A1900DC1EAD /* SettingsViewController.swift */,
 				A52E60CD1CCA67AD00B0A0AD /* SearchViewController.swift */,
+				A5D5B64A1CD3660A00603BCB /* TopViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				A52E60D71CCA77DF00B0A0AD /* SearchRepoCell.swift in Sources */,
 				A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */,
 				A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */,
+				A5D5B64B1CD3660A00603BCB /* TopViewController.swift in Sources */,
 				A52310621CA791DD0042EC5E /* AppDelegate.swift in Sources */,
 				A52E60CE1CCA67AD00B0A0AD /* SearchViewController.swift in Sources */,
 				A52310761CA7B7350042EC5E /* Items.swift in Sources */,

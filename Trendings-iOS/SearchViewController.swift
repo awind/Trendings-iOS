@@ -116,7 +116,16 @@ extension SearchViewController {
         var svc: SFSafariViewController
         if isSearchRepo {
             if repos.count == 0 {
-                print("didSelectRowAtIndexPath")
+                let vc = TopViewController()
+                switch indexPath.row {
+                case 0:
+                    vc.isTopRepo = true
+                case 1:
+                    vc.isTopRepo = false
+                default:
+                    break
+                }
+                self.presentViewController(vc, animated: true, completion: nil)
             } else {
                 let repo = repos[indexPath.row]
                 svc = SFSafariViewController(URL: NSURL(string: repo.url)!)
