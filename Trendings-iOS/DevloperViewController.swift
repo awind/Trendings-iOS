@@ -31,7 +31,7 @@ class DevloperViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: language, style: .Plain, target: self, action: #selector(pickerViewClicked))
         
         initTableView()
         
@@ -76,6 +76,7 @@ class DevloperViewController: UIViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
+            self.navigationItem.rightBarButtonItem?.title = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }

@@ -13,6 +13,7 @@ import MBProgressHUD
 
 class SearchViewController: UITableViewController {
     
+    let DEFAULT_CELL = "cell"
     let REPO_CELL = "searchRepoCell"
     let USER_CELL = "searchUserCell"
     
@@ -20,15 +21,20 @@ class SearchViewController: UITableViewController {
     
     var repos = [Repositiory]()
     var users = [User]()
+    var searchRecommands = ["View top reposities", "View top developers"]
     var currentPage = 1
     var totalCount = 10
     var keyword: String = ""
     var isSearchRepo = true
     
+    var hud: MBProgressHUD!
+    
     override func viewDidLoad() {
         
         tableView.registerNib(UINib(nibName: "SearchRepoCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
-         tableView.registerNib(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: USER_CELL)
+        tableView.registerNib(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: USER_CELL)
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: DEFAULT_CELL)
+        
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -38,6 +44,10 @@ class SearchViewController: UITableViewController {
         footer.setTitle("Loading", forState: .Refreshing)
         tableView.mj_footer = footer
 
+        initSearchBar()
+    }
+    
+    func initSearchBar() {
         searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width-20, self.view.frame.height))
         if isSearchRepo {
             searchBar.placeholder = "Search Repositiories"
@@ -50,7 +60,6 @@ class SearchViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         searchBar.becomeFirstResponder()
     }
-
 }
 
 extension SearchViewController {
@@ -60,8 +69,14 @@ extension SearchViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearchRepo {
+            if self.repos.count == 0 {
+                return searchRecommands.count
+            }
             return repos.count
         } else {
+            if self.users.count == 0 {
+                return searchRecommands.count
+            }
             return users.count
         }
     }
@@ -69,11 +84,27 @@ extension SearchViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if isSearchRepo {
+            
+            if repos.count == 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(DEFAULT_CELL, forIndexPath: indexPath)
+                cell.textLabel?.text = searchRecommands[indexPath.row]
+                cell.textLabel?.textColor = UIColor(red: 136/255.0, green: 136/255.0, blue: 136/255.0, alpha: 1)
+                cell.imageView?.image = UIImage(named: "ic_about")
+                return cell
+            }
+            
             let repo = repos[indexPath.row]
             let repoCell = tableView.dequeueReusableCellWithIdentifier(REPO_CELL, forIndexPath: indexPath) as! SearchRepoCell
             repoCell.bindItem(repo)
             return repoCell
         } else {
+            if users.count == 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(DEFAULT_CELL, forIndexPath: indexPath)
+                cell.textLabel?.text = searchRecommands[indexPath.row]
+                cell.imageView?.image = UIImage(named: "ic_about")
+                return cell
+            }
+
             let user = users[indexPath.row]
             let userCell = tableView.dequeueReusableCellWithIdentifier(USER_CELL, forIndexPath: indexPath) as! SearchUserCell
             userCell.bindItem(user)
@@ -84,13 +115,23 @@ extension SearchViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var svc: SFSafariViewController
         if isSearchRepo {
-            let repo = repos[indexPath.row]
-            svc = SFSafariViewController(URL: NSURL(string: repo.url)!)
+            if repos.count == 0 {
+                print("didSelectRowAtIndexPath")
+            } else {
+                let repo = repos[indexPath.row]
+                svc = SFSafariViewController(URL: NSURL(string: repo.url)!)
+                self.presentViewController(svc, animated: true, completion: nil)
+            }
         } else {
-            let user = users[indexPath.row]
-            svc = SFSafariViewController(URL: NSURL(string: user.url)!)
+            if users.count == 0 {
+                print("didSelectRowAtIndexPath")
+            } else {
+                let user = users[indexPath.row]
+                svc = SFSafariViewController(URL: NSURL(string: user.url)!)
+                self.presentViewController(svc, animated: true, completion: nil)
+            }
         }
-        self.presentViewController(svc, animated: true, completion: nil)
+        
     }
 
     
@@ -114,10 +155,6 @@ extension SearchViewController {
     }
     
     func searchRepos() {
-        let hud = MBProgressHUD.showHUDAddedTo(self.navigationController?.view, animated: true)
-        hud.mode = .Indeterminate
-        hud.labelText = "Loading"
-        hud.removeFromSuperViewOnHide = true
         GitHubAPI.searchRepos(self.keyword, page: "\(currentPage)", completion: { items in
             self.tableView.mj_footer.endRefreshing()
             if self.currentPage == 1 {
@@ -129,19 +166,15 @@ extension SearchViewController {
             self.currentPage += 1
             self.totalCount = items.count
             self.tableView.reloadData()
-            hud.hide(true)
+            self.hud.hide(true)
             }, fail:  { error in
                 self.tableView.mj_footer.endRefreshing()
-                hud.labelText = "Loading Error"
-                hud.hide(true, afterDelay: 1)
+                self.hud.labelText = "Loading Error"
+                self.hud.hide(true, afterDelay: 1)
         })
     }
     
     func searchUsers() {
-        let hud = MBProgressHUD.showHUDAddedTo(self.navigationController?.view, animated: true)
-        hud.mode = .Indeterminate
-        hud.labelText = "Loading"
-        hud.removeFromSuperViewOnHide = true
         GitHubAPI.searchUsers(self.keyword, page: "\(currentPage)", completion: { items in
             self.tableView.mj_footer.endRefreshing()
             if self.currentPage == 1 {
@@ -153,11 +186,11 @@ extension SearchViewController {
             self.currentPage += 1
             self.totalCount = items.count
             self.tableView.reloadData()
-            hud.hide(true)
+            self.hud.hide(true)
             }, fail: { error in
                 self.tableView.mj_footer.endRefreshing()
-                hud.labelText = "Loading Error"
-                hud.hide(true, afterDelay: 1)
+                self.hud.labelText = "Loading Error"
+                self.hud.hide(true, afterDelay: 1)
                 
         })
     }
@@ -181,7 +214,13 @@ extension SearchViewController: UISearchBarDelegate {
         
         searchBar.endEditing(true)
         currentPage = 1
+        totalCount = 11
         keyword = key
+        hud = MBProgressHUD.showHUDAddedTo(self.navigationController?.view, animated: true)
+        hud.mode = .Indeterminate
+        hud.labelText = "Loading"
+        hud.removeFromSuperViewOnHide = true
+        
         fetchData()
     }
 
