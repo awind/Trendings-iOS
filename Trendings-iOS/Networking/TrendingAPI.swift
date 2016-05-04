@@ -114,14 +114,20 @@ public func url(route: TargetType) -> String {
 public enum GitHubAPI {
     case SearchRepos(String, String)
     case SearchUsers(String, String)
+    case TopRepos(String, String)
+    case TopUsers(String, String, String)
 }
 
 extension GitHubAPI: TargetType {
     public var baseURL: NSURL { return NSURL(string : "https://api.github.com/search")! }
     public var path: String {
         switch self {
+        case .TopRepos(_, _):
+            fallthrough
         case .SearchRepos(_):
             return "/repositories"
+        case .TopUsers(_, _, _):
+            fallthrough
         case .SearchUsers(_):
             return "/users"
         }
@@ -137,6 +143,10 @@ extension GitHubAPI: TargetType {
             return ["q": keyword, "page": page]
         case .SearchUsers(let keyword, let page):
             return ["q": keyword, "page": page]
+        case .TopRepos(let language, let page):
+            return ["q": "language:\(language)", "page": page, "sort": "starts", "order": "desc"]
+        case .TopUsers(let location, let language, let page):
+            return ["q": "location:\(location) language:\(language)", "page": page, "sort": "followers", "order": "desc"]
         }
     }
     
@@ -176,6 +186,33 @@ extension GitHubAPI {
                 }
             )
             .addDisposableTo(disposeBag)
+    }
+    
+    static func topRepos(language: String, page: String, completion: GithubRepos -> Void, fail: ErrorType -> Void) {
+        githubProvider.request(.TopRepos(language, page))
+            .mapSuccessfulHTTPToObject(GithubRepos)
+            .observeOn(MainScheduler.instance)
+            .subscribe(
+                onNext: { items in
+                    completion(items)
+                }, onError: { error in
+                    fail(error)
+                }
+            )
+            .addDisposableTo(disposeBag)
+    }
+    
+    static func topUsers(location: String, language: String, page: String, completion: GithubUsers -> Void, fail: ErrorType ->Void) {
+        githubProvider.request(.TopUsers(location, language, page))
+            .mapSuccessfulHTTPToObject(GithubUsers)
+            .observeOn(MainScheduler.instance)
+            .subscribe(
+                onNext: {items in
+                    completion(items)
+                }, onError: { error in
+                    fail(error)
+                }
+            ).addDisposableTo(disposeBag)
     }
 
     

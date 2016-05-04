@@ -25,8 +25,8 @@
 		A54BFD941CB4D3EE006C3343 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BFD931CB4D3EE006C3343 /* String.swift */; };
 		A55C41A81CB7D880004454C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C41A71CB7D880004454C4 /* Constants.swift */; };
 		A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F961CB8FD5A00F166E5 /* Observable+Networking.swift */; };
-		A57D4F991CB8FD5A00F166E5 /* TrendingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */; };
 		A5D5B64B1CD3660A00603BCB /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5B64A1CD3660A00603BCB /* TopViewController.swift */; };
+		A5E191101CD9A0E800C93F79 /* TrendingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */; };
 		A5FE6D1A1CCB148100163B66 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE6D181CCB148100163B66 /* SearchUserCell.swift */; };
 		A5FE6D1B1CCB148100163B66 /* SearchUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5FE6D191CCB148100163B66 /* SearchUserCell.xib */; };
 /* End PBXBuildFile section */
@@ -319,13 +319,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5FE6D1A1CCB148100163B66 /* SearchUserCell.swift in Sources */,
-				A57D4F991CB8FD5A00F166E5 /* TrendingAPI.swift in Sources */,
 				A54BFD941CB4D3EE006C3343 /* String.swift in Sources */,
 				A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */,
 				A52310641CA791DD0042EC5E /* RepoViewController.swift in Sources */,
 				A541DFC31CAFBDAC00549D35 /* DevTableViewCell.swift in Sources */,
 				A52E60D71CCA77DF00B0A0AD /* SearchRepoCell.swift in Sources */,
 				A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */,
+				A5E191101CD9A0E800C93F79 /* TrendingAPI.swift in Sources */,
 				A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */,
 				A5D5B64B1CD3660A00603BCB /* TopViewController.swift in Sources */,
 				A52310621CA791DD0042EC5E /* AppDelegate.swift in Sources */,

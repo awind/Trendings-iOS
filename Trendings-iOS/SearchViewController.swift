@@ -125,7 +125,8 @@ extension SearchViewController {
                 default:
                     break
                 }
-                self.presentViewController(vc, animated: true, completion: nil)
+                let navVc = UINavigationController(rootViewController: vc)
+                self.presentViewController(navVc, animated: true, completion: nil)
             } else {
                 let repo = repos[indexPath.row]
                 svc = SFSafariViewController(URL: NSURL(string: repo.url)!)
@@ -203,6 +204,7 @@ extension SearchViewController {
                 
         })
     }
+    
 }
 
 

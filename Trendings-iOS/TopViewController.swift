@@ -24,6 +24,9 @@ class TopViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "Swift"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(dismissSelf))
+        
         tableView.registerNib(UINib(nibName: "SearchRepoCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
         tableView.registerNib(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: USER_CELL)
         
@@ -35,6 +38,11 @@ class TopViewController: UITableViewController {
         footer.setTitle("Release to refresh", forState: .Pulling)
         footer.setTitle("Loading", forState: .Refreshing)
         tableView.mj_footer = footer
+        fetchData()
+    }
+    
+    func dismissSelf() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func fetchData() {
@@ -45,21 +53,35 @@ class TopViewController: UITableViewController {
         }
         
         if isTopRepo {
-            searchTopRepos()
+            topRepos()
         } else {
-            searchTopUsers()
+            topUsers()
         }
         
     }
     
-    func searchTopRepos() {
-        
+    func topRepos() {
+        GitHubAPI.topRepos("swift", page: "1", completion: { items in
+            print(items.count)
+            self.repos = items.items
+            self.tableView.reloadData()
+            }, fail: { error in
+                print("error")
+        })
     }
     
-    func searchTopUsers() {
-        
+    func topUsers() {
+        GitHubAPI.topUsers("china", language: "java", page: "1", completion: { items in
+            print(items)
+            self.users = items.items
+            self.tableView.reloadData()
+            }, fail: { error in
+                print("error")})
     }
-
+    
+    
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
