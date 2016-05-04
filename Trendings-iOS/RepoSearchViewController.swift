@@ -55,7 +55,6 @@ class RepoSearchViewController: UITableViewController {
         footer.setTitle("Release to refresh", forState: .Pulling)
         footer.setTitle("Loading", forState: .Refreshing)
         tableView.mj_footer = footer
-        
     }
     
     func pullDownRefresh() {

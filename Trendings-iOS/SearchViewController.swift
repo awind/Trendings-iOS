@@ -69,10 +69,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     
     
     func initSearchBar() {
-        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width - 36, self.view.frame.height))
+        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width - 20, self.view.frame.height))
         searchBar.placeholder = "Search users or repositiories"
         let leftNavBarButton = UIBarButtonItem(customView: searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
+        searchBar.showsCancelButton = true
         searchBar.becomeFirstResponder()
         searchBar.delegate = self
     }
@@ -87,7 +88,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        self.navigationController?.popViewControllerAnimated(true)
+        searchBar.endEditing(true)
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
