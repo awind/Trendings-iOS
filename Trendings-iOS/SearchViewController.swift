@@ -11,228 +11,93 @@ import SafariServices
 import MJRefresh
 import MBProgressHUD
 
-class SearchViewController: UITableViewController {
+class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuDelegate {
     
-    let DEFAULT_CELL = "cell"
-    let REPO_CELL = "searchRepoCell"
-    let USER_CELL = "searchUserCell"
-    
+    var pageMenu: CAPSPageMenu?
     var searchBar: UISearchBar!
     
-    var repos = [Repositiory]()
-    var users = [User]()
-    var searchRecommands = ["View top reposities", "View top developers"]
-    var currentPage = 1
-    var totalCount = 10
-    var keyword: String = ""
-    var isSearchRepo = true
+    var repoVC = RepoSearchViewController()
+    var userVC = UserSearchViewController()
+    var controllerArray : [UIViewController] = []
     
-    var hud: MBProgressHUD!
+    var keyword = ""
+    var currentPageIndex = 0
     
     override func viewDidLoad() {
         
-        tableView.registerNib(UINib(nibName: "SearchRepoCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
-        tableView.registerNib(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: USER_CELL)
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: DEFAULT_CELL)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 142.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-        tableView.estimatedRowHeight = 138.0
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
-        let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(fetchData))
-        footer.setTitle("Pull to refresh", forState: .Idle)
-        footer.setTitle("Release to refresh", forState: .Pulling)
-        footer.setTitle("Loading", forState: .Refreshing)
-        tableView.mj_footer = footer
-
         initSearchBar()
+        initPageMenu()
     }
+    
+    func initPageMenu() {
+        
+        repoVC.title = "Repos"
+        repoVC.parentNavigationController = self.navigationController
+        userVC.title = "Users"
+        userVC.parentNavigationController = self.navigationController
+        controllerArray.append(repoVC)
+        controllerArray.append(userVC)
+        // Customize menu (Optional)
+        let parameters: [CAPSPageMenuOption] = [
+            .ScrollMenuBackgroundColor(UIColor.whiteColor()),
+            .ViewBackgroundColor(UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)),
+            .BottomMenuHairlineColor(UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 0.1)),
+            .SelectionIndicatorColor(UIColor(red: 18.0/255.0, green: 150.0/255.0, blue: 225.0/255.0, alpha: 1.0)),
+            .MenuHeight(40.0),
+            .SelectedMenuItemLabelColor(UIColor(red: 18.0/255.0, green: 150.0/255.0, blue: 225.0/255.0, alpha: 1.0)),
+            .UnselectedMenuItemLabelColor(UIColor(red: 40.0/255.0, green: 40.0/255.0, blue: 40.0/255.0, alpha: 1.0)),
+            .MenuItemFont(UIFont(name: "HelveticaNeue-Medium", size: 14.0)!),
+            .UseMenuLikeSegmentedControl(true),
+            .MenuItemSeparatorRoundEdges(true),
+            .SelectionIndicatorHeight(2.0),
+            .MenuItemSeparatorPercentageHeight(0.1)
+        ]
+        
+        // Initialize scroll menu
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 60.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
+        pageMenu?.useMenuLikeSegmentedControl = true
+        pageMenu?.delegate = self
+        
+        self.view.addSubview(pageMenu!.view)
+    }
+    
     
     func initSearchBar() {
-        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width-20, self.view.frame.height))
-        if isSearchRepo {
-            searchBar.placeholder = "Search Repositiories"
-        } else {
-            searchBar.placeholder = "Search Users"
-        }
+        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width - 36, self.view.frame.height))
+        searchBar.placeholder = "Search users or repositiories"
         let leftNavBarButton = UIBarButtonItem(customView: searchBar)
-        searchBar.delegate = self
-        searchBar.showsCancelButton = true
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         searchBar.becomeFirstResponder()
-    }
-}
-
-extension SearchViewController {
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        searchBar.delegate = self
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearchRepo {
-            if self.repos.count == 0 {
-                return searchRecommands.count
-            }
-            return repos.count
-        } else {
-            if self.users.count == 0 {
-                return searchRecommands.count
-            }
-            return users.count
-        }
+    func didMoveToPage(controller: UIViewController, index: Int) {
+        self.currentPageIndex = index
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        if isSearchRepo {
-            
-            if repos.count == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(DEFAULT_CELL, forIndexPath: indexPath)
-                cell.textLabel?.text = searchRecommands[indexPath.row]
-                cell.textLabel?.textColor = UIColor(red: 136/255.0, green: 136/255.0, blue: 136/255.0, alpha: 1)
-                cell.imageView?.image = UIImage(named: "ic_about")
-                return cell
-            }
-            
-            let repo = repos[indexPath.row]
-            let repoCell = tableView.dequeueReusableCellWithIdentifier(REPO_CELL, forIndexPath: indexPath) as! SearchRepoCell
-            repoCell.bindItem(repo)
-            return repoCell
-        } else {
-            if users.count == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(DEFAULT_CELL, forIndexPath: indexPath)
-                cell.textLabel?.text = searchRecommands[indexPath.row]
-                cell.imageView?.image = UIImage(named: "ic_about")
-                return cell
-            }
-
-            let user = users[indexPath.row]
-            let userCell = tableView.dequeueReusableCellWithIdentifier(USER_CELL, forIndexPath: indexPath) as! SearchUserCell
-            userCell.bindItem(user)
-            return userCell
-        }
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var svc: SFSafariViewController
-        if isSearchRepo {
-            if repos.count == 0 {
-                let vc = TopViewController()
-                switch indexPath.row {
-                case 0:
-                    vc.isTopRepo = true
-                case 1:
-                    vc.isTopRepo = false
-                default:
-                    break
-                }
-                let navVc = UINavigationController(rootViewController: vc)
-                self.presentViewController(navVc, animated: true, completion: nil)
-            } else {
-                let repo = repos[indexPath.row]
-                svc = SFSafariViewController(URL: NSURL(string: repo.url)!)
-                self.presentViewController(svc, animated: true, completion: nil)
-            }
-        } else {
-            if users.count == 0 {
-                print("didSelectRowAtIndexPath")
-            } else {
-                let user = users[indexPath.row]
-                svc = SFSafariViewController(URL: NSURL(string: user.url)!)
-                self.presentViewController(svc, animated: true, completion: nil)
-            }
-        }
-        
-    }
-
-    
-    func fetchData() {
-        if self.keyword.isEmpty {
-            tableView.mj_footer.endRefreshing()
-            return
-        }
-        
-        if currentPage * 10 > totalCount {
-            tableView.mj_footer.endRefreshingWithNoMoreData()
-            return
-        }
-        
-        if isSearchRepo {
-            searchRepos()
-        } else {
-            searchUsers()
-        }
-        
-    }
-    
-    func searchRepos() {
-        GitHubAPI.searchRepos(self.keyword, page: "\(currentPage)", completion: { items in
-            self.tableView.mj_footer.endRefreshing()
-            if self.currentPage == 1 {
-                self.repos.removeAll()
-                self.repos = items.items
-            } else {
-                self.repos += items.items
-            }
-            self.currentPage += 1
-            self.totalCount = items.count
-            self.tableView.reloadData()
-            self.hud.hide(true)
-            }, fail:  { error in
-                self.tableView.mj_footer.endRefreshing()
-                self.hud.labelText = "Loading Error"
-                self.hud.hide(true, afterDelay: 1)
-        })
-    }
-    
-    func searchUsers() {
-        GitHubAPI.searchUsers(self.keyword, page: "\(currentPage)", completion: { items in
-            self.tableView.mj_footer.endRefreshing()
-            if self.currentPage == 1 {
-                self.users.removeAll()
-                self.users = items.items
-            } else {
-                self.users += items.items
-            }
-            self.currentPage += 1
-            self.totalCount = items.count
-            self.tableView.reloadData()
-            self.hud.hide(true)
-            }, fail: { error in
-                self.tableView.mj_footer.endRefreshing()
-                self.hud.labelText = "Loading Error"
-                self.hud.hide(true, afterDelay: 1)
-                
-        })
-    }
-    
-}
-
-
-extension SearchViewController: UISearchBarDelegate {
     // MARK: SearchBar
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        self.keyword = searchText
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        guard let key = searchBar.text else {
-            return
+        if self.currentPageIndex == 0 {
+            self.repoVC.keyword = self.keyword
+        } else {
+            self.userVC.keyword = self.keyword
         }
-        
         searchBar.endEditing(true)
-        currentPage = 1
-        totalCount = 11
-        keyword = key
-        hud = MBProgressHUD.showHUDAddedTo(self.navigationController?.view, animated: true)
-        hud.mode = .Indeterminate
-        hud.labelText = "Loading"
-        hud.removeFromSuperViewOnHide = true
-        
-        fetchData()
     }
 
+    
 }

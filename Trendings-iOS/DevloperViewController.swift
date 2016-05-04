@@ -25,13 +25,15 @@ class DevloperViewController: UIViewController {
     var devItems = [Developer]()
     
     @IBOutlet weak var tableView: UITableView!
-    var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.prompt = self.language
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: language, style: .Plain, target: self, action: #selector(pickerViewClicked))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
+        initTableView()
+        
         
         initTableView()
         
@@ -52,12 +54,6 @@ class DevloperViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-        
-        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width, 44))
-        searchBar.tintColor = UIColor(red: 220/255.0, green: 199/255.0, blue: 204/255.0, alpha: 1.0)
-        searchBar.placeholder = "Search Users"
-        self.tableView.tableHeaderView = searchBar
-        searchBar.delegate = self
     }
     
     func getDevelopers(language: String, since: String) {
@@ -76,7 +72,7 @@ class DevloperViewController: UIViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
-            self.navigationItem.rightBarButtonItem?.title = self.language
+            self.navigationItem.prompt = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
@@ -94,6 +90,7 @@ class DevloperViewController: UIViewController {
         self.tableView.mj_header.endRefreshing()
         self.tableView.mj_header.beginRefreshing()
     }
+    
 }
 
 extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
@@ -125,17 +122,4 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
         Answers.logContentViewWithName("ViewContent", contentType: "Developers", contentId: item.url, customAttributes: nil)
     }
     
-}
-
-// MARK: UISearchControllerDelegate
-
-extension DevloperViewController: UISearchBarDelegate {
-    
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        let vc = SearchViewController()
-        vc.isSearchRepo = false
-        let navVC = UINavigationController(rootViewController: vc)
-        self.presentViewController(navVC, animated: true, completion: nil)
-        return false
-    }
 }

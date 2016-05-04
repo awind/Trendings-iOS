@@ -39,7 +39,7 @@ class SettingsViewController: UITableViewController {
     
     func shareClicked() {
         let urlToShare = "http://bit.ly/1Yl4P3k"
-        let array = ["This app is awesome! Click to \(urlToShare) download!"]
+        let array = ["This app is awesome! Click \(urlToShare) to download!"]
         let activityVC = UIActivityViewController(activityItems: array, applicationActivities: nil)
         self.presentViewController(activityVC, animated: true, completion: nil)
     }

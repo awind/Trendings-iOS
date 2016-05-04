@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import ActionSheetPicker_3_0
 
 class TopViewController: UITableViewController {
 
@@ -17,6 +18,8 @@ class TopViewController: UITableViewController {
     var repos = [Repositiory]()
     var users = [User]()
     
+    var language = "All"
+    var languageIndex = 0
     var currentPage = 1
     var totalCount = 10
     var isTopRepo = true
@@ -24,7 +27,7 @@ class TopViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Swift"
+        self.title = self.language
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(dismissSelf))
         
         tableView.registerNib(UINib(nibName: "SearchRepoCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
@@ -33,20 +36,44 @@ class TopViewController: UITableViewController {
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: language, style: .Plain, target: self, action: #selector(pickerViewClicked))
+        
+        
+        
+        let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
+        header.setTitle("Pull down to refresh", forState: .Idle)
+        header.setTitle("Release to refresh", forState: .Pulling)
+        header.setTitle("Loading", forState: .Refreshing)
+        header.lastUpdatedTimeLabel?.hidden = true
+        self.tableView.mj_header = header
         let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(fetchData))
         footer.setTitle("Pull to refresh", forState: .Idle)
         footer.setTitle("Release to refresh", forState: .Pulling)
         footer.setTitle("Loading", forState: .Refreshing)
         tableView.mj_footer = footer
-        fetchData()
+        tableView.mj_header.beginRefreshing()
     }
     
     func dismissSelf() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func fetchData() {
+    func refreshData() {
+        self.currentPage = 1
+        self.totalCount = 10
+        self.repos.removeAll()
+        self.users.removeAll()
         
+        if isTopRepo {
+            topRepos()
+        } else {
+            topUsers()
+        }
+        
+    }
+    
+    func fetchData() {
         if currentPage * 10 > totalCount {
             tableView.mj_footer.endRefreshingWithNoMoreData()
             return
@@ -61,9 +88,20 @@ class TopViewController: UITableViewController {
     }
     
     func topRepos() {
-        GitHubAPI.topRepos("swift", page: "1", completion: { items in
+        if languageIndex == 0 {
+            self.language = ""
+        }
+        GitHubAPI.topRepos("\(self.language)", page: "\(self.currentPage)", completion: { items in
             print(items.count)
-            self.repos = items.items
+            if self.currentPage == 1 {
+                self.repos.removeAll()
+                self.repos = items.items
+            } else {
+                self.repos.appendContentsOf(items.items)
+            }
+            self.currentPage += 1
+            self.totalCount = items.count
+            self.tableView.mj_header.endRefreshing()
             self.tableView.reloadData()
             }, fail: { error in
                 print("error")
@@ -71,16 +109,34 @@ class TopViewController: UITableViewController {
     }
     
     func topUsers() {
-        GitHubAPI.topUsers("china", language: "java", page: "1", completion: { items in
+        GitHubAPI.topUsers("china", language: "\(self.language)", page: "\(self.currentPage)", completion: { items in
             print(items)
-            self.users = items.items
+            if self.currentPage == 1 {
+                self.users.removeAll()
+                self.users = items.items
+            } else {
+                self.users.appendContentsOf(items.items)
+            }
+            self.currentPage += 1
+            self.totalCount = items.count
+            self.tableView.mj_header.endRefreshing()
             self.tableView.reloadData()
             }, fail: { error in
                 print("error")})
     }
     
-    
-    
+    func pickerViewClicked(sender: UIButton) {
+        ActionSheetStringPicker.showPickerWithTitle("Language", rows: supportLanguages, initialSelection: self.languageIndex, doneBlock: {  picker, value, index in
+            if (supportLanguages[value] == self.language) {
+                return
+            }
+            self.language = supportLanguages[value]
+            self.languageIndex = value
+            
+            self.navigationItem.rightBarButtonItem?.title = self.language
+            self.tableView.mj_header.beginRefreshing()
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
+    }
     
     // MARK: - Table view data source
 

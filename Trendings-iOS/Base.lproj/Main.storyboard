@@ -116,10 +116,10 @@
                             <constraint firstItem="EZX-XI-m0T" firstAttribute="width" secondItem="5d8-Ec-9NF" secondAttribute="width" id="sS2-7V-q35"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="juf-18-atY">
+                    <navigationItem key="navigationItem" prompt="All" id="juf-18-atY">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="B99-1S-KZj">
-                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <rect key="frame" x="180" y="37" width="240" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Daily"/>
@@ -137,6 +137,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="143-zM-xbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1623" y="1081"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="3U2-sC-fcK">
+            <objects>
+                <viewController id="M3q-tH-26K" customClass="SearchViewController" customModule="Trending" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ks2-8l-cLn"/>
+                        <viewControllerLayoutGuide type="bottom" id="9hj-pt-ZaF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="siF-VP-gXz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jPV-YX-al9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ez-Ix-ARY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="1934"/>
         </scene>
         <!--Repo View Controller-->
         <scene sceneID="gHp-ch-PHT">
@@ -252,10 +271,9 @@
                             <constraint firstItem="MsP-7k-jz5" firstAttribute="centerY" secondItem="yyf-j8-5r9" secondAttribute="centerY" id="paY-qf-cpE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="eKa-g5-FPm">
-                        <nil key="title"/>
+                    <navigationItem key="navigationItem" prompt="All" id="eKa-g5-FPm">
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="qOe-6c-Jvh">
-                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <rect key="frame" x="180" y="37" width="240" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Daily"/>
@@ -287,6 +305,7 @@
                     <connections>
                         <segue destination="IPC-ut-QEm" kind="relationship" relationship="viewControllers" id="leB-vW-HPm"/>
                         <segue destination="7je-fB-j0d" kind="relationship" relationship="viewControllers" id="lS9-kE-CQ0"/>
+                        <segue destination="I0A-ZB-qqS" kind="relationship" relationship="viewControllers" id="4yH-vv-W6h"/>
                         <segue destination="ctw-Uu-acr" kind="relationship" relationship="viewControllers" id="kCa-vQ-fW1"/>
                     </connections>
                 </tabBarController>
@@ -309,7 +328,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eRw-qB-ivJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="675" y="1991"/>
+            <point key="canvasLocation" x="-409" y="2747"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="vYe-WZ-eoQ">
@@ -405,7 +424,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NgC-fF-wpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1393" y="2128"/>
+            <point key="canvasLocation" x="709" y="2784"/>
         </scene>
         <!--Repositiories-->
         <scene sceneID="PUc-he-LYr">
@@ -449,12 +468,32 @@
             </objects>
             <point key="canvasLocation" x="811" y="1081"/>
         </scene>
+        <!--Search-->
+        <scene sceneID="zZf-Zt-Qae">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I0A-ZB-qqS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="ic_search" selectedImage="ic_search" id="qQS-TU-tvT"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bz2-Qm-ebg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="M3q-tH-26K" kind="relationship" relationship="rootViewController" id="XEy-H9-GbN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XFe-ZY-6uZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="623" y="1838"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ic_about" width="14" height="14"/>
         <image name="ic_advice" width="14" height="13"/>
         <image name="ic_developer" width="8" height="16"/>
         <image name="ic_repo" width="12" height="16"/>
+        <image name="ic_search" width="15" height="15"/>
         <image name="ic_settings" width="15" height="12"/>
         <image name="ic_share" width="14" height="13"/>
     </resources>

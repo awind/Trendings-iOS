@@ -39,8 +39,8 @@
                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBX-X3-RVc" userLabel="repoName">
-                        <rect key="frame" x="68" y="32" width="39.5" height="19.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBX-X3-RVc" userLabel="repoName">
+                        <rect key="frame" x="68" y="32" width="434" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.25098039220000001" green="0.47058823529999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -64,6 +64,7 @@
                     <constraint firstItem="mBX-X3-RVc" firstAttribute="leading" secondItem="pfS-zN-DQi" secondAttribute="trailing" constant="8" id="d4u-df-CNA"/>
                     <constraint firstItem="AOK-vj-Pb6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="d4z-0x-6XB"/>
                     <constraint firstItem="qNd-Wg-ucE" firstAttribute="top" secondItem="pfS-zN-DQi" secondAttribute="bottom" constant="8" id="ehv-Ne-JFk"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="mBX-X3-RVc" secondAttribute="trailing" constant="16" id="fNC-ay-or6"/>
                     <constraint firstItem="bAr-IL-KIn" firstAttribute="top" secondItem="qNd-Wg-ucE" secondAttribute="bottom" constant="8" id="fxy-eX-HEu"/>
                     <constraint firstItem="pfS-zN-DQi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="guo-pM-GQp"/>
                     <constraint firstItem="bAr-IL-KIn" firstAttribute="centerY" secondItem="y2s-Ev-FK8" secondAttribute="centerY" id="gwx-oH-6rw"/>

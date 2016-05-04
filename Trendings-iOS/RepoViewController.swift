@@ -22,8 +22,6 @@ class RepoViewController: UIViewController {
     var currentIndex = 0
     
     @IBOutlet weak var tableView: UITableView!
-    var langTitle: UILabel!
-    var searchBar: UISearchBar!
     
     var repos = [Repo]()
     var githubRepos = [Repositiory]()
@@ -33,8 +31,8 @@ class RepoViewController: UIViewController {
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: language, style: .Plain, target: self, action: #selector(pickerViewClicked))
-        
+        self.navigationItem.prompt = self.language
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
         self.tableView.mj_header.beginRefreshing()
     }
@@ -50,12 +48,6 @@ class RepoViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         tableView.delegate = self
-        
-        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width, 44))
-        searchBar.tintColor = UIColor(red: 220/255.0, green: 199/255.0, blue: 204/255.0, alpha: 1.0)
-        searchBar.placeholder = "Search Repositiories"
-        self.tableView.tableHeaderView = searchBar
-        searchBar.delegate = self
     }
     
     func pickerViewClicked(sender: UIButton) {
@@ -65,7 +57,7 @@ class RepoViewController: UIViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
-            self.navigationItem.rightBarButtonItem?.title = self.language
+            self.navigationItem.prompt = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
@@ -121,17 +113,3 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
 }
-
-// MARK: UISearchControllerDelegate
-
-extension RepoViewController: UISearchBarDelegate {
-    
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        let vc = SearchViewController()
-        vc.isSearchRepo = true
-        let navVC = UINavigationController(rootViewController: vc)
-        self.presentViewController(navVC, animated: true, completion: nil)
-        return false
-    }
-}
-

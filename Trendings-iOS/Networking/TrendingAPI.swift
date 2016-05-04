@@ -144,7 +144,7 @@ extension GitHubAPI: TargetType {
         case .SearchUsers(let keyword, let page):
             return ["q": keyword, "page": page]
         case .TopRepos(let language, let page):
-            return ["q": "language:\(language)", "page": page, "sort": "starts", "order": "desc"]
+            return ["q": "language:\(language)", "page": page, "sort": "stars", "order": "desc"]
         case .TopUsers(let location, let language, let page):
             return ["q": "location:\(location) language:\(language)", "page": page, "sort": "followers", "order": "desc"]
         }
