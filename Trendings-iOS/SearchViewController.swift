@@ -9,7 +9,6 @@
 import UIKit
 import SafariServices
 import MJRefresh
-import MBProgressHUD
 
 class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuDelegate {
     
@@ -60,7 +59,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
         ]
         
         // Initialize scroll menu
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 60.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 64.0, self.view.frame.width, self.view.frame.height - 113), pageMenuOptions: parameters)
         pageMenu?.useMenuLikeSegmentedControl = true
         pageMenu?.delegate = self
         

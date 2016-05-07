@@ -9,7 +9,6 @@
 import UIKit
 import SafariServices
 import MJRefresh
-import MBProgressHUD
 
 class UserSearchViewController: UITableViewController {
     
@@ -18,6 +17,7 @@ class UserSearchViewController: UITableViewController {
     
     var users = [User]()
     
+    var isLoading = false
     var currentPage = 1
     var totalCount = 10
     var keyword: String = "" {
@@ -34,8 +34,6 @@ class UserSearchViewController: UITableViewController {
     
     var parentNavigationController: UINavigationController?
     
-    var hud: MBProgressHUD!
-    
     override func viewDidLoad() {
         
         tableView.registerNib(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: USER_CELL)
@@ -50,11 +48,6 @@ class UserSearchViewController: UITableViewController {
         header.setTitle("Loading", forState: .Refreshing)
         header.lastUpdatedTimeLabel?.hidden = true
         self.tableView.mj_header = header
-        let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(fetchData))
-        footer.setTitle("Pull to refresh", forState: .Idle)
-        footer.setTitle("Release to refresh", forState: .Pulling)
-        footer.setTitle("Loading", forState: .Refreshing)
-        tableView.mj_footer = footer
     }
     
     func pullDownRefresh() {
@@ -92,24 +85,33 @@ extension UserSearchViewController {
         self.parentNavigationController?.presentViewController(svc, animated: true, completion: nil)
     }
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == self.users.count - 4 {
+            fetchData()
+        }
+    }
+    
     
     func fetchData() {
         if self.keyword.isEmpty {
-            tableView.mj_footer.endRefreshing()
+            return
+        }
+        
+        if isLoading {
             return
         }
         
         if currentPage * 10 > totalCount {
-            tableView.mj_footer.endRefreshingWithNoMoreData()
             return
         }
+        self.isLoading = true
         searchUsers()
     }
     
     
     func searchUsers() {
         GitHubAPI.searchUsers(self.keyword, page: "\(currentPage)", completion: { items in
-            self.tableView.mj_footer.endRefreshing()
+            self.isLoading = false
             self.tableView.mj_header.endRefreshing()
             if self.currentPage == 1 {
                 self.users.removeAll()
@@ -120,12 +122,8 @@ extension UserSearchViewController {
             self.currentPage += 1
             self.totalCount = items.count
             self.tableView.reloadData()
-//            self.hud.hide(true)
             }, fail: { error in
-                self.tableView.mj_footer.endRefreshing()
-//                self.hud.labelText = "Loading Error"
-//                self.hud.hide(true, afterDelay: 1)
-                
+                self.isLoading = false
         })
     }
     
