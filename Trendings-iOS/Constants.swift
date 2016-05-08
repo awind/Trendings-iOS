@@ -13,7 +13,7 @@ let screenWidth  = screenSize.width
 let screenHeight = screenSize.height
 
 
-let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "Ruby", "Php", "Shell", "Go", "C", "Cpp"]
+let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "Ruby", "Php", "Shell", "Go", "C", "Cpp", "Kotlin", "CSS", "Perl", "Scala", "Groovy", "Html", "CoffeeScript"]
 let repoSince = ["daily", "weekly", "monthly"]
 let devSince = ["daily", "weekly"]
 
