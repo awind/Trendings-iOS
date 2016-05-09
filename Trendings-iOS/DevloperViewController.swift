@@ -18,18 +18,57 @@ class DevloperViewController: UIViewController {
     
     let DEVELOPER_CELL = "devCell"
     
-    var language = "All"
-    var languageIndex = 0
-    var currentIndex = 0
+    var language: String {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("language") as? String {
+                return returnValue
+            } else {
+                return "All"
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "language")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    var languageIndex: Int {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("languageIndex") as? Int {
+                return returnValue
+            } else {
+                return 0
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "languageIndex")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    var sinceIndex: Int {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("devSinceIndex") as? Int {
+                return returnValue
+            } else {
+                return 0
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "devSinceIndex")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+
     
     var devItems = [Developer]()
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.prompt = self.language
+        self.segmentedControl.selectedSegmentIndex = self.sinceIndex
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
@@ -78,15 +117,15 @@ class DevloperViewController: UIViewController {
     }
     
     func pullDownRefresh() {
-        getDevelopers(language.lowercaseString, since: devSince[currentIndex])
+        getDevelopers(language.lowercaseString, since: devSince[sinceIndex])
     }
     
     @IBAction func segmentValueChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
-        if index == currentIndex {
+        if index == sinceIndex {
             return
         }
-        currentIndex = index
+        sinceIndex = index
         self.tableView.mj_header.endRefreshing()
         self.tableView.mj_header.beginRefreshing()
     }

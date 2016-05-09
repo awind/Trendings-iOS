@@ -17,10 +17,47 @@ class RepoViewController: UIViewController {
     
     let REPO_CELL = "repoCell"
     
-    var language = "All"
-    var languageIndex = 0
-    var currentIndex = 0
+    var language: String {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("language") as? String {
+                return returnValue
+            } else {
+                return "All"
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "language")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    var languageIndex: Int {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("languageIndex") as? Int {
+                return returnValue
+            } else {
+                return 0
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "languageIndex")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    var sinceIndex: Int {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("sinceIndex") as? Int {
+                return returnValue
+            } else {
+                return 0
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "sinceIndex")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
     var repos = [Repo]()
@@ -31,7 +68,9 @@ class RepoViewController: UIViewController {
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
+        
         self.navigationItem.prompt = self.language
+        self.segmentedControl.selectedSegmentIndex = self.sinceIndex
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
         self.tableView.mj_header.beginRefreshing()
@@ -72,15 +111,15 @@ class RepoViewController: UIViewController {
     }
     
     func pullDownRefresh() {
-        getTrendings(language.lowercaseString, since: repoSince[currentIndex])
+        getTrendings(language.lowercaseString, since: repoSince[sinceIndex])
     }
     
     @IBAction func segmentValueChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
-        if index == currentIndex  {
+        if index == sinceIndex  {
             return
         }
-        currentIndex = index
+        sinceIndex = index
         self.tableView.mj_header.endRefreshing()
         self.tableView.mj_header.beginRefreshing()
     }
