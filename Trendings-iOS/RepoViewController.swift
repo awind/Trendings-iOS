@@ -19,40 +19,41 @@ class RepoViewController: UIViewController {
     
     var language: String {
         get {
-            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("language") as? String {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("repoLanguage") as? String {
                 return returnValue
             } else {
                 return "All"
             }
         }
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "language")
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "repoLanguage")
             NSUserDefaults.standardUserDefaults().synchronize()
+            self.tableView.mj_header.beginRefreshing()
         }
     }
     var languageIndex: Int {
         get {
-            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("languageIndex") as? Int {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("repoLanguageIndex") as? Int {
                 return returnValue
             } else {
                 return 0
             }
         }
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "languageIndex")
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "repoLanguageIndex")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
     var sinceIndex: Int {
         get {
-            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("sinceIndex") as? Int {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("repoSinceIndex") as? Int {
                 return returnValue
             } else {
                 return 0
             }
         }
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "sinceIndex")
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "repoSinceIndex")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
@@ -66,10 +67,8 @@ class RepoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-        
-        
         self.navigationItem.prompt = self.language
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         self.segmentedControl.selectedSegmentIndex = self.sinceIndex
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()

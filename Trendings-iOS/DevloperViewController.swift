@@ -20,27 +20,27 @@ class DevloperViewController: UIViewController {
     
     var language: String {
         get {
-            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("language") as? String {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("devLanguage") as? String {
                 return returnValue
             } else {
                 return "All"
             }
         }
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "language")
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "devLanguage")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
     var languageIndex: Int {
         get {
-            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("languageIndex") as? Int {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("devLanguageIndex") as? Int {
                 return returnValue
             } else {
                 return 0
             }
         }
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "languageIndex")
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "devLanguageIndex")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
@@ -78,7 +78,6 @@ class DevloperViewController: UIViewController {
         
         self.tableView.mj_header.beginRefreshing()
     }
-    
     
     func initTableView() {
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullDownRefresh))
