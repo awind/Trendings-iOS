@@ -3,6 +3,10 @@
 ##### *View the most trending repositories and developers in Github.*
 
 
+  <a href="https://itunes.apple.com/cn/app/trending-for-github/id1101623984?mt=8"><img alt="Get it on Google Play" src="Screenshot/AppStore.png" width="210" /></a>
+<br/>
+
+
 
 ##Screenshots
 <br/>
@@ -11,6 +15,8 @@
 <img src="Screenshot/screenshot_3.png" width="210">
 <br/>
 <br/>
+
+
 
 -------
 

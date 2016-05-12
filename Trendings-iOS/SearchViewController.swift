@@ -69,7 +69,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     
     func initSearchBar() {
         searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width - 20, self.view.frame.height))
-        searchBar.placeholder = "Search users or repositiories"
+        searchBar.placeholder = "Search Repositiories"
         let leftNavBarButton = UIBarButtonItem(customView: searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         searchBar.showsCancelButton = true
@@ -79,6 +79,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     
     func didMoveToPage(controller: UIViewController, index: Int) {
         self.currentPageIndex = index
+        if self.currentPageIndex == 0 {
+            self.searchBar.placeholder = "Search Repositiories"
+        } else {
+            self.searchBar.placeholder = "Search Users"
+        }
     }
     
     // MARK: SearchBar
