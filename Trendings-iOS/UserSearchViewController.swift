@@ -55,6 +55,10 @@ class UserSearchViewController: UITableViewController {
         self.tableView.reloadData()
         currentPage = 1
         totalCount = 10
+        if self.keyword.isEmpty {
+            self.tableView.mj_header.endRefreshing()
+            return
+        }
         searchUsers()
     }
     

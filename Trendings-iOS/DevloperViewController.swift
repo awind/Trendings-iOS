@@ -150,10 +150,7 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard indexPath.row > 0 else {
-            return
-        }
-        let item = self.devItems[indexPath.row - 1]
+        let item = self.devItems[indexPath.row]
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(item.url)")!)
         self.presentViewController(svc, animated: true, completion: nil)
         
