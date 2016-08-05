@@ -48,6 +48,10 @@ class UserSearchViewController: UITableViewController {
         header.setTitle("Loading", forState: .Refreshing)
         header.lastUpdatedTimeLabel?.hidden = true
         self.tableView.mj_header = header
+        
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
+        tableView.tableFooterView = UIView()
     }
     
     func pullDownRefresh() {
@@ -131,5 +135,18 @@ extension UserSearchViewController {
         })
     }
     
+}
+
+extension UserSearchViewController: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
+    func titleForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString? {
+        let text = "No Users"
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(18.0),
+                          NSForegroundColorAttributeName: LIGHT_TEXT_COLOR]
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func emptyDataSetShouldDisplay(scrollView: UIScrollView) -> Bool {
+        return true
+    }
 }
 

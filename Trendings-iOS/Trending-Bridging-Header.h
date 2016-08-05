@@ -10,5 +10,6 @@
 #define Trending_Bridging_Header_h
 
 #import <MJRefresh/MJRefresh.h>
+#import "UIScrollView+EmptyDataSet.h"
 
 #endif /* Trending_Bridging_Header_h */

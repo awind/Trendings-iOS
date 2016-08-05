@@ -18,3 +18,7 @@ let repoSince = ["daily", "weekly", "monthly"]
 let devSince = ["daily", "weekly"]
 
 let BASE_URL = "http://162.243.45.82/v2"
+
+let LIGHT_TEXT_COLOR = UIColor.init(red: 136.0/255.0, green: 136.0/255.0, blue: 136.0/255.0, alpha: 1.0)
+let EMPTY_BUTTON_NORMAL_COLOR = UIColor.init(red: 5.0/255.0, green: 173.0/255.0, blue: 255.0/255.0, alpha: 1)
+let EMPTY_BUTTON_SELECTED_COLOR = UIColor.init(red: 107.0/255.0, green: 206.0/255.0, blue: 255.0/255.0, alpha: 1)

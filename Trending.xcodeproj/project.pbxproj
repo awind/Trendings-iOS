@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D7FD8B46AF0275F114E4411 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97657CCC73F0F9BA8C67DCBB /* Pods.framework */; };
+		2F58F8F11D545E6800A4201A /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F8F01D545E6800A4201A /* UIScrollView+EmptyDataSet.m */; };
 		A50C7AB31CB27A1900DC1EAD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C7AB21CB27A1900DC1EAD /* SettingsViewController.swift */; };
 		A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */; };
 		A52310621CA791DD0042EC5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52310611CA791DD0042EC5E /* AppDelegate.swift */; };
@@ -35,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F58F8EF1D545E6800A4201A /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		2F58F8F01D545E6800A4201A /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		36C740EF8A89F9A250614210 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6289946457CFDB5E14CE0D74 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		97657CCC73F0F9BA8C67DCBB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +116,8 @@
 		A50C7AB01CB2786800DC1EAD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2F58F8EF1D545E6800A4201A /* UIScrollView+EmptyDataSet.h */,
+				2F58F8F01D545E6800A4201A /* UIScrollView+EmptyDataSet.m */,
 				A5E191111CD9D47100C93F79 /* CAPSPageMenu.swift */,
 				A541DFC01CAFA6B900549D35 /* RepoTableViewCell.swift */,
 				A541DFC21CAFBDAC00549D35 /* DevTableViewCell.swift */,
@@ -333,6 +338,7 @@
 				A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */,
 				A52310641CA791DD0042EC5E /* RepoViewController.swift in Sources */,
 				A541DFC31CAFBDAC00549D35 /* DevTableViewCell.swift in Sources */,
+				2F58F8F11D545E6800A4201A /* UIScrollView+EmptyDataSet.m in Sources */,
 				A52E60D71CCA77DF00B0A0AD /* SearchRepoCell.swift in Sources */,
 				A5E191121CD9D47100C93F79 /* CAPSPageMenu.swift in Sources */,
 				A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */,
@@ -459,14 +465,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Fei Song (434358A4DE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fei Song (434358A4DE)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.awind.Trendings;
 				PRODUCT_NAME = Trending;
-				PROVISIONING_PROFILE = "f8617121-193b-4256-8341-bfd4c8b7f246";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Trendings-iOS/Trending-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -477,14 +486,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Fei Song (434358A4DE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fei Song (434358A4DE)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.awind.Trendings;
 				PRODUCT_NAME = Trending;
-				PROVISIONING_PROFILE = "f8617121-193b-4256-8341-bfd4c8b7f246";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Trendings-iOS/Trending-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

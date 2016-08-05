@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let cache = KingfisherManager.sharedManager.cache
@@ -65,10 +64,9 @@ extension AppDelegate {
     }
     
     class func setupArmchair() {
-        
         Armchair.appID(Pages)
         Armchair.opensInStoreKit(false)
-        Armchair.significantEventsUntilPrompt(30)
+        Armchair.significantEventsUntilPrompt(5)
     }
 
 }

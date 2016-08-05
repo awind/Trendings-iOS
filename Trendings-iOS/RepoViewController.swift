@@ -58,6 +58,8 @@ class RepoViewController: UIViewController {
         }
     }
     
+    var refreshError: Bool = false
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
@@ -72,7 +74,10 @@ class RepoViewController: UIViewController {
         self.segmentedControl.selectedSegmentIndex = self.sinceIndex
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
-        self.tableView.mj_header.beginRefreshing()
+        tableView.mj_header.beginRefreshing()
+        // tableview sepator trick
+        tableView.tableFooterView = UIView()
+        
     }
     
     func initTableView() {
@@ -86,6 +91,8 @@ class RepoViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
     func pickerViewClicked(sender: UIButton) {
@@ -101,12 +108,18 @@ class RepoViewController: UIViewController {
     }
     
     func getTrendings(language: String, since: String) {
-        TrendingAPI.getTrendings(language.lowercaseString, since: since.lowercaseString) { items in
+        self.repos = []
+        TrendingAPI.getTrendings(language.lowercaseString, since: since.lowercaseString, completion: { items in
             self.repos = items.items
+            self.refreshError = false
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
-        }
+            }, failure: { error in
+                self.refreshError = true
+                self.tableView.reloadData()
+                self.tableView.mj_header.endRefreshing()
+        })
     }
     
     func pullDownRefresh() {
@@ -150,4 +163,28 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
         self.presentViewController(svc, animated: true, completion: nil)
     }
 
+}
+
+extension RepoViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func titleForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString? {
+        let text = "Oops...There's No repositiory data for you request."
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(18.0),
+                          NSForegroundColorAttributeName: LIGHT_TEXT_COLOR]
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControlState) -> NSAttributedString? {
+        let text = "Click to refresh"
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(16.0),
+                          NSForegroundColorAttributeName: state == .Normal ? EMPTY_BUTTON_NORMAL_COLOR : EMPTY_BUTTON_SELECTED_COLOR]
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func emptyDataSetDidTapButton(scrollView: UIScrollView) {
+        self.tableView.mj_header.beginRefreshing()
+    }
+    
+    func emptyDataSetShouldDisplay(scrollView: UIScrollView) -> Bool {
+        return self.refreshError
+    }
 }

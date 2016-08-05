@@ -58,6 +58,7 @@ class DevloperViewController: UIViewController {
         }
     }
 
+    var refreshError: Bool = false
     
     var devItems = [Developer]()
     
@@ -73,10 +74,7 @@ class DevloperViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
         
-        
-        initTableView()
-        
-        self.tableView.mj_header.beginRefreshing()
+        tableView.mj_header.beginRefreshing()
     }
     
     func initTableView() {
@@ -92,15 +90,24 @@ class DevloperViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
     }
     
     func getDevelopers(language: String, since: String) {
-        TrendingAPI.getDevelopers(language.lowercaseString, since: since.lowercaseString) { items in
+        TrendingAPI.getDevelopers(language.lowercaseString, since: since.lowercaseString, completion: { items in
+            self.refreshError = false
             self.devItems = items.items
             self.tableView.reloadData()
             self.tableView.mj_header.endRefreshing()
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
-        }
+            }, failure: { error in
+                self.refreshError = true
+                self.tableView.reloadData()
+                self.tableView.mj_header.endRefreshing()
+        })
     }
     
     func pickerViewClicked(sender: UIButton) {
@@ -157,4 +164,28 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
         Answers.logContentViewWithName("ViewContent", contentType: "Developers", contentId: item.url, customAttributes: nil)
     }
     
+}
+
+extension DevloperViewController: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
+    func titleForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString? {
+        let text = "Oops...There's No develop data for you request."
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(18.0),
+                          NSForegroundColorAttributeName: LIGHT_TEXT_COLOR]
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControlState) -> NSAttributedString? {
+        let text = "Click to refresh"
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(16.0),
+                          NSForegroundColorAttributeName: state == .Normal ? EMPTY_BUTTON_NORMAL_COLOR : EMPTY_BUTTON_SELECTED_COLOR]
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func emptyDataSetDidTapButton(scrollView: UIScrollView) {
+        self.tableView.mj_header.beginRefreshing()
+    }
+    
+    func emptyDataSetShouldDisplay(scrollView: UIScrollView) -> Bool {
+        return self.refreshError
+    }
 }

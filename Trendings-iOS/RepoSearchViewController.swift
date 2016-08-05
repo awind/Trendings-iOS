@@ -49,6 +49,10 @@ class RepoSearchViewController: UITableViewController {
         header.setTitle("Loading", forState: .Refreshing)
         header.lastUpdatedTimeLabel?.hidden = true
         self.tableView.mj_header = header
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()
     }
     
     func pullDownRefresh() {
@@ -130,6 +134,18 @@ extension RepoSearchViewController {
                 self.isLoading = false
         })
     }
+}
+
+extension RepoSearchViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
+    func titleForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString? {
+        let text = "No Repositiories"
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(18.0),
+                          NSForegroundColorAttributeName: LIGHT_TEXT_COLOR]
+        return NSAttributedString(string: text, attributes: attributes)
+    }
     
+    func emptyDataSetShouldDisplay(scrollView: UIScrollView) -> Bool {
+        return true
+    }
 }

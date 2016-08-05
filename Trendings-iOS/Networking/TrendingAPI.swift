@@ -70,7 +70,7 @@ extension TrendingAPI: TargetType {
 }
 
 extension TrendingAPI {
-    static func getTrendings(language: String, since: String, completion: RepoItems -> Void) {
+    static func getTrendings(language: String, since: String, completion: RepoItems -> Void, failure: ErrorType -> Void) {
         //disposeBag = DisposeBag()
         trendingProvider.request(.Trending(language, since))
             .mapSuccessfulHTTPToObject(RepoItems)
@@ -78,12 +78,14 @@ extension TrendingAPI {
             .subscribe(
                 onNext: { items in
                     completion(items)
+                }, onError: { error in
+                    failure(error)
                 }
             )
             .addDisposableTo(disposeBag)
     }
     
-    static func getDevelopers(language: String, since: String, completion: DevItems -> Void) {
+    static func getDevelopers(language: String, since: String, completion: DevItems -> Void, failure: ErrorType -> Void) {
         //disposeBag = DisposeBag()
         trendingProvider.request(.Developer(language, since))
             .mapSuccessfulHTTPToObject(DevItems)
@@ -91,6 +93,8 @@ extension TrendingAPI {
             .subscribe(
                 onNext: { items in
                     completion(items)
+                }, onError: { error in
+                    failure(error)
                 }
             )
             .addDisposableTo(disposeBag)
