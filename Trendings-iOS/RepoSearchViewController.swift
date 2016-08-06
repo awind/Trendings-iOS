@@ -139,10 +139,9 @@ extension RepoSearchViewController {
 extension RepoSearchViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     func titleForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString? {
-        let text = "No Repositiories"
         let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(18.0),
                           NSForegroundColorAttributeName: LIGHT_TEXT_COLOR]
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: TrendingString.EMPTY_STRING_SEARCH_REPO, attributes: attributes)
     }
     
     func emptyDataSetShouldDisplay(scrollView: UIScrollView) -> Bool {

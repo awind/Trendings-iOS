@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		1D7FD8B46AF0275F114E4411 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97657CCC73F0F9BA8C67DCBB /* Pods.framework */; };
 		2F58F8F11D545E6800A4201A /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F8F01D545E6800A4201A /* UIScrollView+EmptyDataSet.m */; };
-		A50C7AB31CB27A1900DC1EAD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C7AB21CB27A1900DC1EAD /* SettingsViewController.swift */; };
+		2F58F8FF1D562E7300A4201A /* TopDevViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F8FE1D562E7300A4201A /* TopDevViewController.swift */; };
+		2F58F9011D562FB300A4201A /* TrendingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F9001D562FB300A4201A /* TrendingString.swift */; };
+		A50C7AB31CB27A1900DC1EAD /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C7AB21CB27A1900DC1EAD /* MoreViewController.swift */; };
 		A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */; };
 		A52310621CA791DD0042EC5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52310611CA791DD0042EC5E /* AppDelegate.swift */; };
 		A52310641CA791DD0042EC5E /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52310631CA791DD0042EC5E /* RepoViewController.swift */; };
@@ -26,7 +28,7 @@
 		A54BFD941CB4D3EE006C3343 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BFD931CB4D3EE006C3343 /* String.swift */; };
 		A55C41A81CB7D880004454C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C41A71CB7D880004454C4 /* Constants.swift */; };
 		A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F961CB8FD5A00F166E5 /* Observable+Networking.swift */; };
-		A5D5B64B1CD3660A00603BCB /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5B64A1CD3660A00603BCB /* TopViewController.swift */; };
+		A5D5B64B1CD3660A00603BCB /* TopRepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5B64A1CD3660A00603BCB /* TopRepoViewController.swift */; };
 		A5E191101CD9A0E800C93F79 /* TrendingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */; };
 		A5E191121CD9D47100C93F79 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E191111CD9D47100C93F79 /* CAPSPageMenu.swift */; };
 		A5E191141CD9D4C600C93F79 /* RepoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E191131CD9D4C600C93F79 /* RepoSearchViewController.swift */; };
@@ -38,10 +40,12 @@
 /* Begin PBXFileReference section */
 		2F58F8EF1D545E6800A4201A /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		2F58F8F01D545E6800A4201A /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		2F58F8FE1D562E7300A4201A /* TopDevViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopDevViewController.swift; sourceTree = "<group>"; };
+		2F58F9001D562FB300A4201A /* TrendingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingString.swift; sourceTree = "<group>"; };
 		36C740EF8A89F9A250614210 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6289946457CFDB5E14CE0D74 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		97657CCC73F0F9BA8C67DCBB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A50C7AB21CB27A1900DC1EAD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A50C7AB21CB27A1900DC1EAD /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevloperViewController.swift; sourceTree = "<group>"; };
 		A523105E1CA791DD0042EC5E /* Trending.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trending.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52310611CA791DD0042EC5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +66,7 @@
 		A55C41A71CB7D880004454C4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A57D4F961CB8FD5A00F166E5 /* Observable+Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Networking.swift"; sourceTree = "<group>"; };
 		A57D4F971CB8FD5A00F166E5 /* TrendingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingAPI.swift; sourceTree = "<group>"; };
-		A5D5B64A1CD3660A00603BCB /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
+		A5D5B64A1CD3660A00603BCB /* TopRepoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRepoViewController.swift; sourceTree = "<group>"; };
 		A5E191111CD9D47100C93F79 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
 		A5E191131CD9D4C600C93F79 /* RepoSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoSearchViewController.swift; sourceTree = "<group>"; };
 		A5E191171CD9DA6800C93F79 /* UserSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
@@ -104,11 +108,12 @@
 			children = (
 				A52310631CA791DD0042EC5E /* RepoViewController.swift */,
 				A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */,
-				A50C7AB21CB27A1900DC1EAD /* SettingsViewController.swift */,
+				A50C7AB21CB27A1900DC1EAD /* MoreViewController.swift */,
 				A52E60CD1CCA67AD00B0A0AD /* SearchViewController.swift */,
-				A5D5B64A1CD3660A00603BCB /* TopViewController.swift */,
+				A5D5B64A1CD3660A00603BCB /* TopRepoViewController.swift */,
 				A5E191131CD9D4C600C93F79 /* RepoSearchViewController.swift */,
 				A5E191171CD9DA6800C93F79 /* UserSearchViewController.swift */,
+				2F58F8FE1D562E7300A4201A /* TopDevViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				A541DFC81CB0042C00549D35 /* Trending-Bridging-Header.h */,
 				A54BFD931CB4D3EE006C3343 /* String.swift */,
 				A55C41A71CB7D880004454C4 /* Constants.swift */,
+				2F58F9001D562FB300A4201A /* TrendingString.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -334,9 +340,11 @@
 			files = (
 				A5FE6D1A1CCB148100163B66 /* SearchUserCell.swift in Sources */,
 				A5E191181CD9DA6800C93F79 /* UserSearchViewController.swift in Sources */,
+				2F58F8FF1D562E7300A4201A /* TopDevViewController.swift in Sources */,
 				A54BFD941CB4D3EE006C3343 /* String.swift in Sources */,
 				A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */,
 				A52310641CA791DD0042EC5E /* RepoViewController.swift in Sources */,
+				2F58F9011D562FB300A4201A /* TrendingString.swift in Sources */,
 				A541DFC31CAFBDAC00549D35 /* DevTableViewCell.swift in Sources */,
 				2F58F8F11D545E6800A4201A /* UIScrollView+EmptyDataSet.m in Sources */,
 				A52E60D71CCA77DF00B0A0AD /* SearchRepoCell.swift in Sources */,
@@ -344,12 +352,12 @@
 				A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */,
 				A5E191101CD9A0E800C93F79 /* TrendingAPI.swift in Sources */,
 				A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */,
-				A5D5B64B1CD3660A00603BCB /* TopViewController.swift in Sources */,
+				A5D5B64B1CD3660A00603BCB /* TopRepoViewController.swift in Sources */,
 				A52310621CA791DD0042EC5E /* AppDelegate.swift in Sources */,
 				A52E60CE1CCA67AD00B0A0AD /* SearchViewController.swift in Sources */,
 				A5E191141CD9D4C600C93F79 /* RepoSearchViewController.swift in Sources */,
 				A52310761CA7B7350042EC5E /* Items.swift in Sources */,
-				A50C7AB31CB27A1900DC1EAD /* SettingsViewController.swift in Sources */,
+				A50C7AB31CB27A1900DC1EAD /* MoreViewController.swift in Sources */,
 				A55C41A81CB7D880004454C4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -82,9 +82,9 @@ class RepoViewController: UIViewController {
     
     func initTableView() {
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullDownRefresh))
-        header.setTitle("Pull down to refresh", forState: .Idle)
-        header.setTitle("Release to refresh", forState: .Pulling)
-        header.setTitle("Loading", forState: .Refreshing)
+        header.setTitle(TrendingString.PULL_DOWN_IDLE_TITLE, forState: .Idle)
+        header.setTitle(TrendingString.PULL_DOWN_PULLING_TITLE, forState: .Pulling)
+        header.setTitle(TrendingString.PULL_DOWN_REFRESHING_TITLE, forState: .Refreshing)
         header.lastUpdatedTimeLabel?.hidden = true
         self.tableView.mj_header = header
         tableView.estimatedRowHeight = 138.0
@@ -167,17 +167,15 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension RepoViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func titleForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString? {
-        let text = "Oops...There's No repositiory data for you request."
         let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(18.0),
                           NSForegroundColorAttributeName: LIGHT_TEXT_COLOR]
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: TrendingString.EMPTY_STRING_REPO, attributes: attributes)
     }
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControlState) -> NSAttributedString? {
-        let text = "Click to refresh"
         let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(16.0),
                           NSForegroundColorAttributeName: state == .Normal ? EMPTY_BUTTON_NORMAL_COLOR : EMPTY_BUTTON_SELECTED_COLOR]
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: TrendingString.CLICK_TO_REFRESH, attributes: attributes)
     }
     
     func emptyDataSetDidTapButton(scrollView: UIScrollView) {

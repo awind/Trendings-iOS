@@ -10,7 +10,7 @@ import UIKit
 import MJRefresh
 import ActionSheetPicker_3_0
 
-class TopViewController: UITableViewController {
+class TopRepoViewController: UITableViewController {
 
     let REPO_CELL = "searchRepoCell"
     let USER_CELL = "searchUserCell"
@@ -29,30 +29,31 @@ class TopViewController: UITableViewController {
 
         self.title = self.language
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(dismissSelf))
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: language, style: .Plain, target: self, action: #selector(pickerViewClicked))
+        initTableView()
+    }
+    
+    func initTableView() {
         tableView.registerNib(UINib(nibName: "SearchRepoCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
         tableView.registerNib(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: USER_CELL)
         
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
-        
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: language, style: .Plain, target: self, action: #selector(pickerViewClicked))
-        
-        
+        tableView.tableFooterView = UIView()
         
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
-        header.setTitle("Pull down to refresh", forState: .Idle)
-        header.setTitle("Release to refresh", forState: .Pulling)
-        header.setTitle("Loading", forState: .Refreshing)
+        header.setTitle(TrendingString.PULL_DOWN_IDLE_TITLE, forState: .Idle)
+        header.setTitle(TrendingString.PULL_DOWN_PULLING_TITLE, forState: .Pulling)
+        header.setTitle(TrendingString.PULL_DOWN_REFRESHING_TITLE, forState: .Refreshing)
         header.lastUpdatedTimeLabel?.hidden = true
         self.tableView.mj_header = header
         let footer = MJRefreshBackNormalFooter(refreshingTarget: self, refreshingAction: #selector(fetchData))
-        footer.setTitle("Pull to refresh", forState: .Idle)
-        footer.setTitle("Release to refresh", forState: .Pulling)
-        footer.setTitle("Loading", forState: .Refreshing)
+        footer.setTitle(TrendingString.PULL_UP_IDLE_TITLE, forState: .Idle)
+        footer.setTitle(TrendingString.PULL_UP_PULLING_TITLE, forState: .Pulling)
+        footer.setTitle(TrendingString.PULL_UP_REFRESHING_TITLE, forState: .Refreshing)
         tableView.mj_footer = footer
         tableView.mj_header.beginRefreshing()
+        
     }
     
     func dismissSelf() {
@@ -167,4 +168,23 @@ class TopViewController: UITableViewController {
 
     }
     
+}
+
+extension TopRepoViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func titleForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString? {
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(18.0),
+                          NSForegroundColorAttributeName: LIGHT_TEXT_COLOR]
+        return NSAttributedString(string: TrendingString.EMPTY_STRING_REPO, attributes: attributes)
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControlState) -> NSAttributedString? {
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(16.0),
+                          NSForegroundColorAttributeName: state == .Normal ? EMPTY_BUTTON_NORMAL_COLOR : EMPTY_BUTTON_SELECTED_COLOR]
+        return NSAttributedString(string: TrendingString.CLICK_TO_REFRESH, attributes: attributes)
+
+    }
+    
+    func emptyDataSetDidTapButton(scrollView: UIScrollView) {
+        self.refreshData()
+    }
 }

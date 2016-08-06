@@ -139,10 +139,9 @@ extension UserSearchViewController {
 
 extension UserSearchViewController: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     func titleForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString? {
-        let text = "No Users"
         let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(18.0),
                           NSForegroundColorAttributeName: LIGHT_TEXT_COLOR]
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: TrendingString.EMPTY_STRING_SEARCH_DEV, attributes: attributes)
     }
     
     func emptyDataSetShouldDisplay(scrollView: UIScrollView) -> Bool {

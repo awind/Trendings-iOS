@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import Armchair
 
-class SettingsViewController: UITableViewController {
+class MoreViewController: UITableViewController {
 
     
     override func viewDidLoad() {
@@ -27,14 +27,28 @@ class SettingsViewController: UITableViewController {
         
         switch section {
         case 0:
-            shareClicked()
+            topRepoClicked()
         case 1:
-            reviewClick()
+            topDevClicked()
         case 2:
+            shareClicked()
+        case 3:
+            reviewClick()
+        case 4:
             aboutClicked()
         default:
             break
         }
+    }
+    
+    func topRepoClicked() {
+        let rootViewController = UINavigationController(rootViewController: TopRepoViewController())
+        self.presentViewController(rootViewController, animated: true, completion: nil)
+    }
+    
+    func topDevClicked() {
+        let rootViewController = UINavigationController(rootViewController: TopDevViewController())
+        self.presentViewController(rootViewController, animated: true, completion: nil)
     }
     
     func shareClicked() {
