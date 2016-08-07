@@ -11,6 +11,10 @@
 		2F58F8F11D545E6800A4201A /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F8F01D545E6800A4201A /* UIScrollView+EmptyDataSet.m */; };
 		2F58F8FF1D562E7300A4201A /* TopDevViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F8FE1D562E7300A4201A /* TopDevViewController.swift */; };
 		2F58F9011D562FB300A4201A /* TrendingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F9001D562FB300A4201A /* TrendingString.swift */; };
+		2F58F9081D57021F00A4201A /* TopUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F9061D57021F00A4201A /* TopUserTableViewCell.swift */; };
+		2F58F9091D57022000A4201A /* TopUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F58F9071D57021F00A4201A /* TopUserTableViewCell.xib */; };
+		2F58F90C1D57066F00A4201A /* TopRepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F90A1D57066E00A4201A /* TopRepoTableViewCell.swift */; };
+		2F58F90D1D57066F00A4201A /* TopRepoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F58F90B1D57066E00A4201A /* TopRepoTableViewCell.xib */; };
 		A50C7AB31CB27A1900DC1EAD /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C7AB21CB27A1900DC1EAD /* MoreViewController.swift */; };
 		A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */; };
 		A52310621CA791DD0042EC5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52310611CA791DD0042EC5E /* AppDelegate.swift */; };
@@ -42,6 +46,10 @@
 		2F58F8F01D545E6800A4201A /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		2F58F8FE1D562E7300A4201A /* TopDevViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopDevViewController.swift; sourceTree = "<group>"; };
 		2F58F9001D562FB300A4201A /* TrendingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingString.swift; sourceTree = "<group>"; };
+		2F58F9061D57021F00A4201A /* TopUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopUserTableViewCell.swift; sourceTree = "<group>"; };
+		2F58F9071D57021F00A4201A /* TopUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopUserTableViewCell.xib; sourceTree = "<group>"; };
+		2F58F90A1D57066E00A4201A /* TopRepoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRepoTableViewCell.swift; sourceTree = "<group>"; };
+		2F58F90B1D57066E00A4201A /* TopRepoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopRepoTableViewCell.xib; sourceTree = "<group>"; };
 		36C740EF8A89F9A250614210 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6289946457CFDB5E14CE0D74 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		97657CCC73F0F9BA8C67DCBB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,9 +119,9 @@
 				A50C7AB21CB27A1900DC1EAD /* MoreViewController.swift */,
 				A52E60CD1CCA67AD00B0A0AD /* SearchViewController.swift */,
 				A5D5B64A1CD3660A00603BCB /* TopRepoViewController.swift */,
+				2F58F8FE1D562E7300A4201A /* TopDevViewController.swift */,
 				A5E191131CD9D4C600C93F79 /* RepoSearchViewController.swift */,
 				A5E191171CD9DA6800C93F79 /* UserSearchViewController.swift */,
-				2F58F8FE1D562E7300A4201A /* TopDevViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -130,6 +138,10 @@
 				A52E60D61CCA77DF00B0A0AD /* SearchRepoCell.xib */,
 				A5FE6D181CCB148100163B66 /* SearchUserCell.swift */,
 				A5FE6D191CCB148100163B66 /* SearchUserCell.xib */,
+				2F58F9061D57021F00A4201A /* TopUserTableViewCell.swift */,
+				2F58F9071D57021F00A4201A /* TopUserTableViewCell.xib */,
+				2F58F90A1D57066E00A4201A /* TopRepoTableViewCell.swift */,
+				2F58F90B1D57066E00A4201A /* TopRepoTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -264,7 +276,9 @@
 				A5FE6D1B1CCB148100163B66 /* SearchUserCell.xib in Resources */,
 				A52E60D81CCA77DF00B0A0AD /* SearchRepoCell.xib in Resources */,
 				A541DFC51CAFCB0A00549D35 /* .gitignore in Resources */,
+				2F58F9091D57022000A4201A /* TopUserTableViewCell.xib in Resources */,
 				A523106C1CA791DD0042EC5E /* LaunchScreen.storyboard in Resources */,
+				2F58F90D1D57066F00A4201A /* TopRepoTableViewCell.xib in Resources */,
 				A52310691CA791DD0042EC5E /* Assets.xcassets in Resources */,
 				A52310671CA791DD0042EC5E /* Main.storyboard in Resources */,
 			);
@@ -340,6 +354,7 @@
 			files = (
 				A5FE6D1A1CCB148100163B66 /* SearchUserCell.swift in Sources */,
 				A5E191181CD9DA6800C93F79 /* UserSearchViewController.swift in Sources */,
+				2F58F9081D57021F00A4201A /* TopUserTableViewCell.swift in Sources */,
 				2F58F8FF1D562E7300A4201A /* TopDevViewController.swift in Sources */,
 				A54BFD941CB4D3EE006C3343 /* String.swift in Sources */,
 				A57D4F981CB8FD5A00F166E5 /* Observable+Networking.swift in Sources */,
@@ -350,6 +365,7 @@
 				A52E60D71CCA77DF00B0A0AD /* SearchRepoCell.swift in Sources */,
 				A5E191121CD9D47100C93F79 /* CAPSPageMenu.swift in Sources */,
 				A541DFC11CAFA6B900549D35 /* RepoTableViewCell.swift in Sources */,
+				2F58F90C1D57066F00A4201A /* TopRepoTableViewCell.swift in Sources */,
 				A5E191101CD9A0E800C93F79 /* TrendingAPI.swift in Sources */,
 				A50FD3381CAEAA29006219E0 /* DevloperViewController.swift in Sources */,
 				A5D5B64B1CD3660A00603BCB /* TopRepoViewController.swift in Sources */,

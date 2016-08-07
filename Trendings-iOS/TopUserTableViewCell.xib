@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="topRankDevCell" id="KGk-i7-Jjw" customClass="TopUserTableViewCell" customModule="Trending" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="517" height="77"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="517" height="76.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dcu-ys-Tng">
+                        <rect key="frame" x="55" y="16" width="36" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="36" id="cDV-w6-pN3"/>
+                            <constraint firstAttribute="height" constant="36" id="fLM-Ph-PK3"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-5G-jWc">
+                        <rect key="frame" x="99" y="24" width="39.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.25098039220000001" green="0.47058823529999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svw-AA-8om">
+                        <rect key="frame" x="16" y="26.5" width="31" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Dcu-ys-Tng" firstAttribute="leading" secondItem="svw-AA-8om" secondAttribute="trailing" constant="8" id="089-o0-Npj"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="svw-AA-8om" secondAttribute="leading" constant="16" id="CNH-ab-0EZ"/>
+                    <constraint firstItem="Dcu-ys-Tng" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FAh-IX-ffk"/>
+                    <constraint firstItem="BlQ-5G-jWc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="U6x-S4-Jwv"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="svw-AA-8om" secondAttribute="trailing" constant="380" id="e3r-kL-Lar"/>
+                    <constraint firstItem="svw-AA-8om" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="hnb-MC-Ppw"/>
+                    <constraint firstItem="BlQ-5G-jWc" firstAttribute="leading" secondItem="Dcu-ys-Tng" secondAttribute="trailing" constant="8" id="i3A-p1-4rc"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Dcu-ys-Tng" secondAttribute="bottom" constant="8" id="jjS-s2-FrQ"/>
+                    <constraint firstItem="svw-AA-8om" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="k5J-p9-QtT"/>
+                    <constraint firstItem="svw-AA-8om" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="keA-qw-dbw"/>
+                    <constraint firstItem="Dcu-ys-Tng" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="nyO-hr-pWe"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="CNH-ab-0EZ"/>
+                        <exclude reference="e3r-kL-Lar"/>
+                        <exclude reference="hnb-MC-Ppw"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="avatar" destination="Dcu-ys-Tng" id="hhe-R2-Vk6"/>
+                <outlet property="rankNum" destination="svw-AA-8om" id="4cW-5R-Ehp"/>
+                <outlet property="username" destination="BlQ-5G-jWc" id="Kee-MO-Gkd"/>
+            </connections>
+            <point key="canvasLocation" x="406.5" y="255.5"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -15,12 +15,16 @@ class MoreViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Settings"
+        self.title = TrendingString.TITLE_MORE
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    
+//    override func viewWillAppear(animated: Bool) {
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
+//    }
+//    
+//    override func viewWillDisappear(animated: Bool) {
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+//    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let section = indexPath.section
@@ -42,13 +46,16 @@ class MoreViewController: UITableViewController {
     }
     
     func topRepoClicked() {
-        let rootViewController = UINavigationController(rootViewController: TopRepoViewController())
-        self.presentViewController(rootViewController, animated: true, completion: nil)
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(TopRepoViewController(), animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
     
     func topDevClicked() {
-        let rootViewController = UINavigationController(rootViewController: TopDevViewController())
-        self.presentViewController(rootViewController, animated: true, completion: nil)
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(TopDevViewController(), animated: true)
+        self.hidesBottomBarWhenPushed = false
+
     }
     
     func shareClicked() {

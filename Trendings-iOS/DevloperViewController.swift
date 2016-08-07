@@ -67,7 +67,7 @@ class DevloperViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = TrendingString.TITLE_DEV
         self.navigationItem.prompt = self.language
         self.segmentedControl.selectedSegmentIndex = self.sinceIndex
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]

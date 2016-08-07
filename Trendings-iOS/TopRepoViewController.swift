@@ -9,33 +9,38 @@
 import UIKit
 import MJRefresh
 import ActionSheetPicker_3_0
+import SafariServices
 
 class TopRepoViewController: UITableViewController {
 
-    let REPO_CELL = "searchRepoCell"
-    let USER_CELL = "searchUserCell"
+    let REPO_CELL = "topRepoTableViewCell"
     
     var repos = [Repositiory]()
-    var users = [User]()
     
     var language = "All"
     var languageIndex = 0
     var currentPage = 1
     var totalCount = 10
-    var isTopRepo = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = self.language
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(dismissSelf))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: language, style: .Plain, target: self, action: #selector(pickerViewClicked))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     func initTableView() {
-        tableView.registerNib(UINib(nibName: "SearchRepoCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
-        tableView.registerNib(UINib(nibName: "SearchUserCell", bundle: nil), forCellReuseIdentifier: USER_CELL)
+        tableView.registerNib(UINib(nibName: "TopRepoTableViewCell", bundle: nil), forCellReuseIdentifier: REPO_CELL)
         
         tableView.estimatedRowHeight = 138.0
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -61,17 +66,11 @@ class TopRepoViewController: UITableViewController {
     }
     
     func refreshData() {
-        self.currentPage = 1
-        self.totalCount = 10
-        self.repos.removeAll()
-        self.users.removeAll()
-        
-        if isTopRepo {
-            topRepos()
-        } else {
-            topUsers()
-        }
-        
+        currentPage = 1
+        totalCount = 10
+        repos = []
+        tableView.reloadData()
+        topRepos()
     }
     
     func fetchData() {
@@ -79,51 +78,31 @@ class TopRepoViewController: UITableViewController {
             tableView.mj_footer.endRefreshingWithNoMoreData()
             return
         }
-        
-        if isTopRepo {
-            topRepos()
-        } else {
-            topUsers()
-        }
-        
+        topRepos()
     }
     
     func topRepos() {
         if languageIndex == 0 {
-            self.language = ""
+            language = ""
         }
-        GitHubAPI.topRepos("\(self.language)", page: "\(self.currentPage)", completion: { items in
-            print(items.count)
-            if self.currentPage == 1 {
-                self.repos.removeAll()
-                self.repos = items.items
-            } else {
-                self.repos.appendContentsOf(items.items)
-            }
+        GitHubAPI.topRepos("\(language)", page: "\(currentPage)", completion: { items in
+            //print(items.count)
+            self.repos.appendContentsOf(items.items)
             self.currentPage += 1
             self.totalCount = items.count
-            self.tableView.mj_header.endRefreshing()
+            self.tableViewEndRefresh()
             self.tableView.reloadData()
             }, fail: { error in
-                print("error")
+                // TO-DO
+                self.tableViewEndRefresh()
+                //print("error")
+                
         })
     }
     
-    func topUsers() {
-        GitHubAPI.topUsers("china", language: "\(self.language)", page: "\(self.currentPage)", completion: { items in
-            print(items)
-            if self.currentPage == 1 {
-                self.users.removeAll()
-                self.users = items.items
-            } else {
-                self.users.appendContentsOf(items.items)
-            }
-            self.currentPage += 1
-            self.totalCount = items.count
-            self.tableView.mj_header.endRefreshing()
-            self.tableView.reloadData()
-            }, fail: { error in
-                print("error")})
+    func tableViewEndRefresh() {
+        tableView.mj_header.endRefreshing()
+        tableView.mj_footer.endRefreshing()
     }
     
     func pickerViewClicked(sender: UIButton) {
@@ -133,8 +112,8 @@ class TopRepoViewController: UITableViewController {
             }
             self.language = supportLanguages[value]
             self.languageIndex = value
+            self.title = self.language
             
-            self.navigationItem.rightBarButtonItem?.title = self.language
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
@@ -146,26 +125,21 @@ class TopRepoViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isTopRepo {
-            return repos.count
-        }
-        return users.count
+        return repos.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if isTopRepo {
-            let repo = repos[indexPath.row]
-            let repoCell = tableView.dequeueReusableCellWithIdentifier(REPO_CELL, forIndexPath: indexPath) as! SearchRepoCell
-            repoCell.bindItem(repo)
-            return repoCell
-        } else {
-            let user = users[indexPath.row]
-            let userCell = tableView.dequeueReusableCellWithIdentifier(USER_CELL, forIndexPath: indexPath) as! SearchUserCell
-            userCell.bindItem(user)
-            return userCell
-        }
-
+        let repo = repos[indexPath.row]
+        let repoCell = tableView.dequeueReusableCellWithIdentifier(REPO_CELL, forIndexPath: indexPath) as! TopRepoTableViewCell
+        repoCell.bindItem(repo, indexPath: indexPath)
+        return repoCell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let repo = repos[indexPath.row]
+        let safraiVC = SFSafariViewController(URL: NSURL(string: repo.url)!)
+        self.presentViewController(safraiVC, animated: true, completion: nil)
     }
     
 }

@@ -23,7 +23,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     var currentPageIndex = 0
     
     override func viewDidLoad() {
-        
+        self.title = TrendingString.TITLE_SEARCH
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 142.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.translucent = true

@@ -68,7 +68,7 @@ class RepoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = TrendingString.TITLE_REPO
         self.navigationItem.prompt = self.language
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         self.segmentedControl.selectedSegmentIndex = self.sinceIndex

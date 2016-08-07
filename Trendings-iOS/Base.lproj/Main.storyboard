@@ -298,7 +298,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="18a-Qw-aht">
             <objects>
-                <tabBarController id="1Lm-5T-nJH" sceneMemberID="viewController">
+                <tabBarController hidesBottomBarWhenPushed="YES" id="1Lm-5T-nJH" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="P1T-EU-Lqg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -478,11 +478,11 @@
             </objects>
             <point key="canvasLocation" x="709" y="2784"/>
         </scene>
-        <!--Repositiories-->
+        <!--Repositiory-->
         <scene sceneID="PUc-he-LYr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IPC-ut-QEm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Repositiories" image="ic_repo" id="f2z-iG-ZgS"/>
+                    <tabBarItem key="tabBarItem" title="Repositiory" image="ic_repo" id="f2z-iG-ZgS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D7g-MY-dWc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -501,11 +501,11 @@
             </objects>
             <point key="canvasLocation" x="894" y="267"/>
         </scene>
-        <!--Developers-->
+        <!--Developer-->
         <scene sceneID="LYs-jL-RnC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7je-fB-j0d" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Developers" image="ic_developer" selectedImage="ic_developer" id="tGd-7Q-bS4"/>
+                    <tabBarItem key="tabBarItem" title="Developer" image="ic_developer" selectedImage="ic_developer" id="tGd-7Q-bS4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rdX-dh-QpQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
