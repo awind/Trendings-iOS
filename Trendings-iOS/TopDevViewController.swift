@@ -17,7 +17,7 @@ class TopDevViewController: UITableViewController {
     
     var users = [User]()
     
-    var language = "All"
+    var language = topRankSupportLanguages[0]
     var languageIndex = 0
     var currentPage = 1
     var totalCount = 10
@@ -88,7 +88,6 @@ class TopDevViewController: UITableViewController {
             self.tableViewEndRefresh()
             self.tableView.reloadData()
             }, fail: { error in
-                // TODO
                 self.tableViewEndRefresh()
         })
     }
@@ -99,11 +98,11 @@ class TopDevViewController: UITableViewController {
     }
     
     func pickerViewClicked(sender: UIButton) {
-        ActionSheetStringPicker.showPickerWithTitle("Language", rows: supportLanguages, initialSelection: self.languageIndex, doneBlock: {  picker, value, index in
-            if (supportLanguages[value] == self.language) {
+        ActionSheetStringPicker.showPickerWithTitle("Language", rows: topRankSupportLanguages, initialSelection: self.languageIndex, doneBlock: {  picker, value, index in
+            if (topRankSupportLanguages[value] == self.language) {
                 return
             }
-            self.language = supportLanguages[value]
+            self.language = topRankSupportLanguages[value]
             self.languageIndex = value
             self.title = self.language
             

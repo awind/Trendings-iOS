@@ -17,7 +17,7 @@ class TopRepoViewController: UITableViewController {
     
     var repos = [Repositiory]()
     
-    var language = "All"
+    var language = topRankSupportLanguages[0]
     var languageIndex = 0
     var currentPage = 1
     var totalCount = 10
@@ -28,15 +28,8 @@ class TopRepoViewController: UITableViewController {
 
         self.title = self.language
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
+//        self.navigationController?.hidesBarsOnSwipe = true
         initTableView()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func initTableView() {
@@ -82,9 +75,6 @@ class TopRepoViewController: UITableViewController {
     }
     
     func topRepos() {
-        if languageIndex == 0 {
-            language = ""
-        }
         GitHubAPI.topRepos("\(language)", page: "\(currentPage)", completion: { items in
             //print(items.count)
             self.repos.appendContentsOf(items.items)
@@ -93,9 +83,7 @@ class TopRepoViewController: UITableViewController {
             self.tableViewEndRefresh()
             self.tableView.reloadData()
             }, fail: { error in
-                // TO-DO
                 self.tableViewEndRefresh()
-                //print("error")
                 
         })
     }
@@ -106,11 +94,11 @@ class TopRepoViewController: UITableViewController {
     }
     
     func pickerViewClicked(sender: UIButton) {
-        ActionSheetStringPicker.showPickerWithTitle("Language", rows: supportLanguages, initialSelection: self.languageIndex, doneBlock: {  picker, value, index in
-            if (supportLanguages[value] == self.language) {
+        ActionSheetStringPicker.showPickerWithTitle("Language", rows: topRankSupportLanguages, initialSelection: self.languageIndex, doneBlock: {  picker, value, index in
+            if (topRankSupportLanguages[value] == self.language) {
                 return
             }
-            self.language = supportLanguages[value]
+            self.language = topRankSupportLanguages[value]
             self.languageIndex = value
             self.title = self.language
             

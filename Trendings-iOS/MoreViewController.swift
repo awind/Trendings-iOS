@@ -18,14 +18,6 @@ class MoreViewController: UITableViewController {
         self.title = TrendingString.TITLE_MORE
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        self.navigationController?.setNavigationBarHidden(false, animated: true)
-//    }
-//    
-//    override func viewWillDisappear(animated: Bool) {
-//        self.navigationController?.setNavigationBarHidden(true, animated: true)
-//    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let section = indexPath.section
         
