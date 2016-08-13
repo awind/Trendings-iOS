@@ -14,7 +14,7 @@ class TrendingString {
     static let TITLE_REPO = "Repositiory"
     static let TITLE_DEV = "Developer"
     static let TITLE_SEARCH = "Search"
-    static let TITLE_MORE = "More"
+    static let TITLE_MORE = "Settings"
     
     static let EMPTY_STRING_REPO = "Oops...There's No repositiory data for you request."
     static let EMPTY_STRING_DEV = "Oops...There's No develop data for you request."

@@ -18,19 +18,6 @@ class DevloperViewController: UIViewController {
     
     let DEVELOPER_CELL = "devCell"
     
-    var language: String {
-        get {
-            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("devLanguage") as? String {
-                return returnValue
-            } else {
-                return "All"
-            }
-        }
-        set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "devLanguage")
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
-    }
     var languageIndex: Int {
         get {
             if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("devLanguageIndex") as? Int {
@@ -44,6 +31,9 @@ class DevloperViewController: UIViewController {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
+    
+    var language = supportLanguages[0]
+    
     var sinceIndex: Int {
         get {
             if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("devSinceIndex") as? Int {
@@ -68,10 +58,11 @@ class DevloperViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = TrendingString.TITLE_DEV
+        self.language = supportLanguages[languageIndex]
         self.navigationItem.prompt = self.language
         self.segmentedControl.selectedSegmentIndex = self.sinceIndex
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_code.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
         
         tableView.mj_header.beginRefreshing()

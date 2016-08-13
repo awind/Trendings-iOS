@@ -43,14 +43,15 @@ class UserSearchViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullDownRefresh))
-        header.setTitle("Pull down to refresh", forState: .Idle)
-        header.setTitle("Release to refresh", forState: .Pulling)
-        header.setTitle("Loading", forState: .Refreshing)
+        header.setTitle(TrendingString.PULL_DOWN_IDLE_TITLE, forState: .Idle)
+        header.setTitle(TrendingString.PULL_DOWN_PULLING_TITLE, forState: .Pulling)
+        header.setTitle(TrendingString.PULL_DOWN_REFRESHING_TITLE, forState: .Refreshing)
         header.lastUpdatedTimeLabel?.hidden = true
-        self.tableView.mj_header = header
+        tableView.mj_header = header
         
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
+        tableView.keyboardDismissMode = .OnDrag
         tableView.tableFooterView = UIView()
     }
     

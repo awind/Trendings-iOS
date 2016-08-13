@@ -17,18 +17,31 @@ class TopRepoViewController: UITableViewController {
     
     var repos = [Repositiory]()
     
+    var languageIndex: Int {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("topRepoLanguageIndex") as? Int {
+                return returnValue
+            } else {
+                return 0
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "topRepoLanguageIndex")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
     var language = topRankSupportLanguages[0]
-    var languageIndex = 0
+    
     var currentPage = 1
     var totalCount = 10
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        language = topRankSupportLanguages[languageIndex]
         self.title = self.language
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
-//        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_code.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
     }
     

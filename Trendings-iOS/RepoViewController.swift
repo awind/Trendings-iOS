@@ -17,20 +17,6 @@ class RepoViewController: UIViewController {
     
     let REPO_CELL = "repoCell"
     
-    var language: String {
-        get {
-            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("repoLanguage") as? String {
-                return returnValue
-            } else {
-                return "All"
-            }
-        }
-        set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "repoLanguage")
-            NSUserDefaults.standardUserDefaults().synchronize()
-            self.tableView.mj_header.beginRefreshing()
-        }
-    }
     var languageIndex: Int {
         get {
             if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("repoLanguageIndex") as? Int {
@@ -44,6 +30,9 @@ class RepoViewController: UIViewController {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
+    
+    var language = supportLanguages[0]
+    
     var sinceIndex: Int {
         get {
             if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("repoSinceIndex") as? Int {
@@ -69,10 +58,11 @@ class RepoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = TrendingString.TITLE_REPO
+        language = supportLanguages[languageIndex]
         self.navigationItem.prompt = self.language
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         self.segmentedControl.selectedSegmentIndex = self.sinceIndex
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_arrow_down.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_code.png"), style: .Plain, target: self, action: #selector(pickerViewClicked))
         initTableView()
         tableView.mj_header.beginRefreshing()
         // tableview sepator trick

@@ -23,7 +23,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     var currentPageIndex = 0
     
     override func viewDidLoad() {
-        self.title = TrendingString.TITLE_SEARCH
+//        self.title = TrendingString.TITLE_SEARCH
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 142.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.translucent = true
@@ -68,12 +68,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     
     
     func initSearchBar() {
-        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width - 20, self.view.frame.height))
+        let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark.png"), style: .Plain, target: self, action: #selector(bookmarkClicked))
+        searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width - 60, self.view.frame.height))
         searchBar.placeholder = "Search Repositiories"
-        let leftNavBarButton = UIBarButtonItem(customView: searchBar)
+        let rightNavBarButton = UIBarButtonItem(customView: searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
+        self.navigationItem.rightBarButtonItem = rightNavBarButton
         searchBar.showsCancelButton = true
-        searchBar.becomeFirstResponder()
         searchBar.delegate = self
     }
     
@@ -84,6 +85,34 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
         } else {
             self.searchBar.placeholder = "Search Users"
         }
+    }
+    
+    func bookmarkClicked() {
+        let topRankController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let topRankRepoAction = UIAlertAction(title: "Top Repositiory", style: .Default) { action in
+            self.topRepoClicked()
+        }
+        let topRankDevAction = UIAlertAction(title: "Top Developer", style: .Default) { action in
+            self.topDevClicked()
+        }
+        topRankController.addAction(topRankRepoAction)
+        topRankController.addAction(topRankDevAction)
+        topRankController.addAction(cancelAction)
+        self.presentViewController(topRankController, animated: true, completion: nil)
+    }
+    
+    func topRepoClicked() {
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(TopRepoViewController(), animated: true)
+        self.hidesBottomBarWhenPushed = false
+    }
+    
+    func topDevClicked() {
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(TopDevViewController(), animated: true)
+        self.hidesBottomBarWhenPushed = false
+        
     }
     
     // MARK: SearchBar
@@ -104,5 +133,4 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
         searchBar.endEditing(true)
     }
 
-    
 }

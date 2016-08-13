@@ -17,24 +17,55 @@ class TopDevViewController: UITableViewController {
     
     var users = [User]()
     
+    var languageIndex: Int {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("topDevLanguageIndex") as? Int {
+                return returnValue
+            } else {
+                return 0
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "topDevLanguageIndex")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
     var language = topRankSupportLanguages[0]
-    var languageIndex = 0
+    
+    var locationIndex: Int {
+        get {
+            if let returnValue = NSUserDefaults.standardUserDefaults().objectForKey("topDevLocationIndex") as? Int {
+                return returnValue
+            } else {
+                return 0
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "topDevLocationIndex")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
+    var location = topRankSupportCountryList[0]
+    
     var currentPage = 1
     var totalCount = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = self.language
+        language = topRankSupportLanguages[languageIndex]
+        location = topRankSupportCountryList[locationIndex]
+        self.title = "\(self.language)@\(self.location)"
         initNavigationButtonItem()
         initTableView()
     }
     
     func initNavigationButtonItem() {
-        let countryImg = UIImage(named: "ic_share")
-        let languageImg = UIImage(named: "ic_star")
-        let countryBtn = UIBarButtonItem(image: countryImg, style: .Plain, target: self, action: #selector(countrySelect))
-        let languageBtn = UIBarButtonItem(image: languageImg, style: .Plain, target: self, action: #selector(pickerViewClicked))
+        let locationImg = UIImage(named: "ic_location")
+        let languageImg = UIImage(named: "ic_code")
+        let countryBtn = UIBarButtonItem(image: locationImg, style: .Done, target: self, action: #selector(countrySelect))
+        let languageBtn = UIBarButtonItem(image: languageImg, style: .Plain, target: self, action: #selector(languageSelect))
         self.navigationItem.rightBarButtonItems = [languageBtn, countryBtn]
     }
     
@@ -59,10 +90,6 @@ class TopDevViewController: UITableViewController {
         tableView.mj_header.beginRefreshing()
     }
     
-    func countrySelect(sender: UIButton) {
-        
-    }
-    
     func refreshData() {
         currentPage = 1
         totalCount = 10
@@ -81,7 +108,7 @@ class TopDevViewController: UITableViewController {
     }
     
     func topUsers() {
-        GitHubAPI.topUsers("china", language: "\(self.language)", page: "\(self.currentPage)", completion: { items in
+        GitHubAPI.topUsers(location.lowercaseString, language: "\(self.language)", page: "\(self.currentPage)", completion: { items in
             self.users.appendContentsOf(items.items)
             self.currentPage += 1
             self.totalCount = items.count
@@ -97,14 +124,27 @@ class TopDevViewController: UITableViewController {
         tableView.mj_footer.endRefreshing()
     }
     
-    func pickerViewClicked(sender: UIButton) {
+    func countrySelect(sender: UIButton) {
+        ActionSheetStringPicker.showPickerWithTitle("Country", rows: topRankSupportCountryList, initialSelection: self.locationIndex, doneBlock: {  picker, value, index in
+            if (topRankSupportLanguages[value] == self.language) {
+                return
+            }
+            self.location = topRankSupportCountryList[value]
+            self.locationIndex = value
+            self.title = "\(self.language)@\(self.location)"
+            
+            self.tableView.mj_header.beginRefreshing()
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
+    }
+    
+    func languageSelect(sender: UIButton) {
         ActionSheetStringPicker.showPickerWithTitle("Language", rows: topRankSupportLanguages, initialSelection: self.languageIndex, doneBlock: {  picker, value, index in
             if (topRankSupportLanguages[value] == self.language) {
                 return
             }
             self.language = topRankSupportLanguages[value]
             self.languageIndex = value
-            self.title = self.language
+            self.title = "\(self.language)@\(self.location)"
             
             self.tableView.mj_header.beginRefreshing()
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
