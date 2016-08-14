@@ -16,7 +16,7 @@ let screenHeight = screenSize.height
 let supportLanguages = ["All", "Java", "Objective-C", "JavaScript", "Python", "Swift", "C#", "Ruby", "Php", "Go", "C", "Cpp", "Kotlin", "Perl", "Scala", "Groovy", "CoffeeScript", "Lua", "Shell", "CSS", "Html"]
 
 let topRankSupportLanguages = ["Java", "Objective-C", "JavaScript", "Python", "Swift", "C#", "Ruby", "Php", "Go", "C", "Cpp", "Kotlin", "Perl", "Scala", "Groovy", "CoffeeScript", "Lua", "Shell", "CSS", "Html"]
-let topRankSupportCountryList = ["Australia", "China", "Canada", "China", "Denmark", "France", "Germany", "India", "Japan", "Korea", "UK", "USA"]
+let topRankSupportCountryList = ["Australia", "Canada", "China", "Denmark", "France", "Germany", "India", "Japan", "Korea", "UK", "USA"]
 
 let repoSince = ["daily", "weekly", "monthly"]
 let devSince = ["daily", "weekly"]
