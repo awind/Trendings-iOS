@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D7FD8B46AF0275F114E4411 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97657CCC73F0F9BA8C67DCBB /* Pods.framework */; };
 		2F58F8F11D545E6800A4201A /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F8F01D545E6800A4201A /* UIScrollView+EmptyDataSet.m */; };
 		2F58F8FF1D562E7300A4201A /* TopDevViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F8FE1D562E7300A4201A /* TopDevViewController.swift */; };
 		2F58F9011D562FB300A4201A /* TrendingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F58F9001D562FB300A4201A /* TrendingString.swift */; };
@@ -39,8 +38,8 @@
 		A5E191181CD9DA6800C93F79 /* UserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E191171CD9DA6800C93F79 /* UserSearchViewController.swift */; };
 		A5FE6D1A1CCB148100163B66 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE6D181CCB148100163B66 /* SearchUserCell.swift */; };
 		A5FE6D1B1CCB148100163B66 /* SearchUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5FE6D191CCB148100163B66 /* SearchUserCell.xib */; };
-		B0CBDE84DB24A7C4A4562033 /* Pods_Trending.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F522CC5B2F416E064E518E5 /* Pods_Trending.framework */; };
 		BE59A6891D601869001FE53F /* FabricEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE59A6881D601869001FE53F /* FabricEvent.swift */; };
+		DD6C79811CE8C0710309F288 /* Pods_Trending.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4017711D133978F96EB7536F /* Pods_Trending.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,10 +52,7 @@
 		2F58F90A1D57066E00A4201A /* TopRepoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRepoTableViewCell.swift; sourceTree = "<group>"; };
 		2F58F90B1D57066E00A4201A /* TopRepoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopRepoTableViewCell.xib; sourceTree = "<group>"; };
 		350D66AD8B76EFCDBBDD4826 /* Pods-Trending.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trending.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Trending/Pods-Trending.debug.xcconfig"; sourceTree = "<group>"; };
-		36C740EF8A89F9A250614210 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		3F522CC5B2F416E064E518E5 /* Pods_Trending.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trending.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6289946457CFDB5E14CE0D74 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		97657CCC73F0F9BA8C67DCBB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4017711D133978F96EB7536F /* Pods_Trending.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trending.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50C7AB21CB27A1900DC1EAD /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		A50FD3371CAEAA29006219E0 /* DevloperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevloperViewController.swift; sourceTree = "<group>"; };
 		A523105E1CA791DD0042EC5E /* Trending.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trending.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,8 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D7FD8B46AF0275F114E4411 /* Pods.framework in Frameworks */,
-				B0CBDE84DB24A7C4A4562033 /* Pods_Trending.framework in Frameworks */,
+				DD6C79811CE8C0710309F288 /* Pods_Trending.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,8 +99,7 @@
 		833D0D7466FA416794D891BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				97657CCC73F0F9BA8C67DCBB /* Pods.framework */,
-				3F522CC5B2F416E064E518E5 /* Pods_Trending.framework */,
+				4017711D133978F96EB7536F /* Pods_Trending.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,8 +107,6 @@
 		9283CBDDED5EEA11752B7D27 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				36C740EF8A89F9A250614210 /* Pods.debug.xcconfig */,
-				6289946457CFDB5E14CE0D74 /* Pods.release.xcconfig */,
 				350D66AD8B76EFCDBBDD4826 /* Pods-Trending.debug.xcconfig */,
 				CBB75CC7D25DA525D0802161 /* Pods-Trending.release.xcconfig */,
 			);
@@ -354,7 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric.framework/run\" a8dbb91c6c25377d1cb8886e9939d5d015d59c3a 931e64bc48f235a7f2cd082a501245d812acc1a7fb9f2edd348a7d03d8bd4c18";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" a8dbb91c6c25377d1cb8886e9939d5d015d59c3a 931e64bc48f235a7f2cd082a501245d812acc1a7fb9f2edd348a7d03d8bd4c18";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -502,14 +494,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fei Song (434358A4DE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.awind.Trendings;
 				PRODUCT_NAME = Trending;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c60927e3-59da-4ef1-8b22-b9c87788e1f4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Trendings-iOS/Trending-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -523,14 +515,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fei Song (434358A4DE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fei Song (434358A4DE)";
 				INFOPLIST_FILE = "Trendings-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.awind.Trendings;
 				PRODUCT_NAME = Trending;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c60927e3-59da-4ef1-8b22-b9c87788e1f4";
 				SWIFT_OBJC_BRIDGING_HEADER = "Trendings-iOS/Trending-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
