@@ -92,6 +92,7 @@ extension RepoSearchViewController {
         let repo = repos[indexPath.row]
         svc = SFSafariViewController(URL: NSURL(string: repo.url)!)
         self.parentNavigationController?.presentViewController(svc, animated: true, completion: nil)
+        FabricEvent.logContentViewEvent(String(RepoSearchViewController.self), type: TrendingString.EVENT_CONTENT_VIEW_TYPE_SAFARI, contentId: repo.fullname)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -132,6 +133,7 @@ extension RepoSearchViewController {
             self.totalCount = items.count
             self.tableView.reloadData()
             }, fail:  { error in
+                FabricEvent.logCustomEvent(TrendingString.ERROR_GITHUB_API)
                 self.isLoading = false
         })
     }

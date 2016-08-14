@@ -30,4 +30,17 @@ class TrendingString {
     static let PULL_UP_IDLE_TITLE = "Pull to refresh"
     static let PULL_UP_PULLING_TITLE = "Release to refresh"
     static let PULL_UP_REFRESHING_TITLE = "Loading"
+    
+    static let EVENT_REVIEW = "Review"
+    static let EVENT_ABOUT_AUTHOR = "About Author"
+    static let EVENT_TOP_RANK = "Top Button Click"
+    static let EVENT_TOP_REPO = "Top Repo"
+    static let EVENT_TOP_DEV = "Top Dev"
+    
+    static let ERROR_TRENDING_API = "TrendingApi Failure"
+    static let ERROR_GITHUB_API = "GitHubApi Failure"
+    
+    static let EVENT_CONTENT_VIEW_TYPE_SAFARI = "Safari"
+    
+    
 }

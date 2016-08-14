@@ -33,6 +33,7 @@ public enum TrendingAPI {
 
 
 extension TrendingAPI: TargetType {
+    public var multipartBody: [Moya.MultipartFormData]?  { return nil}
     public var baseURL: NSURL { return NSURL(string : "http://162.243.45.82")! }
     public var path: String {
         switch self {
@@ -65,7 +66,6 @@ extension TrendingAPI: TargetType {
         default:
             return NSData()
         }
-        
     }
 }
 
@@ -123,6 +123,7 @@ public enum GitHubAPI {
 }
 
 extension GitHubAPI: TargetType {
+    public var multipartBody: [Moya.MultipartFormData]?  { return nil}
     public var baseURL: NSURL { return NSURL(string : "https://api.github.com/search")! }
     public var path: String {
         switch self {

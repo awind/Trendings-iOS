@@ -23,7 +23,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     var currentPageIndex = 0
     
     override func viewDidLoad() {
-//        self.title = TrendingString.TITLE_SEARCH
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 142.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.translucent = true
@@ -68,7 +67,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
     
     
     func initSearchBar() {
-        let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark.png"), style: .Plain, target: self, action: #selector(bookmarkClicked))
+        let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark.png"), style: .Plain, target: self, action: #selector(topRankClicked))
         searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.width - 60, self.view.frame.height))
         searchBar.placeholder = "Search Repositiories"
         let rightNavBarButton = UIBarButtonItem(customView: searchBar)
@@ -87,7 +86,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
         }
     }
     
-    func bookmarkClicked() {
+    func topRankClicked() {
         let topRankController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         let topRankRepoAction = UIAlertAction(title: "Top Repositiory", style: .Default) { action in
@@ -100,15 +99,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, CAPSPageMenuD
         topRankController.addAction(topRankDevAction)
         topRankController.addAction(cancelAction)
         self.presentViewController(topRankController, animated: true, completion: nil)
+        FabricEvent.logCustomEvent(TrendingString.EVENT_TOP_RANK)
     }
     
     func topRepoClicked() {
+        FabricEvent.logCustomEvent(TrendingString.EVENT_TOP_REPO)
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(TopRepoViewController(), animated: true)
         self.hidesBottomBarWhenPushed = false
     }
     
     func topDevClicked() {
+        FabricEvent.logCustomEvent(TrendingString.EVENT_TOP_DEV)
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(TopDevViewController(), animated: true)
         self.hidesBottomBarWhenPushed = false

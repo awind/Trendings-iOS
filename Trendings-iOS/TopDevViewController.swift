@@ -115,6 +115,7 @@ class TopDevViewController: UITableViewController {
             self.tableViewEndRefresh()
             self.tableView.reloadData()
             }, fail: { error in
+                FabricEvent.logCustomEvent(TrendingString.ERROR_GITHUB_API)
                 self.tableViewEndRefresh()
         })
     }
@@ -171,6 +172,7 @@ class TopDevViewController: UITableViewController {
         let user = users[indexPath.row]
         let svc = SFSafariViewController(URL: NSURL(string: user.url)!)
         self.presentViewController(svc, animated: true, completion: nil)
+        FabricEvent.logContentViewEvent(String(TopDevViewController), type: TrendingString.EVENT_CONTENT_VIEW_TYPE_SAFARI, contentId: user.login)
     }
 
 }

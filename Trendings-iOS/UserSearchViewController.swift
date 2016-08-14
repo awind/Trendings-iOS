@@ -92,6 +92,7 @@ extension UserSearchViewController {
         let user = users[indexPath.row]
         svc = SFSafariViewController(URL: NSURL(string: user.url)!)
         self.parentNavigationController?.presentViewController(svc, animated: true, completion: nil)
+        FabricEvent.logContentViewEvent(String(UserSearchViewController.self), type: TrendingString.EVENT_CONTENT_VIEW_TYPE_SAFARI, contentId: user.login)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -132,6 +133,7 @@ extension UserSearchViewController {
             self.totalCount = items.count
             self.tableView.reloadData()
             }, fail: { error in
+                FabricEvent.logCustomEvent(TrendingString.ERROR_GITHUB_API)
                 self.isLoading = false
         })
     }

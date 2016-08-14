@@ -96,6 +96,7 @@ class TopRepoViewController: UITableViewController {
             self.tableViewEndRefresh()
             self.tableView.reloadData()
             }, fail: { error in
+                FabricEvent.logCustomEvent(TrendingString.ERROR_GITHUB_API)
                 self.tableViewEndRefresh()
                 
         })
@@ -141,6 +142,7 @@ class TopRepoViewController: UITableViewController {
         let repo = repos[indexPath.row]
         let safraiVC = SFSafariViewController(URL: NSURL(string: repo.url)!)
         self.presentViewController(safraiVC, animated: true, completion: nil)
+        FabricEvent.logContentViewEvent(String(TopRepoViewController.self), type: TrendingString.EVENT_CONTENT_VIEW_TYPE_SAFARI, contentId: repo.fullname)
     }
     
 }

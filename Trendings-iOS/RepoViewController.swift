@@ -11,7 +11,6 @@ import SafariServices
 import MJRefresh
 import ActionSheetPicker_3_0
 
-import Crashlytics
 
 class RepoViewController: UIViewController {
     
@@ -106,6 +105,7 @@ class RepoViewController: UIViewController {
             self.tableView.mj_header.endRefreshing()
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
             }, failure: { error in
+                FabricEvent.logCustomEvent(TrendingString.ERROR_TRENDING_API)
                 self.refreshError = true
                 self.tableView.reloadData()
                 self.tableView.mj_header.endRefreshing()
@@ -149,6 +149,7 @@ extension RepoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let repo = repos[indexPath.row]
+        FabricEvent.logContentViewEvent(String(RepoViewController.self),  type: TrendingString.EVENT_CONTENT_VIEW_TYPE_SAFARI, contentId: repo.name)
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(repo.url)")!)
         self.presentViewController(svc, animated: true, completion: nil)
     }

@@ -142,12 +142,14 @@ struct Repositiory {
 
 extension Repositiory: Decodable {
     static func decode(json: JSON) -> Decoded<Repositiory> {
-        return curry(Repositiory.init)
+        
+        let f = curry(Repositiory.init)
             <^> json <| "id"
             <*> json <| "name"
             <*> json <| "full_name"
             <*> json <| "owner"
             <*> json <| "html_url"
+        return f
             <*> json <|? "description"
             <*> json <| "forks_count"
             <*> json <| "stargazers_count"

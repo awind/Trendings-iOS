@@ -34,9 +34,11 @@ class MoreViewController: UITableViewController {
     func aboutClicked() {
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com/awind")!)
         self.presentViewController(svc, animated: true, completion: nil)
+        FabricEvent.logCustomEvent(TrendingString.EVENT_ABOUT_AUTHOR)
     }
     
     func reviewClick() {
         Armchair.rateApp()
+        FabricEvent.logCustomEvent(TrendingString.EVENT_REVIEW)
     }
 }

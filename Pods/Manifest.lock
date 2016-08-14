@@ -1,24 +1,24 @@
 PODS:
   - ActionSheetPicker-3.0 (2.0.5)
-  - Alamofire (3.3.1)
-  - Argo (3.0.1)
-  - Armchair (0.1.1)
-  - Crashlytics (3.7.0):
+  - Alamofire (3.4.1)
+  - Argo (3.1.0)
+  - Armchair (0.1.2)
+  - Crashlytics (3.7.3):
     - Fabric (~> 1.6.3)
-  - Curry (2.2.0)
-  - Fabric (1.6.7)
+  - Curry (2.3.3)
+  - Fabric (1.6.8)
   - Kingfisher (2.3.1)
-  - MJRefresh (3.1.0)
-  - Moya (6.4.0):
-    - Moya/Core (= 6.4.0)
-  - Moya/Core (6.4.0):
+  - MJRefresh (3.1.12)
+  - Moya (7.0.0):
+    - Moya/Core (= 7.0.0)
+  - Moya/Core (7.0.0):
     - Alamofire (~> 3.0)
     - Result (~> 2.0)
-  - Moya/RxSwift (6.4.0):
+  - Moya/RxSwift (7.0.0):
     - Moya/Core
     - RxSwift (~> 2.0)
-  - Result (2.0.0)
-  - RxSwift (2.4)
+  - Result (2.1.3)
+  - RxSwift (2.6.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (~> 2.0.5)
@@ -35,16 +35,16 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 8312778b6815578e6a86d630fbcf31dc94c534e7
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
-  Argo: 22c5d62b7967020a641468c91dc9488bea9523b8
-  Armchair: 276f0dadba704b562870613301bdf7b595a29315
-  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
-  Curry: c22d80fff7f5a4b1bbd531455c3e2dbb099658a3
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Argo: bb0e94e309d6ceb8fa58910205c8968be101e429
+  Armchair: 10f49453001a25036e1dc8e74e4f1b699add562c
+  Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
+  Curry: 37223f4467e4802a08b6a414b526dcd919a4a777
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   Kingfisher: 6d3fbada4829cbc7b89e883e8218c28afeb64e42
-  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
-  Moya: 4d526954c8afd79820991393d40d7d8af756ceee
-  Result: 9e75e1111c774c6ac594e14907b15057053a7959
-  RxSwift: 67b9ef4e8b34fb394e200e754c6a09cc16559f94
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  Moya: f004b82418fb8165ee1fc9f86190db4b3611fda9
+  Result: 18e1a7597fbcca5923c565b40a25a98afafdee02
+  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
 
 COCOAPODS: 0.39.0

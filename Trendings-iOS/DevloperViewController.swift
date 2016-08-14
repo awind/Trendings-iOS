@@ -11,7 +11,7 @@ import SafariServices
 import Kingfisher
 import MJRefresh
 import Alamofire
-import Crashlytics
+//import Crashlytics
 import ActionSheetPicker_3_0
 
 class DevloperViewController: UIViewController {
@@ -95,6 +95,7 @@ class DevloperViewController: UIViewController {
             self.tableView.mj_header.endRefreshing()
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
             }, failure: { error in
+                FabricEvent.logCustomEvent(TrendingString.ERROR_TRENDING_API)
                 self.refreshError = true
                 self.tableView.reloadData()
                 self.tableView.mj_header.endRefreshing()
@@ -149,10 +150,9 @@ extension DevloperViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let item = self.devItems[indexPath.row]
+        FabricEvent.logContentViewEvent(String(DevloperViewController.self), type: TrendingString.EVENT_CONTENT_VIEW_TYPE_SAFARI, contentId: item.loginName)
         let svc = SFSafariViewController(URL: NSURL(string: "https://github.com\(item.url)")!)
         self.presentViewController(svc, animated: true, completion: nil)
-        
-        Answers.logContentViewWithName("ViewContent", contentType: "Developers", contentId: item.url, customAttributes: nil)
     }
     
 }

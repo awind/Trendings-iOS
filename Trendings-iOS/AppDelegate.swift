@@ -8,9 +8,9 @@
 
 import UIKit
 import Armchair
+import Kingfisher
 import Fabric
 import Crashlytics
-import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
